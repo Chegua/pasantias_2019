@@ -1,0 +1,214 @@
+CREATE table departamentos(
+	id_departamento INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	nombre_departamento varchar(40)
+)
+
+crate table periodos(
+	id_periodo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	anio_inicio int,
+	anio_final int,
+	estatus_periodo
+)
+
+
+CREATE table grados(
+	id_grados INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	grado varchar(40)
+)
+
+
+CREATE table menciones(
+	id_mencion INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	mencion varchar(40)
+)
+
+
+CREATE table grado_seccion(
+	id_grado_seccion INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	id_periodo int,
+    id_grados  int,
+    id_mencion int
+)
+
+ALTER TABLE grado_seccion ADD FOREIGN KEY (id_grados) REFERENCES grados(id_grados)
+ALTER TABLE grado_seccion ADD FOREIGN KEY (id_periodo) REFERENCES periodos(id_periodo)
+ALTER TABLE grado_seccion ADD FOREIGN KEY (id_mencion) REFERENCES menciones (id_mencion)
+
+
+CREATE table cargos(
+	id_cargos INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	cargo varchar(40)
+)
+
+create table personas(
+    id_persona int not null AUTO_INCREMENT PRIMARY KEY,
+    id_parroquia int,
+    nombres varchar(100),
+    apellidos varchar(100),
+    cedula varchar(10),
+    correo varchar(20),
+    sector varchar (100),
+    sexo varchar(10),
+    telefono varchar(10),
+    FOREIGN KEY (id_parroquia) REFERENCES parroquias (id_parroquia)
+)
+
+
+create table tutores_academicos(
+	id_tutor_academico int not null AUTO_INCREMENT PRIMARY KEY,
+    id_cargos int,
+    FOREIGN KEY (id_tutor_academico) REFERENCES personas (id_persona),
+    FOREIGN KEY (id_cargos) REFERENCES cargos (id_cargos)
+)
+
+create table tutores_empresariales(
+	id_tutor_empresarial int not null AUTO_INCREMENT PRIMARY KEY,
+    id_cargos int,
+    FOREIGN KEY (id_tutor_empresarial) REFERENCES personas (id_persona),
+    FOREIGN KEY (id_cargos) REFERENCES cargos (id_cargos)
+)
+
+create table representantes(
+	id_representante int not null AUTO_INCREMENT PRIMARY KEY,
+    FOREIGN KEY (id_representante) REFERENCES personas (id_persona)
+)
+
+
+create table personal_administrativo(
+	id_personal_administrativo int not null AUTO_INCREMENT PRIMARY KEY,
+    id_cargos int,
+    FOREIGN KEY (id_cargos) REFERENCES cargos (id_cargos),
+    FOREIGN KEY (id_personal_administrativo) REFERENCES personas (id_persona)
+)
+
+create table estudiantes(
+    id_estudiante int PRIMARY KEY,
+    id_representante int,
+    parentesco varchar(30),
+    fecha_nacimiento date,
+    foto varchar(200),
+    FOREIGN KEY (id_representante) REFERENCES representantes (id_representante),
+    FOREIGN KEY (id_estudiante) REFERENCES personas (id_persona)
+)
+
+
+create table empresas(
+	id_empresa int not null AUTO_INCREMENT PRIMARY KEY,
+    id_parroquia int,
+    rif varchar(20),
+    nombre varchar(50),
+    telefono varchar(10),
+    correo varchar(20),
+    sector varchar(100),
+    FOREIGN KEY (id_parroquia) REFERENCES parroquias (id_parroquia)
+)
+
+CREATE TABLE empresas_menciones (
+	id_empresa_mencion int not null AUTO_INCREMENT PRIMARY KEY,
+    id_empresa int,
+    id_mencion int,
+    FOREIGN KEY (id_empresa) REFERENCES empresas (id_empresa),
+    FOREIGN KEY (id_mencion) REFERENCES menciones (id_mencion)
+)
+
+CREATE TABLE historial_tutor_e (
+	id_his_te int not null AUTO_INCREMENT PRIMARY KEY,
+    id_empresa_mencion int,
+    id_tutor_empresarial int,
+    FOREIGN KEY (id_empresa_mencion) REFERENCES empresas_menciones (id_empresa_mencion),
+    FOREIGN KEY (id_tutor_empresarial) REFERENCES tutores_empresariales (id_tutor_empresarial)
+)
+
+
+CREATE TABLE historial_empresas (
+	id_hist_empresa int not null AUTO_INCREMENT PRIMARY KEY,
+    id_empresa int,
+    id_his_te int,
+    FOREIGN KEY (id_empresa) REFERENCES empresas (id_empresa),
+    FOREIGN KEY (id_his_te) REFERENCES historial_tutor_e (id_his_te)
+)
+
+CREATE TABLE historial_departamento (
+	id_hist_dep int not null AUTO_INCREMENT PRIMARY KEY,
+    id_departamento int,
+    id_personal_administrativo int,
+    FOREIGN KEY (id_departamento) REFERENCES departamentos (id_departamento),
+    FOREIGN KEY (id_personal_administrativo) REFERENCES personal_administrativo (id_personal_administrativo)
+)
+
+CREATE TABLE matricula (
+	id_matricula int not null AUTO_INCREMENT PRIMARY KEY,
+    id_grado_seccion int,
+    id_estudiante int,
+    FOREIGN KEY (id_grado_seccion) REFERENCES grado_seccion (id_grado_seccion),
+    FOREIGN KEY (id_estudiante) REFERENCES estudiantes (id_estudiante)
+)
+
+CREATE TABLE asignar_departamento (
+	id_asig_dep int not null AUTO_INCREMENT PRIMARY KEY,
+    id_matricula int,
+    id_hist_dep int,
+    FOREIGN KEY (id_matricula) REFERENCES matricula (id_matricula),
+    FOREIGN KEY (id_hist_dep) REFERENCES historial_departamento (id_hist_dep)
+)
+
+
+//asigna_empresa
+CREATE TABLE asigna_empresa( id_asig_emp int not null AUTO_INCREMENT PRIMARY KEY, id_matricula int, id_hist_empresa int, FOREIGN KEY (id_matricula) REFERENCES matricula (id_matricula), FOREIGN KEY (id_hist_empresa) REFERENCES historial_empresas (id_hist_empresa) )
+
+
+//VISTA T.ACADEMICO
+SELECT id_tutor_academico, cedula, nombre, sexo, telefono, correo, sector, cargo FROM personas, tutores_academicos, cargos WHERE tutores_academicos.id_cargos=cargos.id_cargos
+
+//VISTA T.EMPRESARIAL
+SELECT id_tutor_empresarial, cedula, nombre, sexo, telefono, correo, sector, cargo FROM personas, tutores_empresariales, cargos WHERE tutores_empresariales.id_cargos=cargos.id_cargos AND id_persona=id_tutor_empresarial
+
+//ESTUDIANTE
+SELECT id_estudiante, cedula, nombre, sexo, telefono, correo, sector, fecha_nacimiento, parentesco FROM personas, estudiantes WHERE id_persona=id_estudiante
+
+//REPRESENTANTES2
+CREATE TABLE representantes2(
+    id_representante int not null AUTO_INCREMENT PRIMARY KEY,
+    id_parroquia int,
+    nombre varchar(60),
+    cedula varchar(10),
+    correo varchar(20),
+    sector varchar (100),
+    sexo varchar(10),
+    telefono varchar(10),
+    FOREIGN KEY (id_parroquia) REFERENCES parroquias (id_parroquia)
+)
+ 
+
+SELECT prueba_estudiante.id_estudiante,prueba_estudiante.cedula, prueba_estudiante.estudiantes, prueba_estudiante.sexo, prueba_estudiante.telefono, prueba_estudiante.correo, prueba_estudiante.sector, prueba_estudiante.fecha_nacimiento, personas.nombre, prueba_estudiante.parentesco FROM prueba_estudiante, personas, representantes WHERE representantes.id_representante= personas.id_persona 
+
+
+//GRADO_SECCION
+SELECT id_grado_seccion,grado,mencion,anio_inicio, anio_final, estatus_periodo FROM grado_seccion,grados,menciones,periodos WHERE grado_seccion.id_grados= grados.id_grados AND grado_seccion.id_mencion= menciones.id_mencion AND grado_seccion.id_periodo= periodos.id_periodo
+
+
+//MATRICULA
+SELECT id_matricula,estudiantes.id_estudiante,id_persona,cedula,nombre,mencion,grado,anio_inicio, anio_final 
+FROM
+ estudiantes,personas,menciones,grados,periodos, matricula,grado_seccion 
+WHERE
+ personas.id_persona=estudiantes.id_estudiante AND estudiantes.id_estudiante=matricula.id_estudiante AND grado_seccion.id_grado_seccion=matricula.id_grado_seccion AND grado_seccion.id_periodo=periodos.id_periodo AND grado_seccion.id_grados=grados.id_grados AND grado_seccion.id_mencion= menciones.id_mencion
+
+vista- vista_matricula 
+
+//PERSONAL ADMINISTRATIVO
+SELECT id_personal_administrativo, cedula, nombre, sexo, telefono, correo, sector, cargo FROM personas, personal_administrativo, cargos WHERE personal_administrativo.id_cargos=cargos.id_cargos AND id_persona=id_personal_administrativo
+vISTA-ver_per_adm
+
+
+//vista_empresas_menciones
+SELECT id_empresa_mencion, empresas_menciones.id_empresa, empresas_menciones.id_mencion, nombre, rif, sector, mencion FROM empresas_menciones, empresas, menciones WHERE empresas_menciones.id_empresa= empresas.id_empresa AND empresas_menciones.id_mencion= menciones.id_mencion 
+
+//ver_historial_empresa
+SELECT historial_empresas.id_hist_empresa, vista_empresas_menciones.nombre AS empresa , vista_empresas_menciones.rif, vista_empresas_menciones.sector,ver_tutores_empresariales.cedula, ver_tutores_empresariales.nombre, ver_tutores_empresariales.cargo, vista_empresas_menciones.mencion, historial_empresas.estatus_his_empresa FROM historial_empresas, vista_empresas_menciones, ver_tutores_empresariales WHERE historial_empresas.id_empresa_mencion= vista_empresas_menciones.id_empresa_mencion AND historial_empresas.id_tutor_empresarial= ver_tutores_empresariales.id_tutor_empresarial
+
+//vista_asignar_empresa
+SELECT asigna_empresa.id_asig_emp, vista_matricula.cedula AS cedula_estu, vista_matricula.nombre AS estudiante, vista_matricula.mencion, vista_matricula.grado, vista_matricula.anio_inicio, vista_matricula.anio_final, ver_historial_empresa.empresa, ver_historial_empresa.rif, ver_historial_empresa.sector, ver_historial_empresa.cedula AS cedula_te, ver_historial_empresa.nombre, ver_historial_empresa.cargo, ver_historial_empresa.mencion AS area, ver_historial_empresa.estatus_his_empresa FROM asigna_empresa, vista_matricula, ver_historial_empresa WHERE vista_matricula.id_matricula= asigna_empresa.id_matricula AND ver_historial_empresa.id_hist_empresa= asigna_empresa.id_hist_empresa
+
+//VER_ESTUDIANTE
+SELECT id_estudiante, personas.cedula AS cedula_estudiante, personas.nombres AS nombre_estudiante, personas.apellidos AS apellido_estudiante, personas.sexo AS sexo_estudiante, personas.telefono AS telefono_estudiante, personas.correo AS correo_estudiante, fecha_nacimiento, foto, ver_representante.cedula AS cedula_representante, ver_representante.nombres AS nombre_representante, ver_representante.apellidos AS apellido_representante, ver_representante.sexo AS sexo_representante, ver_representante.telefono AS telefono_representante, ver_representante.correo AS correo_representante, parentesco FROM estudiantes, personas, ver_representante WHERE personas.id_persona= estudiantes.id_estudiante AND ver_representante.id_representante=estudiantes.id_representante 
