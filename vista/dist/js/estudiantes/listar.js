@@ -4,7 +4,7 @@ $(document).ready(function(){
 
       var table= $('#listaMatri').DataTable({
 
-        'destroy':true,
+        //'destroy':true,
         dom: 'Bfrtip',
         buttons:[
           'copyHtml5',
@@ -23,7 +23,6 @@ $(document).ready(function(){
         "language":{
           "url":"../../bower_components/datatables.net/js/Spanish.json"
         }
-
       });
     }
                      // OJOOOOOO
@@ -37,7 +36,7 @@ $(document).ready(function(){
 //         .appendTo( '#example_wrapper .col-sm-6:eq(0)' );
 // } );
 
-  // daTable();
+  daTable();
   $('.select2_modal').select2({
   dropdownParent: $("#modal_matricula")
   })
@@ -98,6 +97,7 @@ $(document).ready(function(){
               $('#listar').empty();
               // $('#infoMatricula').show();
 
+              $('#listaMatri').DataTable().clear().destroy();
               cedulaD= result[0]['nacionalidad_docente']+'-'+result[0]['cedula_docente'];
               nombreD= result[0]['nombre_docente'];
               apellidoD= result[0]['apellido_docente'];
@@ -106,26 +106,22 @@ $(document).ready(function(){
 
               for (var i = 0; i < result.length; i++) {
                 var texto= '<tr>'+
-                              '<td> <button class= "btn btn-primary" id="selecionar_estudiante" data-dismiss="modal" value="'+result[i]['id_matricula']+'">click</button>'
+                              '<td> <button type="button" class= "btn btn-info selecionar_estudiante" data-dismiss="modal" value="'+result[i]['id_matricula']+'">click</button></td>'+
                               '<td>'+result[i]['nacionalidad_estudiante']+'-'+result[i]['cedula_estudiante']+'</td>'+
                               '<td>'+result[i]['nombre_estudiante']+'</td>'+
                               '<td>'+result[i]['apellido_estudiante']+'</td>'+
                            '</tr>';
                 $('#listaMatri').show();
-
                 $('#listar').append(texto);
 
               }
               $('#docente').html(docente);
-              // daTable();
+              daTable();
       			},
       			error:function(result){ //xhr,status,error
-      				// alert("error: "+result.responseText+" "+result.status);
               // console.log("error: "+result.responseText+" "+result.status);
               $('#listar').empty();
-
               // listar();
-
       			}
 
       		})//fin Ajax dentro del change
@@ -133,7 +129,6 @@ $(document).ready(function(){
 
               // FILTAR POR MENCIONES
         $('#mencion').change(function(){
-          var centinela= false;
           var anio=$("#anio").val();
       		var mencion=$("#mencion").val();
           $.ajax({
@@ -144,6 +139,7 @@ $(document).ready(function(){
       			success:function(result){ //data,textStatus,jqXHR
               $('#listar').empty();
               // $('#infoMatricula').show();
+              $('#listaMatri').DataTable().clear().destroy();
               cedulaD= result[0]['nacionalidad_docente']+'-'+result[0]['cedula_docente'];
               nombreD= result[0]['nombre_docente'];
               apellidoD= result[0]['apellido_docente'];
@@ -162,16 +158,9 @@ $(document).ready(function(){
               }
               $('#docente').html(docente);
 
-              var centinela= $('#confirmar_dataTable').val();
-              if (centinela==0) {
-                daTable();
-                $('#confirmar_dataTable').val(1);
-              }
-
-
+              daTable();
       			},
       			error:function(result){ //xhr,status,error
-              // alert("error: "+result.responseText+" "+result.status);
               // console.log("error: "+result.responseText+" "+result.status);
               $('#listar').empty();
               // listar();
