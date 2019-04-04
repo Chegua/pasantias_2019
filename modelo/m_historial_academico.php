@@ -9,7 +9,6 @@ class historial_academico extends personas//Inicio la clase, señalando que es h
   public $fecha_ini_d;               //Public
   public $fecha_fin_d;               //Public
 
-
   public $estatus_tutor;//indica si guardo o no
   public $estatus;
   public $fecha_ini;
@@ -20,30 +19,28 @@ class historial_academico extends personas//Inicio la clase, señalando que es h
   {
     //Constructor de la lase padre.
     parent::__construct($nacionalidad,$cedula,$nombres,$apellidos,$sexo,$telefono,$correo);
-   
+
    //Asigno valores a los elementos del constructor
     $this->estatus_docente= $estatus_docente;
     $this->fecha_ini_d= $fecha_ini_d;
     $this->fecha_fin_d= $fecha_fin_d;
-    
+
     $this->estatus_tutor= $estatus_tutor; //me indica que lo que porfin
 
     $this->estatus= $estatus;
     $this->fecha_ini= $fecha_ini;
     $this->fecha_fin= $fecha_fin;
-
-
   }
 
 //Metodo registrar datos de la clase hija
-  public function registrar(){ 
+  public function registrar(){
 
     $db= DataBase::getInstance();//Conexion
 
     parent::registrarP($db);           //Ejecuto el metodo registrar de la clase padre
     $p=parent::buscar();               //Ejecuto el metodo buscar de la clase padre.
     $this->id= $p[0]['id_persona'];    //Busco el ID de una persona en la clase padre.
-  
+
     //Preparo la consulta
      $consulta=$db->prepare("INSERT INTO docentes (id_persona , estatus_docente, fecha_inicio_d, fecha_fin_d) VALUES (:id_persona, :estatus_docente, :fecha_inicio_d, :fecha_fin_d)");
 
@@ -61,8 +58,8 @@ class historial_academico extends personas//Inicio la clase, señalando que es h
       if ($decidir== 'No') {
         return 'exito';
       }else{
-         $consulta2=$db->prepare("INSERT INTO tutor_academico (id_tutor , estatus_tutor, fecha_inicio_t, fecha_fin_t) VALUES (:id_persona, :estatus_tutor, :fecha_inicio_t, :fecha_fin_t)");
-   
+        $consulta2=$db->prepare("INSERT INTO tutor_academico (id_tutor , estatus_tutor, fecha_inicio_t, fecha_fin_t) VALUES (:id_persona, :estatus_tutor, :fecha_inicio_t, :fecha_fin_t)");
+
         $consulta2->bindParam(':id_persona', $this->id);
         $consulta2->bindParam(':estatus_tutor', $this->estatus);
         $consulta2->bindParam(':fecha_inicio_t', $this->fecha_ini);
@@ -71,11 +68,10 @@ class historial_academico extends personas//Inicio la clase, señalando que es h
         if ($resultado) {
          return 'exito';
         }
-      }      
+      }
     }else{
       return 'fracaso';
-    } 
-  
+    }
 }
 
 //Metodo consultar datos de la base de datos.
@@ -107,13 +103,13 @@ class historial_academico extends personas//Inicio la clase, señalando que es h
   public function actualizar($id)
   {
     $db = Database::getInstance(); //Conexion
- 
+
     parent::modificar($db); // Metodo modificar de la clase padre.
     $this->id= $p[0]['id_persona']; //Busco el ID de una persona en la clase padre.
 
     //Peraro la consulta
      $sql = "UPDATE historial_academicos SET  id_cargo='$this->cargo', estatus_tutor='$this->estatus', estatus_activo='$this->estatus', fecha_inicio='$this->fecha_ini', fecha_fin='$this->fecha_fin' WHERE id_tutor_aca='$id'";
-     
+
       $resultado= $db->query($sql); // Eejecuto la consulta
 
     //Si logra actualizar, devuelve exito, sino fracaso.
@@ -147,7 +143,7 @@ class historial_academico extends personas//Inicio la clase, señalando que es h
         return 'malo';
     }
 
-  } 
+  }
 
 //Metodo encontrar datos en la bse de datos.
     public static function encontrar($id)

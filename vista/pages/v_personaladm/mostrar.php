@@ -1,7 +1,7 @@
 <?php
-  require_once('../../../modelo/m_personaladm.php');
+  // require_once('../../../modelo/m_personaladm.php');
 
-  $resultado = per_adm::consultar();
+  // $resultado = per_adm::consultar();
 
 ?>
 <!DOCTYPE html>
@@ -46,7 +46,7 @@
     </section>
 
     <section class="content container-fluid">
- 
+
   <?php include ("../include/periodo.php"); ?>
 
     <div class="box box-warning">
@@ -57,7 +57,7 @@
 
        <?php
       require_once('../../../modelo/m_personaladm.php');
-      $per = new per_adm();
+      // $per = new per_adm();
       if (isset($_GET['respuesta1'])=='existente') {
         echo '<script>
               $(document).ready(function(){
@@ -89,40 +89,30 @@
           </script>';
       }
       ?>
-<div class="panel panel-primary">
-          <div class="panel-heading">
+      <div class="panel panel-primary">
+         <div class="panel-heading">
             <h5> <strong>Agregar nuevo</strong><button type="button" onclick="window.location.href='agregar.php'" class="btn btn-success btn-sm"><span class="  glyphicon glyphicon-plus"></span></button></h5>
 
           </div>
 
-            <div class="panel-body">
-              <table class="table table-hover table-bordered" id="example">
+         <div class="panel-body">
+          <table class="table table-hover table-bordered" id="example">
 
-          <thead>
-            <th class="col-md-1">N°</th>
-            <th class="col-md-5">Nombre</th>
-            <th class="col-md-3 text-center">Acciones</th>
+            <thead>
+              <th>N°</th>
+              <th>Nombre</th>
+              <th class="text-center">Acciones</th>
 
-          </thead>
+            </thead>
 
-                    <tbody>
-            <?php foreach ($resultado as $key): ?>
-            <tr>
-              <td><?php echo $key->nombres ; ?></td>
-              <td><?php echo $key->apellidos ; ?></td>
-              <td><?php echo $key->cedula ; ?></td>
-              <td>
-               <button type="button" title="Perfil" onClick="window.location.href='perfil.php<?php echo '?id='?><?php echo $key->id_estudiante?>'" class="btn btn-sm btn-success btn-sm"><span class="fa fa-eye"></span></button>
-              </td>
-            </tr>
+            <tbody id="lista_personal_administrativo">
 
-          <?php endforeach; ?>
 
-          </tbody>
+            </tbody>
 
-        </table>
-            </div>
+          </table>
           </div>
+        </div>
 
 
     </div>
@@ -140,14 +130,13 @@
 </div>
 <!-- ./wrapper -->
 
- 
+
   <?php include ("../include/plugins.php"); ?>
  <script src="../../dist/toastr-master/build/toastr.min.js"></script>
   <script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
   <script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
   <script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
   <script src="../../bower_components/fastclick/lib/fastclick.js"></script>
-  <script src="../../dist/js/demo.js"></script>
 
   <script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
   <script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -166,14 +155,14 @@
 
 
 
-  
+
 <script>
 $(document).ready(function() {
     var table = $('#example').DataTable( {
         lengthChange: false,
         buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
     } );
- 
+
     table.buttons().container()
         .appendTo( '#example_wrapper .col-sm-6:eq(0)' );
 } );

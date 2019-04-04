@@ -11,9 +11,9 @@ class tutores_empresariales extends personas
   public $estatus;
 
   //METODOS
-  function __construct($nacionalidad,$cedula,$nombre,$apellido,$correo,$sexo,$telefono,$cargo,$empresa_mencion,$fecha_inicio,$fecha_fin,$estatus)
+  function __construct($nacionalidad,$cedula,$nombre,$apellido,$sexo,$telefono,$correo,$cargo,$empresa_mencion,$fecha_inicio,$fecha_fin,$estatus)
   {
-    parent::__construct($nacionalidad,$cedula,$nombre,$apellido,$correo,$sexo,$telefono);
+    parent::__construct($nacionalidad,$cedula,$nombre,$apellido,$sexo,$telefono,$correo);
     $this->cargo= $cargo;
     $this->empresa_mencion= $empresa_mencion;
     $this->fecha_inicio= $fecha_inicio;

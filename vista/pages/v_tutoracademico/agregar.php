@@ -77,8 +77,8 @@ $resultado2= personas::consultar();
               <div class="form-group col-md-2">
               <label for="nacionalidad">Nac.</label>
               <select name="nacionalidad" class="form-control form-control-sm" id="nacionalidad" required>
-                <option value="V">V- </option>
-                <option value="E">E- </option>
+                <option value="V">V</option>
+                <option value="E">E</option>
               </select>
             </div>
 

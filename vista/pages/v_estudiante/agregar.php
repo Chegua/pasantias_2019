@@ -63,7 +63,7 @@ $resultado2= $cuadratura->consultar();
       <!-- Default box -->
       <div class="box box-warning">
         <div class="box-header with-border">
-          <h3 class="box-title">Datos del estudiante: </h3>           <div class="pull-right hidden-xs">
+          <h3 class="box-title">Datos del estudiante: </h3>   <div class="pull-right hidden-xs">
       <?php include ("../include/periodo.php"); ?>
              </div>
 
@@ -126,12 +126,13 @@ $resultado2= $cuadratura->consultar();
           <div class="form-group col-md-6">
               <label for="telefono">Telefono:</label>
               <input type="text" name="telefono" id="telefono" class="form-control form-control-sm" placeholder="Ingrese el numero" data-inputmask='"mask": "(9999) 999-9999"' data-mask autocomplete="off" maxlength="15">
+              <span class="help-block">(Opcional.)</span>
           </div>
 
           <div class="form-group col-md-6">
                 <label for="correo">Correo:</label>
                 <input type="text" name="correo" id="correo" class="form-control form-control-sm" placeholder="Ingrese el correo"  autocomplete="off">
-               <span class="help-block"></span>
+                <span class="help-block">(Opcional.)</span>
           </div>
 
           <div class="col-md-12">

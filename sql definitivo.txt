@@ -61,6 +61,19 @@ create table tutor_academico(
     FOREIGN KEY (id_tutor) REFERENCES docentes(id_docente)
 );
 
+CREATE TABLE historial_departamentos(
+    id_hist_dpto INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_personal_administrativo INT,
+    id_departamento INT,
+    id_cargo INT,
+    fecha_inicio DATE,
+    fecha_fin DATE,
+    estatus VARCHAR(10) ,
+    FOREIGN KEY (id_personal_administrativo) REFERENCES personas(id_persona),
+    FOREIGN KEY (id_departamento) REFERENCES departamentos(id_departamento),
+    FOREIGN KEY (id_cargo) REFERENCES cargos(id_cargo)
+);
+
 
 
 //VISTA DE CARGOS....
