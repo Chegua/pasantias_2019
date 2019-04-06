@@ -80,7 +80,7 @@ $resultadocarg= $cargo->consultar();
          </div>
      <div class="box-body">
 
-<form name="registrar_adm" id="registrar_adm">
+<form name="registrar_adm" id="registrar_adm" method="post" action="../../../controlador/c_personaladm.php">
 
 
     <div class="row">
@@ -230,7 +230,7 @@ $resultadocarg= $cargo->consultar();
 <!-- <script src="../../dist/js/personaladm/expresionregular.js"></script>
 <script src="../../dist/js/personaladm/validacion.js"></script> -->
 <!-- <script src="../../dist/js/personaladm/grillaAgregar.js"></script> -->
-<script src="../../dist/js/personaladm/app.js"></script>
+<!-- <script src="../../dist/js/personaladm/app.js"></script> -->
 
 </body>
 </html>

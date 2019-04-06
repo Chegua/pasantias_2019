@@ -51,8 +51,14 @@ switch($_REQUEST['opcion'])
 
 		$per_adm = new personal_administrativo($nacionalidad,$cedula,$nombre,$apellido,$sexo,$telefono,$correo,$departamento,$cargo,$fecha_inicio,$fecha_fin,$estatus);
 		$resultado = $per_adm->registrar();
-		$resultado= json_encode($resultado);
-		echo $resultado;
+    switch ($resultado){
+			case 'existente':
+				Header("Location: ../vista/pages/v_personaladm/mostrar.php?respuesta1= existente");
+				break;
+			case 'exito':
+				Header("Location: ../vista/pages/v_personaladm/mostrar.php?respuesta2= exito");
+				break;
+		}
 		break;
 
 	case 'buscar':

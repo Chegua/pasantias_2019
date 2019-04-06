@@ -1,7 +1,6 @@
 <?php
-  // require_once('../../../modelo/m_personaladm.php');
-
-  // $resultado = per_adm::consultar();
+  require_once('../../../modelo/m_personaladm.php');
+  $resultado = personal_administrativo::consultar();
 
 ?>
 <!DOCTYPE html>
@@ -99,14 +98,27 @@
           <table class="table table-hover table-bordered" id="example">
 
             <thead>
-              <th>N°</th>
-              <th>Nombre</th>
-              <th class="text-center">Acciones</th>
-
+              <tr>
+                <th>N°</th>
+                <th>Cedula</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Departamento</th>
+                <th class="text-center">Acciones</th>
+              </tr>
             </thead>
 
             <tbody id="lista_personal_administrativo">
-
+              <?php for ($i=0; $i < count($resultado); $i++):?>
+                <tr>
+                  <td><?php echo $i+1; ?></td>
+                  <td><?php echo $resultado[$i]['cedula']; ?></td>
+                  <td><?php echo $resultado[$i]['nombre']; ?></td>
+                  <td><?php echo $resultado[$i]['apellido']; ?></td>
+                  <td><?php echo $resultado[$i]['departamento']; ?></td>
+                  <td>ey</td>
+                </tr>
+              <?php endfor; ?>
 
             </tbody>
 

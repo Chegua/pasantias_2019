@@ -25,12 +25,14 @@ class personal_administrativo extends personas
   public function registrar(){
     $db= DataBase::getInstance();
     // $per=parent::registrarP($db);
+    echo $this->cargo;
     $validarPer=  $db->prepare("SELECT id_persona FROM personas WHERE cedula= '$this->cedula'");
     $validarPer->execute();
     $resultadoPer= $validarPer->rowCount();
 
+
     if ($resultadoPer>0) {
-      return $validarPer;
+      return 'existente';
     }else {
     $consultaPer= $db->prepare("INSERT INTO personas (nacionalidad,cedula,nombre,apellido,sexo,telefono,correo) VALUES (:nacionalidad,:cedula,:nombre,:apellido,:sexo,:telefono,:correo)");
        $consultaPer->bindParam(':nacionalidad', $this->nacionalidad);
@@ -41,10 +43,10 @@ class personal_administrativo extends personas
        $consultaPer->bindParam(':telefono', $this->telefono);
        $consultaPer->bindParam(':correo', $this->correo);
        $resultadoPer= $consultaPer->execute();
-      // if ($resultadoPer)
-      //   return 'exito';
-      // else
-      //  return 'fracaso';
+       if ($resultadoPer)
+         return 'exito';
+       else
+        return 'fracaso';
     }
     $p=parent::buscar();
     $this->id_per_adm= $p[0]['id_persona'];
@@ -52,7 +54,7 @@ class personal_administrativo extends personas
     $validar->execute();
     $respuesta= $validar->rowCount();
     if ($respuesta>0) {
-      return $validar;
+      return 'existente';
     }else {
       $consulta=$db->prepare("INSERT INTO historial_departamentos (id_personal_administrativo,id_cargo,id_departamento,fecha_inicio,fecha_fin,estatus) VALUES (:id_per_adm,:cargo,:departamento,:fecha_inicio,:fecha_fin,:estatus)");
       $consulta->bindParam(':id_per_adm', $this->id_per_adm);
@@ -61,14 +63,19 @@ class personal_administrativo extends personas
       $consulta->bindParam(':fecha_inicio', $this->fecha_inicio);
       $consulta->bindParam(':fecha_fin', $this->fecha_fin);
       $consulta->bindParam(':estatus', $this->estatus);
+
+
       $r= $consulta->execute();
-      return $r;
+      if ($r)
+        return 'exito';
+      else
+       return 'fracaso';
     }
   }
 
   public static function consultar(){
     $db= DataBase::getInstance();
-    $sql= "SELECT * FROM vista_per_adm";
+    $sql= "SELECT * FROM vista_historial_departamentos";
     $resultado=$db->query($sql);
     if($resultado->rowCount()>0)
       return $resultado->fetchAll();
