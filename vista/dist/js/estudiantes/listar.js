@@ -1,9 +1,8 @@
 $(document).ready(function(){
     // $('#infoMatricula').hide();
-    function daTable() {
-
+    //----------------------------------------FUNCIONES DATATABLE-------------------------------------
+    function dataTableMatricula(){
       var table= $('#listaMatri').DataTable({
-
         //'destroy':true,
         dom: 'Bfrtip',
         buttons:[
@@ -19,32 +18,51 @@ $(document).ready(function(){
         'ordering': true,
         'info': true,
         'autoWidth': false,
-        'scrollX': true,
+        'scrollX': false,
         "language":{
           "url":"../../bower_components/datatables.net/js/Spanish.json"
         }
       });
     }
-                     // OJOOOOOO
-//   $(document).ready(function() {
-//     var table = $('#example').DataTable( {
-//         lengthChange: false,
-//         buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
-//     } );
 
-//     table.buttons().container()
-//         .appendTo( '#example_wrapper .col-sm-6:eq(0)' );
-// } );
+    function dataTableEmpresarial() {
+      var table= $('#tabla_empresarial').DataTable({
+        //'destroy':true,
+        dom: 'Bfrtip',
+        buttons:[
+          'copyHtml5',
+          'excelHtml5',
+          'csvHtml5',
+          'pdfHtml5',
+          'colvis'
+        ],
+        'paging': true,
+        'lengthChange': false,
+        'searching': true,
+        'ordering': true,
+        'info': true,
+        'autoWidth': false,
+        'scrollX': false,
+        "language":{
+          "url":"../../bower_components/datatables.net/js/Spanish.json"
+        }
+      });
+    }
+  dataTableMatricula();
+  dataTableEmpresarial();
 
-  daTable();
+  $('#listaMatri').hide();
+  $('#tabla_empresarial').hide();
+
+  //------------------------------------SELECT2 DENTRO DE UNA MODAL-------------------------------
   $('.select2_modal').select2({
   dropdownParent: $("#modal_matricula")
   })
 
-  $('#listaMatri').hide();
 
 
-                            // SELECT AÑOS
+
+  //----------------------------------SELECT AÑOS-----------------------------------------------
     $.ajax({
   			url:'../../../controlador/c_anios.php',
   			method:'GET',
@@ -63,7 +81,7 @@ $(document).ready(function(){
 
   		});//fin Ajax
 
-                       // SELECT MENCIONES
+//----------------------------------------SELECT MENCIONES--------------------------------------------------
       $.ajax({
     			url:'../../../controlador/c_mencion.php',
     			method:'GET',
@@ -81,9 +99,7 @@ $(document).ready(function(){
 
     		});//fin Ajax
 
-
-
-                    // FILTAR POR AÑO
+//-----------------------------------------FILTAR POR AÑO------------------------------------------
         $('#anio').change(function(){
           var anio=$("#anio").val();
       		var mencion=$("#mencion").val();
@@ -96,14 +112,12 @@ $(document).ready(function(){
       			success:function(result){ //data,textStatus,jqXHR
               $('#listar').empty();
               // $('#infoMatricula').show();
-
               $('#listaMatri').DataTable().clear().destroy();
               cedulaD= result[0]['nacionalidad_docente']+'-'+result[0]['cedula_docente'];
               nombreD= result[0]['nombre_docente'];
               apellidoD= result[0]['apellido_docente'];
 
               var docente= cedulaD+' '+nombreD+' '+apellidoD;
-
               for (var i = 0; i < result.length; i++) {
                 var texto= '<tr>'+
                               '<td> <button type="button" class= "btn btn-info selecionar_estudiante" data-dismiss="modal" value="'+result[i]['id_matricula']+'">click</button></td>'+
@@ -113,10 +127,9 @@ $(document).ready(function(){
                            '</tr>';
                 $('#listaMatri').show();
                 $('#listar').append(texto);
-
               }
               $('#docente').html(docente);
-              daTable();
+              dataTableMatricula();
       			},
       			error:function(result){ //xhr,status,error
               // console.log("error: "+result.responseText+" "+result.status);
@@ -127,7 +140,7 @@ $(document).ready(function(){
       		})//fin Ajax dentro del change
         });
 
-              // FILTAR POR MENCIONES
+//----------------------------------FILTAR POR MENCIONES-------------------------------------------
         $('#mencion').change(function(){
           var anio=$("#anio").val();
       		var mencion=$("#mencion").val();
@@ -158,7 +171,7 @@ $(document).ready(function(){
               }
               $('#docente').html(docente);
 
-              daTable();
+              dataTableMatricula();
       			},
       			error:function(result){ //xhr,status,error
               // console.log("error: "+result.responseText+" "+result.status);
@@ -168,6 +181,7 @@ $(document).ready(function(){
       		})//fin Ajax dentro del change
         });
 
+//--------------------------------------ELEGIR ESTUDIANTE--------------------------------------------------------------------------------------------------
         $(document).on('click','.selecionar_estudiante',function(){
           var id_matricula= $(this).val();
           $('#id_matricula').val(id_matricula);
@@ -177,16 +191,28 @@ $(document).ready(function(){
            data: {'opcion':'encontrar','id_matricula':id_matricula},
            dataType: 'json',
            success:function(result){
-             datos='Cédula: '+result['nacionalidad_estudiante']+'-'+result['cedula_estudiante']+' Nombre: '+result['nombre_estudiante']+' Apellido: '+result['apellido_estudiante'];
-
+             datos=result['nacionalidad_estudiante']+'-'+result['cedula_estudiante']+' '+result['nombre_estudiante']+' '+result['apellido_estudiante'];
 
              if (result['anio']!='4to'){
 
                alertify.confirm('Confirmar', '¿Desea asignar el estudiante a una empresa?',
-                 function(){ alertify.success('Operación exitosa'), $('#datos_estudiante').html(datos); listar_empresas(result['mencion']); },
-                 function(){alertify.error('Cancelado')}).set('labels',{ok:'Si', cancel:'No'});
+                 function(){
+                    alertify.success('Operación exitosa'), $('#datos_estudiante').html(datos);  listar_empresas(result['mencion']); $('#mostrar_ocultar').show();
+                  },
+                 function(){
+                   alertify.error('Cancelado')}).set('labels',{ok:'Si', cancel:'No'
+                 }
+               );
              }else {
-               alert('Soy de 4to');
+               alertify.confirm('Confirmar', 'Los estudiantes de 4to año seran asigignado a los departamentos activos para pre-pasantias',
+                 function(){ alertify.success('Operación exitosa'),
+                    $('#datos_estudiante').html(datos);
+                    listar_departamentos();
+                    $('#mostrar_ocultar').show();
+                    $('#vaciar_histEmp').empty();
+                    $('#tabla_empresarial').hide();
+                 },
+                 function(){alertify.error('Cancelado')}).set('labels',{ok:'Entendido', cancel:'Cancelar'});
              }
             },
            error:function(result) {
@@ -195,6 +221,7 @@ $(document).ready(function(){
           });//fin Ajax
         });
 
+//----------------------LISTAR EMPRESAS SEGUN LA MENCION DEL ESTUDIANTE--------------------------------------------
         function listar_empresas(mencion){
           $.ajax({
             url: '../../../controlador/c_asignar.php',
@@ -203,6 +230,7 @@ $(document).ready(function(){
             dataType: 'json',
             success:function(result) {
               $('#lista_empresarial').empty();
+              $('#tabla_empresarial').DataTable().clear().destroy();
 
               for (var i = 0; i < result.length; i++) {
                 var texto= '<tr>'+
@@ -210,11 +238,11 @@ $(document).ready(function(){
                            '<td>'+result[i]['empresa']+'</td>'+
                            '<td>'+result[i]['tipo']+'-'+result[i]['rif']+'</td>'+
                            '</tr>';
-                           $('#lista_empresarial').append(texto);
+                $('#lista_empresarial').append(texto);
+
               }
-
-
-
+              $('#tabla_empresarial').show();
+              dataTableEmpresarial();
             },
             error:function(result) {
               alert("error: "+result.responseText+" "+result.status);
@@ -222,6 +250,30 @@ $(document).ready(function(){
           });
         }
 
+//------------------------------------------LISTA ADMINISTRATIVA-----------------------------------------
+        function listar_departamentos(){
+          $.ajax({
+            url: '../../../controlador/c_asignar.php',
+            method: 'GET',
+            data: {'opcion':'listar_departamentos'},
+            dataType: 'json',
+            success:function(result) {
+              $('#lista_administrativa').empty();
+
+              for (var i = 0; i < result.length; i++) {
+                var texto= '<tr>'+
+                             '<td>'+result[i]['nacionalidad']+'-'+result[i]['cedula']+' '+result[i]['nombre']+' '+result[i]['apellido']+'</td>'+
+                             '<td>'+result[i]['departamento']+'</td>'+
+                           '</tr>';
+                 $('#lista_administrativa').append(texto);
+              }
+            },
+            error:function(result) {
+              alert("error: "+result.responseText+" "+result.status);
+            }
+          });
+        }
+//-------------------------------LISTAR TUTORES DE LA EMPRESA-----------------------------------------
         $(document).on('click','.ver_tutor',function(){
           var id_empresa_mencion= $(this).val();
           $.ajax({
@@ -248,7 +300,7 @@ $(document).ready(function(){
           });
 
         });
-
+//-------------------------------ELEGIR TUTOR EMPRESARIAL---------------------------------------
         $(document).on('click','.selecionar_tutor',function(){
           var id_hist_emp= $(this).val();
           $('#id_hist_emp').val(id_hist_emp);
@@ -258,7 +310,7 @@ $(document).ready(function(){
            data: {'opcion':'encontrar','id_hist_emp':id_hist_emp},
            dataType: 'json',
            success:function(result){
-             datos='Cédula: '+result['cargo']+'-'+result['cedula']+' Nombre: '+result['nombre']+' Apellido: '+result['apellido'];
+             datos=result['nacionalidad']+'-'+result['cedula']+' '+result['nombre']+' '+result['apellido'];
              $('#datos_hist_emp').html(datos);
             },
            error:function(result) {
@@ -267,6 +319,7 @@ $(document).ready(function(){
           });//fin Ajax
         });
 
+//---------------------------------BOTON DE ASIGNAR--------------------------------------------
         $('#asignar-form').submit(e => {
           e.preventDefault();
           const postData = {

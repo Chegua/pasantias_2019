@@ -21,14 +21,13 @@
 
 </head>
 
-<body>
-
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
   <!-- Main Header -->
   <header class="main-header">
     <?php include ("../include/header.php"); ?>
+
   </header>
 
   <!-- Left side column. contains the logo and sidebar -->
@@ -41,18 +40,27 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-
+      <h1>
+        <i class="fa fa-graduation-cap"></i> Personal administrativo.
+        <small>Listar <i class="fa fa-list"></i></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li><a href="#">Personas</a></li>
+        <li class="">Personal administrativo.</li>
+        <li class="active">Listar.</li>
+      </ol>
     </section>
 
     <section class="content container-fluid">
 
-  <?php include ("../include/periodo.php"); ?>
-
     <div class="box box-warning">
-       <div class="box-header with-border">
-           <h3 class="" align="center"><strong><i class="fa fa-server"></i>  Personal administrativo.</strong></h3>
-           <p class="info" align="center"><i class="fa fa-eye"></i> En esta sección del sistema se visualiza una lista de registros.</p>
-       </div>
+      <div class="box-header with-border">
+        <h3 class="box-title">Listado de administrativos: </h3>
+        <div class="pull-right hidden-xs">
+          <?php include ("../include/periodo.php"); ?>
+        </div>
+      </div>
 
        <?php
       require_once('../../../modelo/m_personaladm.php');
@@ -88,11 +96,10 @@
           </script>';
       }
       ?>
-      <div class="panel panel-primary">
+      <div class="panel panel-default">
          <div class="panel-heading">
             <h5> <strong>Agregar nuevo</strong><button type="button" onclick="window.location.href='agregar.php'" class="btn btn-success btn-sm"><span class="  glyphicon glyphicon-plus"></span></button></h5>
-
-          </div>
+         </div>
 
          <div class="panel-body">
           <table class="table table-hover table-bordered" id="example">
@@ -116,17 +123,20 @@
                   <td><?php echo $resultado[$i]['nombre']; ?></td>
                   <td><?php echo $resultado[$i]['apellido']; ?></td>
                   <td><?php echo $resultado[$i]['departamento']; ?></td>
-                  <td>ey</td>
+                  <td>
+                   <button type="button" title="Perfil" onClick="window.location.href='perfil2.php<?php echo '?id='?><?php echo $resultado[$i]['id_hist_dpto']?>'" class="btn btn-sm btn-success btn-sm"><span class="fa fa-eye"></span></button>
+
+                    <button title="Modificar Registro" type="button" onClick="window.location.href='modificar.php<?php echo '?id='?><?php echo $resultado[$i]['id_hist_dpto']?>'" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
+
+                    <a href="javascript:preguntar(<?php echo $resultado[$i]['id_hist_dpto']?>,'eliminar')" class="btn btn-sm btn-danger" title="Eliminar registro"><span class="fa fa-trash"></span></a>
+                  </td>
                 </tr>
               <?php endfor; ?>
 
             </tbody>
-
           </table>
           </div>
         </div>
-
-
     </div>
     </section>
     <!-- /.content -->
@@ -152,8 +162,8 @@
 
   <script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
   <script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-  <script src="../../plugins/alertify/alertify.min.js"></script>
-  <script src="../../dist/js/cargos/eliminar2.js"></script>
+  <script src="../../plugins/alertify/js/alertify.min.js"></script>
+  <script src="../../dist/js/personaladm/eliminar2.js"></script>
   <script src="../../bower_components/datable/dataTables.bootstrap.min.js"></script>
   <script src="../../bower_components/datable/dataTables.buttons.min.js"></script>
   <script src="../../bower_components/datable/buttons.bootstrap.min.js"></script>
@@ -164,20 +174,30 @@
   <script src="../../bower_components/datable/buttons.print.min.js"></script>
  <script src="../../bower_components/datable/buttons.colVis.min.js"></script>
 
-
-
-
-
 <script>
-$(document).ready(function() {
-    var table = $('#example').DataTable( {
-        lengthChange: false,
-        buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
-    } );
+$(document).ready(function(){
+  $('#example').DataTable({
+    dom: 'Bfrtip',
+    buttons:[
+      'copyHtml5',
+      'excelHtml5',
+      'csvHtml5',
+      'pdfHtml5',
+      'colvis'
+    ],
+    'paging': true,
+    'lengthChange': false,
+    'searching': true,
+    'ordering': true,
+    'info': true,
+    'autoWidth': false,
+    'scrollX': true,
+    "language":{
+      "url":"../../bower_components/datatables.net/js/Spanish.json"
+    }
 
-    table.buttons().container()
-        .appendTo( '#example_wrapper .col-sm-6:eq(0)' );
-} );
+  });
+});
 </script>
 
 

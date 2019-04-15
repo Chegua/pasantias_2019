@@ -47,17 +47,17 @@ switch($_REQUEST['opcion'])
 		$departamento = new departamentos();
 		$resultado= $departamento->eliminar($id);
 
-switch ($resultado) {
-		case 'exito':
-		header("location: ../vista/pages/v_departamentos/mostrar.php?respuesta2= extio");
-		break;
-		case 'fracaso':
-		header("location: ../vista/pages/v_departamentos/mostrar.php?respuesta3= fracaso");
-		break;
-		case 'ojo':
-		header("location: ../vista/pages/v_departamentos/mostrar.php?respuesta4= ojo");
-		break;
-	}
+		switch ($resultado) {
+				case 'exito':
+				header("location: ../vista/pages/v_departamentos/mostrar.php?respuesta2= extio");
+				break;
+				case 'fracaso':
+				header("location: ../vista/pages/v_departamentos/mostrar.php?respuesta3= fracaso");
+				break;
+				case 'ojo':
+				header("location: ../vista/pages/v_departamentos/mostrar.php?respuesta4= ojo");
+				break;
+			}
 	break;
 }
 ?>

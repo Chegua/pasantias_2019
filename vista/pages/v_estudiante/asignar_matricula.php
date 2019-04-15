@@ -49,7 +49,7 @@
 
     <div class="box box-warning">
        <div class="box-header with-border">
-         <h3 class="box-title">Listado de estudiantes: </h3>
+         <h3 class="box-title">Asignaciones Pasantias/Pre-pasantias: </h3>
          <div class="pull-right hidden-xs">
            <?php include ("../include/periodo.php"); ?>
          </div>
@@ -59,50 +59,76 @@
         <div class="panel-heading">
           <div class="row">
             <div class="col-md-12">
-              <spam class="h4">Listar matricula</spam><button type="button" name="matricula" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal_matricula"><i class="fa fa-search"></i> </button>
-
+              <button type="button" name="matricula" class="btn btn-primary" data-toggle="modal" data-target="#modal_matricula"><i class="fa fa-list"></i> Listar matricula</button>
             </div>
           </div>
 
+          <ul class="nav nav-tabs">
+      			<li class="active"><a href="#asignaciones" data-toggle="tab">Asignaciones</a></li>
+            <li><a href="#datos_empresas" data-toggle="tab">Datos de empresas</a></li>
+            <li><a href="#datos_adm" data-toggle="tab">Datos administrativos</a></li>
+      		</ul>
+
         </div>
         <div class="panel-body">
+          <div class="tab-content">
+            <div id="asignaciones" class="tab-pane fade in active">
+              <div id="mostrar_ocultar" hidden>
+                <form class="" id="asignar-form" method="post">
+                  <div class="col-md-12">
+                    <h4>Estudiante</h4>
+                    <input type="hidden" name="id_matricula" id="id_matricula">
+                    <span id="datos_estudiante"></span>
+                  </div>
 
+                  <div class="col-md-12" id="vaciar_histEmp">
+                    <h4>Tutor empresarial</h4>
+                    <input type="hidden" name="id_hist_emp" id="id_hist_emp">
+                    <span id="datos_hist_emp"></span>
+                  </div>
 
-          <form class="" id="asignar-form" method="post">
-            <div class="col-md-12">
-              <h4>Estudiante</h4>
-              <input type="hidden" name="id_matricula" id="id_matricula">
-              <span id="datos_estudiante"></span>
+                  <div class="col-md-12 text-center">
+                    <button type="submit" name="asignar" class="btn btn-success">Asignar <i class="fa fa-save"></i> </button>
+                  </div>
+
+                </form>
+
+              </div>
             </div>
 
-            <div class="col-md-12">
-              <h4>Tutor empresarial</h4>
-              <input type="hidden" name="id_hist_emp" id="id_hist_emp">
-              <span id="datos_hist_emp"></span>
+            <div id="datos_empresas" class="tab-pane fade">
+              <table class="table table-hover table-bordered" id="tabla_empresarial">
+
+                <thead>
+                  <tr>
+                    <th>Tutores disponibles</th>
+                    <th class="">Empresa</th>
+                    <th class="">RIF</th>
+
+                  </tr>
+                </thead>
+                <tbody id="lista_empresarial" >
+
+                </tbody>
+              </table>
             </div>
 
-            <div class="col-md-12 text-center">
-              <button type="submit" name="asignar" class="btn btn-success">Asignar <i class="fa fa-save"></i> </button>
+            <div id="datos_adm" class="tab-pane fade">
+              <table class="table table-hover table-bordered" id="tabla_administrativa">
+
+                <thead>
+                  <tr>
+                    <th>Tutor administrativo</th>
+                    <th class="">departamentos</th>
+
+                  </tr>
+                </thead>
+                <tbody id="lista_administrativa" >
+
+                </tbody>
+              </table>
             </div>
-
-            <!-- <input type="text" name="confirmar_dataTable" id="confirmar_dataTable" value="0"> -->
-          </form>
-
-          <table class="table table-hover table-bordered" id="tabla_empresarial">
-
-            <thead>
-              <tr>
-                <th>Tutores disponibles</th>
-                <th class="">Empresa</th>
-                <th class="">RIF</th>
-
-              </tr>
-            </thead>
-            <tbody id="lista_empresarial" >
-
-            </tbody>
-          </table>
-
+          </div>
 
         </div>
       </div>
@@ -163,10 +189,8 @@
                              <th class="">Cedula</th>
                              <th class="">Nombre</th>
                              <th class="">Apellido</th>
-
                              <!-- <th class="">Telefono</th>
                              <th class="">Correo</th> -->
-                             <!-- <th class="text-center">Acciones</th> -->
                            </tr>
                          </thead>
                          <tbody id="listar" >
@@ -205,30 +229,23 @@
           <div class="panel panel-default" id="info_tutorEmp">
               <div class="panel-heading">
 
-
               </div>
+              <div class="panel-body">
+                 <table class="table table-hover table-bordered" id="tabla_tutorxempresa">
+                     <thead>
+                       <tr>
+                         <th>Seleccione</th>
+                         <th class="">Cedula</th>
+                         <th class="">Nombre</th>
+                         <th class="">Apellido</th>
+                         <th class="">Cargo</th>
+                       </tr>
+                     </thead>
 
-                     <div class="panel-body">
-
-
-                       <table class="table table-hover table-bordered" id="lista_tutorxempresa">
-
-                         <thead>
-                           <tr>
-                             <th>Seleccione</th>
-                             <th class="">Cedula</th>
-                             <th class="">Nombre</th>
-                             <th class="">Apellido</th>
-                             <th class="">Cargo</th>
-
-                           </tr>
-                         </thead>
-                         <tbody id="listar" >
-
-                         </tbody>
-                       </table>
-
-               </div>
+                     <tbody id="lista_tutorxempresa">
+                     </tbody>
+                 </table>
+             </div>
            </div>
 
         </div>

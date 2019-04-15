@@ -15,6 +15,7 @@ class asignaciones
 
   public function asignarEmp()
   {
+    $resultado= false;
     $db= DataBase::getInstance();
     $consultar= $db->prepare("SELECT * FROM asignar_empresa WHERE id_matricula= :id_matricula AND id_hist_emp= :id_hist_emp");
     $consultar->bindParam(':id_matricula', $this->id_matricula);
@@ -28,11 +29,13 @@ class asignaciones
       $consulta->bindParam(':id_matricula', $this->id_matricula);
       $consulta->bindParam(':id_hist_emp', $this->id_hist_emp);
       $resultado= $consulta->execute();
+      $consulta->closeCursor();
       if ($resultado) {
         return $resultado;
       }
       else {
-        return false;
+        $resultado= false;
+        return $resultado;
       }
     }
 

@@ -9,6 +9,8 @@
   $empresa= new empresas();
   $resultado1=$empresa->encontrar($id);
 
+  $resultado2=$empresa->encontrar_empresa_mencion($id);
+
 
 ?>
 
@@ -64,9 +66,10 @@
       <!-- Default box -->
       <div class="box box-warning">
         <div class="box-header with-border">
-          <h3 class="box-title">Datos de la empresa: </h3>           <div class="pull-right hidden-xs">
-      <?php include ("../include/periodo.php"); ?>
-             </div>
+          <h3 class="box-title">Datos de la empresa: </h3>
+          <div class="pull-right hidden-xs">
+            <?php include ("../include/periodo.php"); ?>
+          </div>
 
         </div>
   <div class="box-body">
@@ -79,9 +82,22 @@
               <div class="form-group col-md-2">
                 <label for="tipo">Tipo: </label>
                 <select name="tipo" class="form-control form-control-sm" id="tipo" required>
-                  <option value="J">J</option>
-                  <option value="G">G</option>
-                  <option value="O">O</option>
+                  <?php if ($resultado1->tipo=='J'): ?>
+                    <option value="J" selected>J</option>
+                    <option value="G">G</option>
+                    <option value="O">O</option>
+                  <?php elseif ($resultado1->tipo=='G'): ?>
+                    <option value="J">J</option>
+                    <option value="G" selected>G</option>
+                    <option value="O">O</option>
+
+                  <?php elseif ($resultado1->tipo=='O'): ?>
+                    <option value="J">J</option>
+                    <option value="G">G</option>
+                    <option value="O" selected>O</option>
+                  <?php endif; ?>
+
+
                 </select>
               </div>
 
@@ -103,7 +119,20 @@
                     <input type="text" value="<?php echo $resultado1->empresa;?>" class="form-control" name="nombre" id="nombre" autocomplete="off"  placeholder="Ingrese nombre de la empresa"  required
                     onkeypress="return soloLetras(event)" onpaste="return false">
 
+<div id="grilla">
+        <p>Resultados que coinciden:</p>
+        <hr>
+        <table class="table table-bordered" id="">
 
+          <thead>
+            <tr>
+              <th>Empresa</th>
+              <th>RIF</th>
+            </tr>
+          </thead>
+          <tbody id="filtrar"></tbody>
+        </table>
+    </div>
                     <span class="input-group-btn"><button type="button" name="buscar" id="buscar" class="btn btn-info"><i class="fa fa-search"></i> </button></span>
                   </div>
                  <span class="help-block">(No se permiten letras ni simbolos.)</span>
@@ -126,16 +155,28 @@
 
              <div class="form-group col-md-12">
               <label for="especialidad">Areas/Especialidades:  </label>
-              
+
                 <select class="form-control select2" multiple="multiple" data-placeholder="Seleccione..." name="mencion[]" required>
+                  <?php $centinela= 0; ?>
                   <?php for ($i=0; $i < count($resultado); $i++): ?>
-                    <option value="<?php echo $resultado[$i]['id_mencion'];?>"> <?php echo $resultado[$i]['mencion']; ?></option>
+                    <?php for ($j=0; $j < count($resultado2); $j++): ?>
+                      <?php if ($resultado[$i]['id_mencion']==$resultado2[$j]['id_mencion']): ?>
+                        <option value="<?php echo $resultado[$i]['id_mencion'];?>" selected> <?php echo $resultado[$i]['mencion']; ?></option>
+                        <?php $centinela= 1; ?>
+                      <?php endif; ?>
+                    <?php endfor; ?>
+
+                    <?php if ($centinela==0): ?>
+                      <option value="<?php echo $resultado[$i]['id_mencion'];?>"> <?php echo $resultado[$i]['mencion']; ?></option>
+                    <?php endif; ?>
+                    <?php $centinela= 0; ?>
                   <?php endfor; ?>
 
                 </select>
               </div>
 
 
+              <input type="hidden" name="dire" id="dire" value="<?php echo $resultado1->nombre_comunidad; ?>">
               <div class="form-group col-md-3">
                 <label for="estado">Estados:</label>
                 <select name="estado" class="form-control form-control-sm select2" id="estado" required>
@@ -175,7 +216,7 @@
 
         <button type="submit" name="opcion" id="btnvalidar" value="registrar" class="btn btn-primary btn-flat margin"><i class="fa fa-save"></i> <strong>Registrar</strong></button>
 
-        <button type="button" class="btn btn-primary btn-flat margin"><strong><i class="fa  fa-spinner"></i> Limpiar</strong></button>
+        <button type="reset" class="btn btn-primary btn-flat margin"><strong><i class="fa  fa-spinner"></i> Limpiar</strong></button>
 
 
         <a href="mostrar.php" type="button" class="btn btn-md btn-primary"><strong><i class="fa fa-server"></i> Listar</strong></a>
@@ -222,7 +263,7 @@
 <script src="../../dist/js/empresas/validar2.js"></script>
 
 <script src="../../dist/js/empresas/filtrado.js"></script>
-<script src="../../dist/js/dire.js"></script>
+<script src="../../dist/js/direM.js"></script>
 
 </body>
 </html>

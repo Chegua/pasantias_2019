@@ -2,6 +2,8 @@
 // require_once('../modelo/m_departamentos.php');
 require_once('../modelo/m_empresas.php');
 require_once('../modelo/m_tutores_empresariales.php');
+require_once('../modelo/m_personaladm.php');
+
 
 
 if (isset($_REQUEST['mencion'])) {
@@ -26,6 +28,12 @@ switch ($_REQUEST['opcion']) {
     echo $resultado;
     break;
 
+  case 'listar_departamentos':
+    $resultado = personal_administrativo::consultar();
+    $resultado= json_encode($resultado);
+    echo $resultado;
+    break;
+
   case 'lista_tutorxempresa':
     $resultado = tutores_empresariales::lista_tutorxempresa($id_empresa_mencion);
     $resultado= json_encode($resultado);
@@ -33,7 +41,10 @@ switch ($_REQUEST['opcion']) {
     break;
 
   case 'asignar_emp':
-    
+    $obj_asignacion= new asignaciones($id_matricula, $id_hist_emp);
+    $resultado= $obj_asignacion->asignarEmp();
+    $resultado= json_encode($resultado);
+    echo $resultado;
     break;
 
   default:

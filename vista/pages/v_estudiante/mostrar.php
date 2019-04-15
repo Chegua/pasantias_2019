@@ -19,8 +19,6 @@
   <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
 </head>
 
-<body>
-
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
@@ -34,13 +32,11 @@
        	<?php include ("../include/sidebar.php"); ?>
   </aside>
 
-
-
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <i class="fa fa-graduation-cap"></i> Estudiante.
+        <i class="fa fa-graduation-cap"></i> Estudiantes.
         <small>Listar <i class="fa fa-list"></i></small>
       </h1>
       <ol class="breadcrumb">
@@ -127,7 +123,6 @@
   <?php include ("../include/plugins.php"); ?>
   <script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
   <script src="../../bower_components/fastclick/lib/fastclick.js"></script>
-  <!-- <script src="../../dist/js/demo.js"></script> -->
 <script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
   <script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 

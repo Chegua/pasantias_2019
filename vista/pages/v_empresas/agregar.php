@@ -102,6 +102,20 @@ $resultado= $mencion->consultar();
                  <span class="help-block">(No se permiten letras ni simbolos.)</span>
 
                 </div>
+                <div id="grilla">
+                     <p>Resultados que coinciden:</p>
+                     <hr>
+                     <table class="table table-bordered" id="">
+
+                       <thead>
+                         <tr>
+                           <th>Empresa</th>
+                           <th>RIF</th>
+                         </tr>
+                       </thead>
+                       <tbody id="filtrar"></tbody>
+                     </table>
+                 </div>
 
 
              <div class="form-group col-md-6">
@@ -119,7 +133,7 @@ $resultado= $mencion->consultar();
 
              <div class="form-group col-md-12">
               <label for="especialidad">Areas/Especialidades:  </label>
-              
+
                 <select class="form-control select2" multiple="multiple" data-placeholder="Seleccione..." name="mencion[]" required>
                   <?php for ($i=0; $i < count($resultado); $i++): ?>
                     <option value="<?php echo $resultado[$i]['id_mencion'];?>"> <?php echo $resultado[$i]['mencion']; ?></option>
@@ -168,7 +182,7 @@ $resultado= $mencion->consultar();
 
         <button type="submit" name="opcion" id="btnvalidar" value="registrar" class="btn btn-primary btn-flat margin"><i class="fa fa-save"></i> <strong>Registrar</strong></button>
 
-        <button type="button" class="btn btn-primary btn-flat margin"><strong><i class="fa  fa-spinner"></i> Limpiar</strong></button>
+        <button type="reset" class="btn btn-primary btn-flat margin"><strong><i class="fa  fa-spinner"></i> Limpiar</strong></button>
 
 
         <a href="mostrar.php" type="button" class="btn btn-md btn-primary"><strong><i class="fa fa-server"></i> Listar</strong></a>
@@ -176,20 +190,7 @@ $resultado= $mencion->consultar();
       </div>
     </div>
 
-  <div id="grilla">
-                  <p>Resultados que coinciden:</p>
-                  <hr>
-                   <table class="table table-bordered" id="">
 
-                      <thead>
-                        <tr>
-                          <th>Empresa</th>
-                          <th>RIF</th>
-                        </tr>
-                      </thead>
-                      <tbody id="filtrar"></tbody>
-                  </table>
-                </div>
   </div>
         <!-- /.box-footer-->
       </div>

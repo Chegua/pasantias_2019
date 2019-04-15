@@ -47,7 +47,7 @@
     </section>
 
     <section class="content container-fluid">
- 
+
   <?php include ("../include/periodo.php"); ?>
 
     <div class="box box-warning">
@@ -115,7 +115,7 @@
                   <td><?php echo $resultado[$i]['tipo_cargo']; ?></td>
 
                   <td class="text-center"><button title="Modificar Registro" type="button" onClick="window.location.href='modificar.php<?php echo '?id='?><?php echo $resultado[$i]['id_cargo']?>'" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
-                  
+
                     <a href="javascript:preguntar(<?php echo $resultado[$i]['id_cargo']?>,'eliminar')" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></a>
 
                   </td>
@@ -143,14 +143,13 @@
 </div>
 <!-- ./wrapper -->
 
- 
+
   <?php include ("../include/plugins.php"); ?>
  <script src="../../dist/toastr-master/build/toastr.min.js"></script>
   <script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
   <script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
   <script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
   <script src="../../bower_components/fastclick/lib/fastclick.js"></script>
-  <script src="../../dist/js/demo.js"></script>
 
   <script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
   <script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>

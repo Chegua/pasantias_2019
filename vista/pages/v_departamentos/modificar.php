@@ -74,11 +74,6 @@
     <div class="row">
       <div class="col-md-12 col-sm-offset-3">
 
-
-
-
-
-
         <button type="submit" name="opcion" value="modificar" class="btn btn-primary btn-flat margin"><i class="fa fa-edit"></i> <strong>Modificar</strong></button>
 
         <button type="reset" class="btn btn-primary btn-flat margin"><strong><i class="fa  fa-spinner"></i> Limpiar</strong></button>

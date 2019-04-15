@@ -39,6 +39,13 @@ if (isset($_REQUEST['estatus'])) {
   $estatus = $_REQUEST['estatus'];
 }
 
+if (isset($_REQUEST['id_hist_dpto'])) {
+  $id_hist_dpto = $_REQUEST['id_hist_dpto'];
+}
+if (isset($_REQUEST['id_personal_administrativo'])) {
+  $id_personal_administrativo = $_REQUEST['id_personal_administrativo'];
+}
+
 switch($_REQUEST['opcion'])
 {
 
@@ -68,32 +75,40 @@ switch($_REQUEST['opcion'])
 		//require_once('../vista/salida.php');
 		break;
 
-	case 'modificar':
-		$cedula = $_REQUEST['cedula'];
-		$nombre = $_REQUEST['nombre'];
-		$apellido= $_REQUEST['apellido'];
-		$fn= $_REQUEST['fn'];
-		$edad= $_REQUEST['edad'];
-		$sexo= $_REQUEST['sexo'];
-		$direccion= $_REQUEST['direccion'];
-		$telefono= $_REQUEST['telefono'];
-		$correo= $_REQUEST['correo'];
-    	$parentesco= $_REQUEST['parentesco'];
+    case 'modificar':
+      $nombre= ucwords(strtolower($nombre)); //convierte la primera letra a mayuscula
+      $nombre=trim($nombre);//elimina los espacios del inicio y el final de cada cadnea
 
-		$estudiante = new personal_administrativo($cedula,$nombre, $fn, $edad, $sexo, $direccion, $telefono, $correo, $parentesco);
-		$resultado = $estudiante->modificar();
-		//require_once('../vista/salida.php');
-		break;
+      $apellido= ucwords(strtolower($apellido)); //convierte la primera letra a mayuscula
+      $apellido=trim($apellido);//elimina los espacios del inicio y el final de cada cadnea
+
+  		$per_adm = new personal_administrativo($nacionalidad,$cedula,$nombre,$apellido,$sexo,$telefono,$correo,$departamento,$cargo,$fecha_inicio,$fecha_fin,$estatus);
+  		$resultado = $per_adm->modificar($id_hist_dpto,$id_personal_administrativo);
+      switch ($resultado){
+  			case 'existente':
+  				Header("Location: ../vista/pages/v_personaladm/mostrar.php?respuesta1= existente");
+  				break;
+  			case 'exito':
+  				Header("Location: ../vista/pages/v_personaladm/mostrar.php?respuesta2= exito");
+  				break;
+  		}
+  		break;
 
     case 'eliminar':
-    $cedula = $_REQUEST['cedula'];
-    $estudiante = new personal_administrativo($cedula);
-    $resultado= $estudiante->eliminar();
+      $id = $_REQUEST['id'];
+      $resultado = personal_administrativo::eliminar($id);
+      switch ($resultado) {
+  				case 'exito':
+  				header("location: ../vista/pages/v_personaladm/mostrar.php?respuesta2= extio");
+  				break;
+  				case 'fracaso':
+  				header("location: ../vista/pages/v_personaladm/mostrar.php?respuesta3= fracaso");
+  				break;
+  				case 'ojo':
+  				header("location: ../vista/pages/v_personaladm/mostrar.php?respuesta4= ojo");
+  				break;
+  			}
       break;
-
 }
-
-//require_once('../vista/salida.php')SALIDA DE INFORMACION
-
 
 ?>

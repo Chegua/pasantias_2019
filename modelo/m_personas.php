@@ -77,12 +77,25 @@ class personas{
       return null;
   }
 
-	public function modificar()
+	public function modificarP($db, $id)
  	{
-   	$db = Database::getInstance();
-		$sql="UPDATE personas SET nombre='$this->nombre', sexo='$this->sexo', direccion='$this->direccion', telefono='$this->telefono', correo='$this->correo' WHERE cedula='$this->cedula'";
-		$resultado=$db->query($sql);
-		return $resultado;
+    $consulta= $db->prepare("UPDATE personas SET nacionalidad= :nacionalidad, cedula= :cedula, nombre= :nombre, apellido= :apellido, sexo= :sexo, telefono= :telefono, correo= :correo WHERE id_persona= '$id'");
+    $consulta->bindParam(':nacionalidad', $this->nacionalidad);
+    $consulta->bindParam(':cedula', $this->cedula);
+    $consulta->bindParam(':nombre', $this->nombre);
+    $consulta->bindParam(':apellido', $this->apellido);
+    $consulta->bindParam(':sexo', $this->sexo);
+    $consulta->bindParam(':telefono', $this->telefono);
+    $consulta->bindParam(':correo', $this->correo);
+    // $consulta->execute();
+
+    $resultado= $consulta->execute();
+
+    if ($resultado)
+      return 'exito';
+    else
+     return 'fracaso';
+
 	}
 
 

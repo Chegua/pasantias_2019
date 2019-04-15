@@ -42,17 +42,27 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-
+      <h1>
+        <i class="fa fa-server"></i> Empresas.
+        <small>Listar <i class="fa fa-list"></i></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li><a href="#">Empresas</a></li>
+        <!-- <li class="">Personal administrativo.</li> -->
+        <li class="active">Listar.</li>
+      </ol>
     </section>
 
     <!-- Main content -->
     <section class="content container-fluid">
-  <?php include ("../include/periodo.php"); ?>
 
     <div class="box box-warning">
        <div class="box-header with-border">
-           <h3 class="" align="center"><strong><i class="fa fa-server"></i> Empresas.</strong></h3>
-           <p class="info" align="center"><i class="fa fa-eye"></i> En esta sección del sistema se visualiza una lista de registros.</p>
+         <h3 class="box-title">Listado de empresas: </h3>
+         <div class="pull-right hidden-xs">
+           <?php include ("../include/periodo.php"); ?>
+         </div>
        </div>
 
        <?php
@@ -92,7 +102,7 @@
           </script>';
       }
       ?>
-<div class="panel panel-primary">
+<div class="panel panel-default">
           <div class="panel-heading">
             <h5> <strong>Agregar nuevo</strong><button type="button" onclick="window.location.href='agregar.php'" class="btn btn-success btn-sm"><span class="  glyphicon glyphicon-plus"></span></button></h5>
 
@@ -128,9 +138,7 @@
                      <a href="javascript:preguntar(<?php echo $key->id_empresa?>,'eliminar')" class="btn btn-sm btn-danger"><span class="fa fa-trash"></a>
 
                    </td>
-
                  </tr>
-
                <?php endforeach; ?>
 
 

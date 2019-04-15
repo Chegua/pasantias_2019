@@ -162,7 +162,7 @@ $resultadocarg= $cargo->consultar();
 
             <div class="form-group col-md-4">
                 <label for="">Estatus: </label>
-                <select class="form-control" name="estatus_docente" id="estatus" required>
+                <select class="form-control" name="estatus" id="estatus" required>
                   <option value="Activo">Activo</option>
                   <option value="Inactivo">Inactivo</option>
                 </select>
