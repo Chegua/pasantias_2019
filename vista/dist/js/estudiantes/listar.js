@@ -1,5 +1,6 @@
 $(document).ready(function(){
     // $('#infoMatricula').hide();
+
     //----------------------------------------FUNCIONES DATATABLE-------------------------------------
     function dataTableMatricula(){
       var table= $('#listaMatri').DataTable({
@@ -262,8 +263,8 @@ $(document).ready(function(){
 
               for (var i = 0; i < result.length; i++) {
                 var texto= '<tr>'+
-                             '<td>'+result[i]['nacionalidad']+'-'+result[i]['cedula']+' '+result[i]['nombre']+' '+result[i]['apellido']+'</td>'+
-                             '<td>'+result[i]['departamento']+'</td>'+
+                            '<td> <input type="checkbox" name="prueba" value="'+result[i]['id_hist_dpto']+'">'+result[i]['departamento']+'</td>'+
+                            '<td>'+result[i]['nacionalidad']+'-'+result[i]['cedula']+' '+result[i]['nombre']+' '+result[i]['apellido']+'</td>'+
                            '</tr>';
                  $('#lista_administrativa').append(texto);
               }
@@ -273,6 +274,18 @@ $(document).ready(function(){
             }
           });
         }
+
+        $('#boton').click(function(){
+          var array=[];
+          $('input:checkbox[name=prueba]:checked').each(function(){
+            //cada elemento seleccionado
+            array[array.length]=$(this).val();
+            //console.log($(this).val());
+          });
+          for (var i = 0; i < array.length; i++) {
+            console.log(array[i]);
+          }
+        })
 //-------------------------------LISTAR TUTORES DE LA EMPRESA-----------------------------------------
         $(document).on('click','.ver_tutor',function(){
           var id_empresa_mencion= $(this).val();
@@ -310,6 +323,7 @@ $(document).ready(function(){
            data: {'opcion':'encontrar','id_hist_emp':id_hist_emp},
            dataType: 'json',
            success:function(result){
+             alertify.success('Operación exitosa');
              datos=result['nacionalidad']+'-'+result['cedula']+' '+result['nombre']+' '+result['apellido'];
              $('#datos_hist_emp').html(datos);
             },
@@ -320,20 +334,43 @@ $(document).ready(function(){
         });
 
 //---------------------------------BOTON DE ASIGNAR--------------------------------------------
-        $('#asignar-form').submit(e => {
+        $('#asignarFormEmp').submit(e => {
           e.preventDefault();
           const postData = {
             opcion: "asignar_emp",
             id_matricula: $('#id_matricula').val(),
             id_hist_emp: $('#id_hist_emp').val()
           };
-          const url = 'c_asignar.php';
+          const url = '../../../controlador/c_asignar.php';
           console.log(postData, url);
           // $.post(url, postData, (response) => {
-          //   console.log(response);
-          //   $('#asignar-form').trigger('reset');
-          //
+          //   if (response) {
+          //     alertify.success('Asingnacion exitosa');
+          //     console.log(response);
+          //     $('#asignarFormEmp').trigger('reset');
+          //   }else {
+          //     alertify.error('Asignacion fallida');
+          //     console.log(response);
+          //     $('#asignarFormEmp').trigger('reset');
+          //   }
           // });
+         $.ajax({
+           url: url,
+           method: 'post',
+           data: postData,
+           dataType: 'json',
+           success: function(result) {
+             if (result) {
+               alertify.success('Asingnacion exitosa');
+               console.log(result);
+               $('#asignarFormEmp').trigger('reset');
+             }else {
+               alertify.error('Asignacion fallida');
+               console.log(result);
+               $('#asignarFormEmp').trigger('reset');
+             }
+           }
+         });
         });
 
 });

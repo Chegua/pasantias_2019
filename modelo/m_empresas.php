@@ -52,7 +52,6 @@ class empresas{
     if ($resultado1>0) {
       return 'existente';
     }else{
-
       $sql= "INSERT INTO empresas(id_comunidad,tipo,rif,empresa,telefono,correo) VALUES (:id_comu,:tipo,:rif,:emp,:tlf,:correo)";
       $consulta= $db->prepare($sql);
       $consulta->bindParam(':id_comu',$this->comunidad);
@@ -108,7 +107,6 @@ class empresas{
             'empresa' => $row['empresa'],
             'tipo' => $row['tipo'],
             'rif' => $row['rif']
-
            );
         }
         return $json;
@@ -165,7 +163,6 @@ class empresas{
         return 'fracaso';
       }
   }
-
 
   public function eliminar($id)
   {

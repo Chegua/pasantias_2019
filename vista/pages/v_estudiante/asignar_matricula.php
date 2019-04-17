@@ -63,6 +63,7 @@
             </div>
           </div>
 
+ <!-------------------------------------BOTONES DE NAVEGACION ------------------------------>
           <ul class="nav nav-tabs">
       			<li class="active"><a href="#asignaciones" data-toggle="tab">Asignaciones</a></li>
             <li><a href="#datos_empresas" data-toggle="tab">Datos de empresas</a></li>
@@ -72,9 +73,15 @@
         </div>
         <div class="panel-body">
           <div class="tab-content">
+<!-------------------------------------SESION PARA ASIGNAR ------------------------------>
+
             <div id="asignaciones" class="tab-pane fade in active">
+
+            </div>
+<!-------------------------------------SESION DE EMPRESAS ------------------------------>
+            <div id="datos_empresas" class="tab-pane fade">
               <div id="mostrar_ocultar" hidden>
-                <form class="" id="asignar-form" method="post">
+                <form class="" id="asignarFormEmp" method="post">
                   <div class="col-md-12">
                     <h4>Estudiante</h4>
                     <input type="hidden" name="id_matricula" id="id_matricula">
@@ -88,15 +95,13 @@
                   </div>
 
                   <div class="col-md-12 text-center">
-                    <button type="submit" name="asignar" class="btn btn-success">Asignar <i class="fa fa-save"></i> </button>
+                    <button type="submit" name="asignar" class="btn btn-success">Asignar <i class="fa fa-check-circle"></i> </button>
                   </div>
-
                 </form>
 
               </div>
-            </div>
+              <br>
 
-            <div id="datos_empresas" class="tab-pane fade">
               <table class="table table-hover table-bordered" id="tabla_empresarial">
 
                 <thead>
@@ -104,7 +109,6 @@
                     <th>Tutores disponibles</th>
                     <th class="">Empresa</th>
                     <th class="">RIF</th>
-
                   </tr>
                 </thead>
                 <tbody id="lista_empresarial" >
@@ -112,15 +116,19 @@
                 </tbody>
               </table>
             </div>
-
+<!----------------------------------------SESION ADMINITRATIVA ------------------------------>
             <div id="datos_adm" class="tab-pane fade">
+              <div class="col-md-12">
+                <button type="button" name="boton" id="boton" class="btn btn-primary">prueba</button>
+              </div>
+
+
               <table class="table table-hover table-bordered" id="tabla_administrativa">
 
                 <thead>
                   <tr>
+                    <th>departamentos</th>
                     <th>Tutor administrativo</th>
-                    <th class="">departamentos</th>
-
                   </tr>
                 </thead>
                 <tbody id="lista_administrativa" >
@@ -142,7 +150,7 @@
   <footer class="main-footer">
       	<?php include ("../include/footer.php"); ?>
   </footer>
-  <!-----------------------------------------------MODAL PARA EL BOTON LISTAR MATRICULA -------------------------------------------------->
+  <!-- ---------------------------------------------MODAL PARA EL BOTON LISTAR MATRICULA -------------------------------------------------->
 
   <div class="modal fade bs-example-modal-lg" id="modal_matricula" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog  modal-lg" role="document">
@@ -154,7 +162,6 @@
         </div>
 
         <div class="modal-body">
-
 
           <div class="panel panel-default" id="infoMatricula">
               <div class="panel-heading">
@@ -177,9 +184,7 @@
                 </div>
 
               </div>
-
                      <div class="panel-body">
-
 
                        <table class="table table-hover table-bordered" id="listaMatri">
 

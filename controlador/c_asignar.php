@@ -3,6 +3,8 @@
 require_once('../modelo/m_empresas.php');
 require_once('../modelo/m_tutores_empresariales.php');
 require_once('../modelo/m_personaladm.php');
+require_once('../modelo/m_asignaciones.php');
+
 
 
 
@@ -43,6 +45,13 @@ switch ($_REQUEST['opcion']) {
   case 'asignar_emp':
     $obj_asignacion= new asignaciones($id_matricula, $id_hist_emp);
     $resultado= $obj_asignacion->asignarEmp();
+    $resultado= json_encode($resultado);
+    echo $resultado;
+    break;
+
+  case 'asignar_dpto':
+    $obj_asignacion= new asignaciones($id_matricula, $id_hist_emp);
+    $resultado= $obj_asignacion->asignarDep();
     $resultado= json_encode($resultado);
     echo $resultado;
     break;

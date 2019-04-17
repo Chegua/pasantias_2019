@@ -43,6 +43,7 @@ class tutores_empresariales extends personas
        $consulta2->bindParam(':telefono', $this->telefono);
 
        $resultado2= $consulta2->execute();
+       $consulta2->closeCursor();
      }
 
       if ($resultado2){

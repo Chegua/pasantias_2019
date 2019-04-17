@@ -30,7 +30,6 @@ switch($_REQUEST['opcion'])
 				}
 
 				header("location: ../vista/pages/v_empresas/mostrar.php?respuesta2= exito");
-
 		}
 
 		break;

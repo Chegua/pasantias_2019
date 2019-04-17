@@ -48,7 +48,7 @@ switch($_REQUEST['opcion'])
 {
 
 	case 'registrar':
-		$tutor_empresarial = new tutores_empresariales($nacionalidad,$cedula,$nombre,$apellido,$correo,$sexo,$telefono,$cargo,$empresa_mencion,$fecha_inicio,$fecha_fin,$estatus);
+		$tutor_empresarial = new tutores_empresariales($nacionalidad,$cedula,$nombre,$apellido,$sexo,$telefono,$correo,$cargo,$empresa_mencion,$fecha_inicio,$fecha_fin,$estatus);
 
 		$resultado = $tutor_empresarial->registrar();
 

@@ -108,8 +108,8 @@ $resultado2= $cuadratura->consultar();
 
             <div class="form-group col-md-4">
               <label for="sexo">Sexo: *</label><br>
-                <input type="radio" name="sexo" id="sexo" value="Masculino" class="minimal" checked> Masculino
-                <input type="radio" name="sexo" id="sexo" value="Femenino" class="minimal-red"> Femenino
+                <input type="radio" name="sexo" id="" value="Masculino" class="minimal" checked> Masculino
+                <input type="radio" name="sexo" id="" value="Femenino" class="minimal-red"> Femenino
                 <span class="help-block">(Selecciononado.)</span>
             </div>
 
