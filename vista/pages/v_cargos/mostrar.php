@@ -43,17 +43,29 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
+    <h1>
+        <i class="fa fa-pencil"></i> Cargos.
+        <small>Listar <i class="fa fa-list"></i></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li><a href="#">Mantenimiento.</a></li>
+        <li><a href="#">Cargos.</a></li>
 
+        <li><a href="#" class="active">Agregar Nuevo.</a></li>
+
+      </ol>
     </section>
 
     <section class="content container-fluid">
-
-  <?php include ("../include/periodo.php"); ?>
+ 
 
     <div class="box box-warning">
        <div class="box-header with-border">
-           <h3 class="" align="center"><strong><i class="fa fa-server"></i>  Cargos.</strong></h3>
-           <p class="info" align="center"><i class="fa fa-eye"></i> En esta sección del sistema se visualiza una lista de registros.</p>
+       <h3 class="box-title">Listado de Cargos: </h3>
+          <div class="pull-right hidden-xs">
+            <?php include ("../include/periodo.php"); ?>
+          </div>
        </div>
 
        <?php
@@ -90,7 +102,7 @@
           </script>';
       }
       ?>
-<div class="panel panel-primary">
+<div class="panel panel-default">
           <div class="panel-heading">
             <h5> <strong>Agregar nuevo</strong><button type="button" onclick="window.location.href='agregar.php'" class="btn btn-success btn-sm"><span class="  glyphicon glyphicon-plus"></span></button></h5>
 
@@ -115,7 +127,7 @@
                   <td><?php echo $resultado[$i]['tipo_cargo']; ?></td>
 
                   <td class="text-center"><button title="Modificar Registro" type="button" onClick="window.location.href='modificar.php<?php echo '?id='?><?php echo $resultado[$i]['id_cargo']?>'" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
-
+                  
                     <a href="javascript:preguntar(<?php echo $resultado[$i]['id_cargo']?>,'eliminar')" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></a>
 
                   </td>
@@ -143,13 +155,14 @@
 </div>
 <!-- ./wrapper -->
 
-
+ 
   <?php include ("../include/plugins.php"); ?>
  <script src="../../dist/toastr-master/build/toastr.min.js"></script>
   <script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
   <script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
   <script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
   <script src="../../bower_components/fastclick/lib/fastclick.js"></script>
+  <script src="../../dist/js/demo.js"></script>
 
   <script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
   <script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>

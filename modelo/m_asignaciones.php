@@ -73,6 +73,42 @@ class asignaciones
       }
     }
   }
+
+  public static function consultar_asignados_empresa()
+  {
+    $db = DataBase::getInstance();
+		$sql= "SELECT *FROM vista_asignar_empresa";
+		$resultado=$db->query($sql);
+		if($resultado->rowCount() >0)
+			return $resultado->fetchAll();
+		else
+			return null;
+  }
+
+  public static function lista_asignados_empresa($empresa)
+  {
+    $db= DataBase::getInstance();
+    $sql= "SELECT * FROM vista_asignar_empresa WHERE empresa='$empresa'";
+    $consulta= $db->prepare($sql);
+    $resultado= $consulta->execute();
+    if ($resultado)
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    else
+      return null;
+  }
+
+  public static function encontrar_asignar_empresa($id)
+  {
+    $db= DataBase::getInstance();
+    $sql= "SELECT * FROM vista_asignar_empresa WHERE id_asignar_empresa='$id'";
+    $consulta= $db->prepare($sql);
+    $resultado= $consulta->execute();
+    if ($resultado)
+        return $consulta->fetch(PDO::FETCH_ASSOC);
+    else
+      return null;
+  }
+
 }
 
 

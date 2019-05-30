@@ -11,6 +11,9 @@ require_once('../modelo/m_asignaciones.php');
 if (isset($_REQUEST['mencion'])) {
   $mencion= $_REQUEST['mencion'];
 }
+if (isset($_REQUEST['nombre_empresa'])) {
+  $nombre_empresa= $_REQUEST['nombre_empresa'];
+}
 if (isset($_REQUEST['id_empresa_mencion'])) {
   $id_empresa_mencion= $_REQUEST['id_empresa_mencion'];
 }
@@ -21,6 +24,9 @@ if (isset($_REQUEST['id_matricula'])) {
 
 if (isset($_REQUEST['id_hist_emp'])) {
   $id_hist_emp= $_REQUEST['id_hist_emp'];
+}
+if (isset($_REQUEST['id_asignar_empresa'])) {
+  $id_asignar_empresa= $_REQUEST['id_asignar_empresa'];
 }
 
 switch ($_REQUEST['opcion']) {
@@ -54,6 +60,24 @@ switch ($_REQUEST['opcion']) {
     $resultado= $obj_asignacion->asignarDep();
     $resultado= json_encode($resultado);
     echo $resultado;
+    break;
+
+  case 'listar_empresas_asignadas':
+    $resultado = empresas::listar_empresas_asignadas();
+    $resultado= json_encode($resultado);
+    echo $resultado;    
+    break;
+
+  case 'lista_asignados_empresa':
+    $resultado = asignaciones::lista_asignados_empresa($nombre_empresa);
+    $resultado= json_encode($resultado);
+    echo $resultado; 
+    break;
+
+  case 'encontrar_asignar_empresa':
+    $resultado = asignaciones::encontrar_asignar_empresa($id_asignar_empresa);
+    $resultado= json_encode($resultado);
+    echo $resultado; 
     break;
 
   default:

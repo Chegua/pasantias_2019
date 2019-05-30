@@ -25,7 +25,45 @@ $(document).ready(function(){
         }
       });
     }
+//--------------------------------------ELEGIR ESTUDIANTE--------------------------------------------------------------------------------------------------
+$(document).on('click','.selecionar_estudiante',function(){
+  var id_matricula= $(this).val();
+  $('#id_matricula').val(id_matricula);
+  $.ajax({
+   url: '../../../controlador/c_estudiante.php',
+   method: 'GET',
+   data: {'opcion':'encontrar','id_matricula':id_matricula},
+   dataType: 'json',
+   success:function(result){
+     datos=result['nacionalidad_estudiante']+'-'+result['cedula_estudiante']+' '+result['nombre_estudiante']+' '+result['apellido_estudiante'];
 
+     if (result['anio']!='4to'){
+
+       alertify.confirm('Confirmar', '¿Desea asignar el estudiante a una empresa?',
+         function(){
+            alertify.success('Operación exitosa'), $('#datos_estudiante').html(datos);  listar_empresas(result['mencion']); $('#mostrar_ocultar').show();
+          },
+         function(){
+           alertify.error('Cancelado')}).set('labels',{ok:'Si', cancel:'No'
+         }
+       );
+     }else {
+       alertify.confirm('Confirmar', 'Los estudiantes de 4to año seran asigignado a los departamentos activos para pre-pasantias',
+         function(){ alertify.success('Operación exitosa'),
+            $('#datos_estudiante').html(datos);
+            listar_departamentos();
+            $('#mostrar_ocultar').show();
+            $('#vaciar_histEmp').empty();
+            $('#tabla_empresarial').hide();
+         },
+         function(){alertify.error('Cancelado')}).set('labels',{ok:'Entendido', cancel:'Cancelar'});
+     }
+    },
+   error:function(result) {
+     alert("error: "+result.responseText+" "+result.status);
+   }
+  });//fin Ajax
+});
     function dataTableEmpresarial() {
       var table= $('#tabla_empresarial').DataTable({
         //'destroy':true,
@@ -354,23 +392,24 @@ $(document).ready(function(){
           //     $('#asignarFormEmp').trigger('reset');
           //   }
           // });
-         $.ajax({
-           url: url,
-           method: 'post',
-           data: postData,
-           dataType: 'json',
-           success: function(result) {
-             if (result) {
-               alertify.success('Asingnacion exitosa');
-               console.log(result);
-               $('#asignarFormEmp').trigger('reset');
-             }else {
-               alertify.error('Asignacion fallida');
-               console.log(result);
-               $('#asignarFormEmp').trigger('reset');
-             }
-           }
-         });
+          $.ajax({
+            url: url,
+            method: 'post',
+            data: postData,
+            dataType: 'json',
+            success: function(result) {
+              if (result) {
+                alertify.success('Asingnacion exitosa');
+                console.log(result);
+                $('#asignarFormEmp').trigger('reset');
+              }else {
+                alertify.error('Asignacion fallida');
+                console.log(result);
+                $('#asignarFormEmp').trigger('reset');
+              }
+            }
+          });
+
         });
 
 });

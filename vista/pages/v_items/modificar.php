@@ -1,10 +1,10 @@
 <?php   //include('modales.php');
-  require_once('../../../modelo/m_departamentos.php');
+  require_once('../../../modelo/m_items.php');
    $id=$_REQUEST['id'];
 
-  $departamento= new departamentos();
+  $item= new items();
 
-  $resultado=$departamento->encontrar($id);
+  $resultado=$item->encontrar($id);
 ?>
 
 <!DOCTYPE html>

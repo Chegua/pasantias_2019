@@ -233,6 +233,18 @@ class empresas{
       return null;
   }
 
+  public static function listar_empresas_asignadas()
+  {
+    $db= DataBase::getInstance();
+    $sql= "SELECT *FROM vista_empresas WHERE empresa IN (SELECT empresa FROM vista_asignar_empresa)";
+    $consulta= $db->prepare($sql);
+    $resultado= $consulta->execute();
+    if ($resultado)
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    else
+      return null;
+  }
+
 
 
 

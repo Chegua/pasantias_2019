@@ -1,8 +1,8 @@
 <?php
-  require_once('../../../modelo/m_menciones.php');
-  $menciones= new menciones();
+  require_once('../../../modelo/m_items.php');
+   $item= new items();
 
-  $resultado= $menciones->consultar();
+  $resultado= $item->consultar();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,8 +10,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Listar</title>
-
-  <link rel="stylesheet" href="../../dist/toastr-master/build/toastr.min.css">
+<link rel="stylesheet" href="../../dist/toastr-master/build/toastr.min.css">
   <?php include ("../include/head.php");?>
   <link rel="stylesheet" href="../../plugins/alertify/css/alertify.min.css">
   <link rel="stylesheet" href="../../plugins/alertify/css/themes/bootstrap.min.css">
@@ -42,31 +41,31 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-    <h1>
-        <i class="fa fa-pencil"></i> Menciones.
+      <h1>
+        <i class="fa fa-pencil"></i> Items.
         <small>Listar <i class="fa fa-list"></i></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
         <li><a href="#">Mantenimiento</a></li>
-        <li class="active">Menciones.</li>
+        <li class="active">Items.</li>
       </ol>
     </section>
 
     <!-- Main content -->
-    <section class="content container-fluid">
+  <section class="content container-fluid">
 
     <div class="box box-warning">
-    <div class="box-header with-border">
-       <h3 class="box-title">Listado de Menciones: </h3>
+        <div class="box-header with-border">
+          <h3 class="box-title">Listado de items: </h3>
           <div class="pull-right hidden-xs">
             <?php include ("../include/periodo.php"); ?>
           </div>
         </div>
-
        <?php
-      require_once('../../../modelo/m_menciones.php');
-      $menciones = new menciones();
+       
+      require_once('../../../modelo/m_items.php');
+      $item = new items();
       if (isset($_GET['respuesta1']) == 'existente') {
        echo '<script>
               $(document).ready(function(){
@@ -107,33 +106,34 @@
 
           </div>
 
-            <div class="panel-body">
-              <table class="table table-hover table-bordered" id="example">
+          <div class="panel-body">
+            <table class="table table-hover table-bordered" id="example">
 
-          <thead>
-            <th class="col-md-1">N°</th>
-            <th class="col-md-5">Menciones</th>
-            <th class="col-md-3 text-center">Acciones</th>
+              <thead>
+                <th class="col-md-1">N°</th>
+                <th class="col-md-5">Item</th>
+                <th class="col-md-3 text-center">Descripcion</th>
 
-          </thead>
+              </thead>
 
-          <tbody>
-               <?php for ($i=0; $i <count($resultado) ; $i++): ?>
-                <tr>
-                  <td> <?php echo $i+1; ?></td>
-                  <td><?php echo $resultado[$i]['mencion']; ?></td>
+              <tbody>
+                   <?php for ($i=0; $i <count($resultado) ; $i++): ?>
+                    <tr>
+                      <td> <?php echo $i+1; ?></td>
+                      <td><?php echo $resultado[$i]['item']; ?></td>
+                      <td><?php echo $resultado[$i]['descripcion']; ?></td>
 
-                  <td class="text-center"><button title="Modificar Registro" type="button" onClick="window.location.href='modificar.php<?php echo '?id='?><?php echo $resultado[$i]['id_mencion']?>'" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
+                      <td class="text-center"><button title="Modificar Registro" type="button" onClick="window.location.href='modificar.php<?php echo '?id='?><?php echo $resultado[$i]['id_item']?>'" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
 
-                <a href="javascript:preguntar(<?php echo $resultado[$i]['id_mencion']?>,'eliminar')" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></a>
-                  </td>
-                </tr>
-              <?php endfor; ?>
-          </tbody>
+                    <a href="javascript:preguntar(<?php echo $resultado[$i]['id_item']?>,'eliminar')" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></a>
+                      </td>
+                    </tr>
+                  <?php endfor; ?>
+              </tbody>
 
-        </table>
-            </div>
+            </table>
           </div>
+    </div>
 
 
     </div>
@@ -158,10 +158,11 @@
   <script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
   <script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
   <script src="../../bower_components/fastclick/lib/fastclick.js"></script>
+
   <script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
   <script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
   <script src="../../plugins/alertify/alertify.min.js"></script>
-  <script src="../../dist/js/menciones/eliminar2.js"></script>
+  <script src="../../dist/js/items/eliminar2.js"></script>
   <script src="../../bower_components/datable/dataTables.bootstrap.min.js"></script>
   <script src="../../bower_components/datable/dataTables.buttons.min.js"></script>
   <script src="../../bower_components/datable/buttons.bootstrap.min.js"></script>
@@ -172,34 +173,43 @@
   <script src="../../bower_components/datable/buttons.print.min.js"></script>
  <script src="../../bower_components/datable/buttons.colVis.min.js"></script>
 
- <script type="text/javascript">
- $(document).ready(function(){
-   $('#example').DataTable({
-     dom: 'Bfrtip',
-     buttons:[
-       'copyHtml5',
-       'excelHtml5',
-       'csvHtml5',
-       'pdfHtml5',
-       'colvis'
-     ],
-     'paging': true,
-     'lengthChange': false,
-     'searching': true,
-     'ordering': true,
-     'info': true,
-     'autoWidth': false,
-     'scrollX': true,
-     "language":{
-       "url":"../../bower_components/datatables.net/js/Spanish.json"
-     }
+<!-- <script>
+$(document).ready(function() {
+    var table = $('#example').DataTable( {
+        lengthChange: false,
+        buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
+    } );
 
-   });
- });
- </script>
+    table.buttons().container()
+        .appendTo( '#example_wrapper .col-sm-6:eq(0)' );
+} );
+</script> -->
 
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#example').DataTable({
+    dom: 'Bfrtip',
+    buttons:[
+      'copyHtml5',
+      'excelHtml5',
+      'csvHtml5',
+      'pdfHtml5',
+      'colvis'
+    ],
+    'paging': true,
+    'lengthChange': false,
+    'searching': true,
+    'ordering': true,
+    'info': true,
+    'autoWidth': false,
+    'scrollX': true,
+    "language":{
+      "url":"../../bower_components/datatables.net/js/Spanish.json"
+    }
 
-
+  });
+});
+</script>
 
 </body>
 </html>

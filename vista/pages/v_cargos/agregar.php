@@ -33,7 +33,6 @@
   </aside>
 
   <!-- =============================================== -->
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -45,6 +44,7 @@
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
         <li><a href="#">Mantenimiento</a></li>
+        <li><a href="#">Cargos</a></li>
         <li class="active">Agregar Nuevo.</li>
       </ol>
     </section>
@@ -77,10 +77,10 @@
                       <option value="<?php echo $resultado[$i]['id_tipo_cargo'];?>"><?php echo $resultado[$i]['tipo_cargo'];?> </option>
                  <?php } ?>
               </select>
-               <span class="help-block"></span>
+               <span class="help-block"></span>              
           </div>
 
-            <div class="col-md-5">
+            <div class="col-md-5">  
                 <label for="cargo">Nombre:</label>
                     <input type="text" name="cargo" id="cargo" class="form-control" autocomplete="off" placeholder="Introduzca el nombre de un cargo">
                  <span class="help-block"></span>
@@ -96,8 +96,8 @@
 
         <button type="submit" name="opcion" id="btnvalidar" value="registrar" class="btn btn-primary btn-flat margin"><i class="fa fa-save"></i> <strong>Registrar</strong></button>
 
-        <button type="reset" class="btn btn-primary btn-flat margin"><strong><i class="fa  fa-spinner"></i> Limpiar</strong></button>
-
+        <button type="button" class="btn btn-primary btn-flat margin"><strong><i class="fa  fa-spinner"></i> Limpiar</strong></button>
+        
 
         <a href="mostrar.php" type="button" class="btn btn-md btn-primary"><strong><i class="fa fa-server"></i> Listar</strong></a>
 

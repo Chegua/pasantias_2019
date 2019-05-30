@@ -52,7 +52,6 @@
             <li><a href="../v_cuadratura/agregar.php">Cuadratura </a></li>
             <li><a href="../v_items/mostrar.php">Items </a></li>
             <li><a href="../v_evaluaciones/mostrar.php">Evaluaciones </a></li>
-
           </ul>
         </li>
 

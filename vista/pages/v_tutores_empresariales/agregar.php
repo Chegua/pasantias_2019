@@ -1,7 +1,6 @@
 <?php
 require_once('../../../modelo/m_cargos.php');
 require_once('../../../modelo/m_empresas.php');
-
 require_once('../../../modelo/m_personas.php');
 
 $cargos= new cargos();
@@ -17,11 +16,12 @@ $resultado3= personas::consultar();
 
 <head>
   <title>Agregar</title>
-  <?php include ("../include/head.php"); ?>
+ <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Agregar</title>
+ <?php include ("../include/head.php"); ?>
   <link rel="stylesheet" href="../../dist/css/estilos.css">
   <link rel="stylesheet" href="../../dist/css/icono_css.css">
-  <link rel="stylesheet" href="../../bower_components/datable/dataTables.bootstrap.min.css">
-
   <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
 </head>
 
@@ -45,119 +45,93 @@ $resultado3= personas::consultar();
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-
+     <h1>
+        <i class="fa fa-graduation-cap "></i> Tutor empresarial.
+        <small>Registrar <i class="fa fa-plus"></i></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li><a href="#">Personas</a></li>
+        <li class="">Tutor empresarial.</li>
+        <li class="active">Agregar Nuevo.</li>
+      </ol>
     </section>
 
     <!-- Main content -->
     <section class="content container-fluid">
-  <?php include ("../include/periodo.php"); ?>
 
     <div class="box box-warning">
 
 
-      <div class="box-header with-border">
-           <h3 class="" align="center"><i class="fa fa-save"></i> <strong>Tutores Empresariales.</strong></h3>
-       <p class="info" align="center"><i class="fa fa-eye"></i>
-        Todos los campos marcados con un (*) son obligatorios.</p>
+       <div class="box-header with-border">
+          <h3 class="box-title">Datos del tutor: </h3>       
+          <div class="pull-right hidden-xs">
+             <?php include ("../include/periodo.php"); ?>
+           </div>
        </div>
        <br>
 
 <form name="form_cargo" id="form_cargo" action="../../../controlador/c_tutores_empresariales.php">
 
-    <div class="row">
-      <article class="col-xl-9 col-lg-10 col-md-10 col-sm-9 col-xs-12 col-md-offset-1">
+    <div class="row box-body">
+      <article class="col-xl-9 col-lg-10 col-md-12 col-sm-9 col-xs-12 col-md-offset-">
         <div class="form-row">
 
-  <div class="panel panel-info">
-    <div class="panel-heading">
-      <h5><i class="fa fa-user"></i> <strong>Datos personales.</strong></h5>
-    </div>
-
-    <div class="panel-body">
-
-      <div class="form-group col-md-2">
+              <div class="form-group col-md-2">
               <label for="nacionalidad">Nac.</label>
               <select name="nacionalidad" class="form-control form-control-sm" id="nacionalidad" required>
-                <option value="V-">V- </option>
-                <option value="E-">E- </option>
+                <option value="V">V- </option>
+                <option value="E">E- </option>
               </select>
             </div>
 
-            <div class="form-group col-md-4">
-              <label for="cedula">Cedula: *</label>
+            <div class="form-group col-md-3">
+              <label for="cedula">Cedula: </label>
                 <div class="input-group">
-
-                  <input type="text" required class="form-control" name="cedula" id="cedula" autocomplete="off"  placeholder="Ingrese la cedula" maxlength="8" >
-                  <span class="input-group-btn"><a href="javascript:void(0);" name="buscar" id="buscar" class="btn btn-info" data-toggle="modal" data-target="#per"><i class="fa fa-search"></i> </a></span>
+                  <input type="text" required class="form-control" name="cedula" id="cedula" autocomplete="off"  placeholder="Ingrese la cedula" maxlength="8"  data-inputmask='"mask": "99999999"' data-mask>
+                  <span class="input-group-btn">
+                    <!---<a href="javascript:void(0);" name="buscar" id="buscar" class="btn btn-info" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-search"></i> </a>-->
+                  </span>
                 </div>
-                <span class="help-block">(No se permiten letras ni simbolos.)</span>
+                <span class="help-block"></span>
             </div>
 
-            <div class="form-group col-md-4">
-                  <label for="nombre">Nombres: *</label>
+            <div class="form-group col-md-3">
+                  <label for="nombre">Nombres: </label>
                   <input type="text" name="nombre" id="nombre" class="form-control form-control-sm" placeholder="Ingrese el nombre" autocomplete="off" required>
-                  <span class="help-block">(No se permiten numeros ni simbolos.)</span>
+                  <span class="help-block"></span>
             </div>
 
              <div class="form-group col-md-4">
-                  <label for="apellido">Apellidos: *</label>
+                  <label for="apellido">Apellidos: </label>
                   <input type="text" name="apellido" id="apellido" class="form-control form-control-sm" placeholder="Ingrese el apellido" autocomplete="off" required>
-                 <span class="help-block">(No se permiten numeros ni simbolos.)</span>
+                 <span class="help-block"></span>
             </div>
 
-            <div class="form-group col-md-6">
-              <label for="sexo">Sexo: *</label><br>
-                <input type="radio" name="sexo" id="sexo" value="Masculino" class="minimal" checked> Masculino
-                <input type="radio" name="sexo" id="sexo" value="Femenino" class="minimal-red"> Femenino
-                <span class="help-block">(Selecciononado.)</span>
-            </div>
 
-            <table class="table table-bordered" id="grilla">
-              <thead>
-                <tr>
-                  <th>Cedula</th>
-                  <th>Nombre</th>
-                  <th>Apellido</th>
-                  <th>Tutor</th>
-                  <th>Estatus</th>
-                </tr>
-              </thead>
-              <tbody id="filtrar"></tbody>
-            </table>
-
-    </div>
-  </div>
-
-
-  <div class="panel panel-info">
-    <div class="panel-heading">
-      <h5><i class="fa fa-user"></i> <strong> Contacto</strong></h5>
-    </div>
-    <div class="panel-body">
-
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-4">
                 <label for="telefono">Telefono:</label>
                 <input type="text" name="telefono" id="telefono" class="form-control form-control-sm" placeholder="Ingrese el numero" data-inputmask='"mask": "(9999) 999-9999"' data-mask autocomplete="off" maxlength="15">
-               <span class="help-block">(Opcional.)</span>
-          </div>
+            </div>
 
-          <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
+              <label for="sexo">Sexo: </label><br>
+                <select name="sexo" id="sexo" class="form-control">
+                  <option value="Masculino">Masculino</option>
+                  <option value="Femenino">Femenino</option>
+                </select>
+            </div>
+
+
+          <div class="form-group col-md-4">
                 <label for="correo">Correo:</label>
                 <input type="text" name="correo" id="correo" class="form-control form-control-sm" placeholder="Ingrese el correo"  autocomplete="off">
-               <span class="help-block">(Opcional.)</span>
+               <span class="help-block"></span>
           </div>
 
-    </div>
-  </div>
-
-    <div class="panel panel-info">
-      <div class="panel-heading">
-        <h5><i class="fa fa-user"></i> <strong> Datos empresariales</strong></h5>
-      </div>
-        <div class="panel-body">
 
           <div class="col-md-12">
-            <button type="button" name="buscar_emp" class="btn btn-info" data-toggle="modal" data-target="#emp_modal">Buscar empresa <i class="fa fa-search-plus"></i> </button>
+            <button type="button" name="buscar_emp" class="btn btn-info" data-toggle="modal" data-target="#emp_modal"> <strong>Empresa</strong> <i class="fa fa-search-plus"></i> </button>
 
           </div>
 
@@ -185,17 +159,18 @@ $resultado3= personas::consultar();
                     <option value="<?php echo $resultado[$i]['id_cargo']?>"> <?php echo $resultado[$i]['cargo']?></option>
                  <?php }?>
                 </select>
-              <span class="help-block">(Seleccione por favor.)</span>
             </div>
 
-        <div class="form-group col-md-12">
-            <label for="Estatus">Estatus:  </label>
-              <input type="radio" name="estatus" id="estatus1" class="flat-red" value="Activo"  >Activo
-               <input type="radio" name="estatus" id="estatus2" class="flat-red" value="Inactivo"   >Inactivo
-               <span class="help-block">(Opcional.)</span>
+
+        <div class="form-group col-md-6">
+          <label for="estatus">Estatus:</label>
+            <select name="estatus" id="estatus" class="form-control">
+               <option value="Activo">Activo</option>
+              <option value="Inactivo">Inactivo</option>
+            </select>
         </div>
 
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-6">
             <label>Fecha Inicio:</label>
               <div class="input-group">
                 <div class="input-group-addon">
@@ -203,10 +178,9 @@ $resultado3= personas::consultar();
                 </div>
                   <input type="date" class="form-control" name="fecha_ini" id="fecha_ini">
               </div>
-                  <span class="help-block">(Opcional.)</span>
         </div>
 
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-6">
             <label>Fecha Final:</label>
              <div class="input-group">
                <div class="input-group-addon">
@@ -214,11 +188,8 @@ $resultado3= personas::consultar();
                 </div>
                     <input type="date" class="form-control" name="fecha_fin" id="fecha_fin">
              </div>
-                    <span class="help-block">(Opcional.)</span>
                 <!-- /.input group -->
         </div>
-    </div>
-  </div>
 
 </div>
       </article>
