@@ -106,7 +106,7 @@
 
 
    	<?php include ("../include/plugins.php"); ?>
-  <script src="../../dist/js/menciones/expresionregular.js"></script>
+  <!-- <script src="../../dist/js/menciones/expresionregular.js"></script> -->
  <script src="../../dist/js/menciones/validacion.js"></script>
   <script src="../../dist/js/menciones/grillaAgregar.js"></script>
 

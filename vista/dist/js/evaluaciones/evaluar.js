@@ -43,7 +43,6 @@ $(document).ready(function(){
           success:function(result) {
             $('#lista_empresarial').empty();
             // $('#tabla_empresarial').DataTable().clear().destroy();
-
             for (var i = 0; i < result.length; i++) {
               var texto= '<tr>'+
                          '<td> <button type="button" class= "btn btn-primary ver_estudiantes_asignados" data-toggle="modal" data-target="#ver_estudiantes_asignados" value="'+result[i]['empresa']+'">Ver <i class="fa fa-eye"></i> </button></td>'+
