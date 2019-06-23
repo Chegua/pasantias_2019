@@ -37,7 +37,7 @@ class historial_academico extends personas//Inicio la clase, señalando que es h
 
     $db= DataBase::getInstance();//Conexion
 
-    parent::registrarP($db);           //Ejecuto el metodo registrar de la clase padre
+    parent::registrarP();           //Ejecuto el metodo registrar de la clase padre
     $p=parent::buscar();               //Ejecuto el metodo buscar de la clase padre.
     $this->id= $p[0]['id_persona'];    //Busco el ID de una persona en la clase padre.
 

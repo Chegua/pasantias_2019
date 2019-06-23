@@ -24,7 +24,7 @@ class personal_administrativo extends personas
   /*-------------------------------------------------------*/
   public function registrar(){
     $db= DataBase::getInstance();
-    $per=parent::registrarP($db);
+    $per=parent::registrarP();
 
     $p=parent::buscar();
     $this->id_per_adm= $p[0]['id_persona'];

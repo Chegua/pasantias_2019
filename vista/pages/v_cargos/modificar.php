@@ -1,4 +1,12 @@
-<?php   //include('modales.php');
+<?php
+  session_start();
+  require_once('../../../modelo/m_personas.php');
+  if (isset($_SESSION['user_id'])) {    
+    $user= personas::comprobarUsuario($_SESSION['user_id']);
+  }else{
+    header('Location: /PASANTIAS_2019/vista/pages/v_users/login.php');
+  }
+  
   require_once('../../../modelo/m_cargos.php');
    $id=$_REQUEST['id'];
 

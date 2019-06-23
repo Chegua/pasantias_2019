@@ -27,7 +27,7 @@ class estudiantes extends personas
   public function registrar(){
     $db= DataBase::getInstance();
 
-    parent::registrarP($db);
+    parent::registrarP();
     $p=parent::buscar();
     $this->id= $p[0]['id_persona'];
     $consulta=$db->prepare("INSERT INTO estudiantes (id_estudiante, id_representante, parentesco, fecha_nacimiento, edad, id_comunidad) VALUES (:id_estudiante, :id_representante, :parentesco, :fecha_nacimiento, :edad, :id_comunidad)");

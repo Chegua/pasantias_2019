@@ -4,13 +4,16 @@ require_once('DataBase.php');
 class personas{
   //ATRIBUTOS DE PERSONA
   protected $id;
-  public $nombre;
-  public $apellido;
-  public $nacionalidad;
-  public $cedula;
-  public $correo;
-  public $sexo;
-  public $telefono;
+  protected $tipo;
+  protected $nombre;
+  protected $apellido;
+  protected $nacionalidad;
+  protected $cedula;
+  protected $correo;
+  protected $sexo;
+  protected $telefono;
+  protected $clave;
+
 
   //CONTRUCTOR personas
   function __construct($nacionalidad,$cedula,$nombre,$apellido,$sexo,$telefono,$correo)
@@ -19,15 +22,81 @@ class personas{
     $this->cedula= $cedula;
 		$this->nombre = $nombre;
     $this->apellido= $apellido;
+    $this->sexo= $sexo;
     $this->telefono= $telefono;
     $this->correo= $correo;
-    $this->sexo= $sexo;
+  }
 
+  public function registrarUser()
+  {
+    $db = Database::getInstance();
+    $sql= "INSERT INTO personas (nacionalidad,cedula,nombre,apellido,sexo,telefono,correo,tipo,clave) VALUES (:nacionalidad,:cedula,:nombre,:apellido,:sexo,:telefono,:correo,:tipo,:clave)";
+
+    try {
+      $consulta= $db->prepare($sql);
+      $consulta->bindParam(':nacionalidad', $this->nacionalidad);
+      $consulta->bindParam(':cedula', $this->cedula);
+      $consulta->bindParam(':nombre', $this->nombre);
+      $consulta->bindParam(':apellido', $this->apellido);
+      $consulta->bindParam(':sexo', $this->sexo);
+      $consulta->bindParam(':telefono', $this->telefono);
+      $consulta->bindParam(':correo', $this->correo);
+      $consulta->bindParam(':tipo', $this->tipo);
+      $consulta->bindParam(':clave', $this->clave);
+      $resultado= $consulta->execute();
+      // if ($resultado) 
+      //   return $db->lastInsertId(); 
+    } catch (Exception $e){      
+      throw new Exception("El usuario ya se encuentra registrado");
+    }
+    return $resultado;
+  }
+
+  public function login()
+  {
+      $resultado= false;
+      try {
+          $db= DataBase::getInstance();
+          $consulta= $db->prepare("SELECT * FROM personas WHERE cedula= :cedula");
+          $consulta->bindParam(':cedula',$this->cedula);
+          $consulta->execute();
+          $resultado= $consulta->fetchAll(PDO::FETCH_ASSOC);
+          //$consulta->closeCursor();
+          if (count($resultado)>0){
+              if (password_verify($this->clave,$resultado[0]['clave'])){
+                  $this->id= $resultado[0]['id_persona'];
+                  session_start();
+                  $_SESSION['user_id'] = $resultado[0]['id_persona'];
+                  $_SESSION['user_tipo'] = $resultado[0]['tipo'];                    
+              }                    
+              else
+                  throw new Exception("Contraseña incorrecta");
+          }   
+          else
+              throw new Exception("Usuario no registrado");                
+                      
+      } catch (Exception $e) {
+          $resultado= false; 
+          throw new Exception ('Error: '.$e->getMessage());
+      }
+      return $resultado;
+  }
+
+  public static function comprobarUsuario($id)
+  {
+      $db= DataBase::getInstance();
+      $consulta= $db->prepare("SELECT * FROM personas WHERE id_persona= :id_persona ");
+      $consulta->bindParam(':id_persona',$id);
+      $resultado= $consulta->execute();
+      if ($resultado)
+          return $consulta->fetch(PDO::FETCH_ASSOC);
+      else
+          return null;
   }
 
   //METODOS personas
-  public function registrarP($db){
-    // $db = Database::getInstance();
+  public function registrarP(){
+    $db = Database::getInstance();
     $consulta=  $db->prepare("SELECT id_persona FROM personas WHERE cedula= '$this->cedula'");
     $consulta->execute();
     $resultado= $consulta->rowCount();
@@ -44,10 +113,7 @@ class personas{
        $consulta2->bindParam(':sexo', $this->sexo);
        $consulta2->bindParam(':telefono', $this->telefono);
        $consulta2->bindParam(':correo', $this->correo);
-
-
        $resultado2= $consulta2->execute();
-
       if ($resultado2)
         return 'exito';
       else
@@ -98,8 +164,6 @@ class personas{
 
 	}
 
-
-
   public function eliminarP($id_hijo)
   {
     $db= DataBase::getInstance();
@@ -128,7 +192,15 @@ class personas{
 
   public function getCodigo(){
 		return $this->id;
-	}
+  }
+  
+  public function setTipo($t){
+    $this->tipo= $t;
+  }
+
+  public function setClave($c){
+    $this->clave= $c;
+  }
 
 }
 

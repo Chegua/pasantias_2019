@@ -16,7 +16,7 @@ class representantes extends personas
   public function registrar(){
     $db= DataBase::getInstance();
 
-    parent::registrarP($db);
+    parent::registrarP();
     $p=parent::buscar();
     $this->id= $p[0]['id_persona'];
     $consulta=$db->prepare("INSERT INTO representantes (id_representante) VALUES (:id)");
