@@ -19,108 +19,125 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<title>Modificar</title>
-	<?php include ("../include/head.php"); ?>
-  <link rel="stylesheet" href="../../plugins/alertify/css/alertify.min.css">
-  <link rel="stylesheet" href="../../plugins/alertify/css/themes/bootstrap.min.css">
-  <link rel="stylesheet" href="../../dist/css/estilos.css">
-  <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Modificar</title>
+    <?php include ("../include/head.php"); ?>
+    <link rel="stylesheet" href="../../plugins/alertify/css/alertify.min.css">
+    <link rel="stylesheet" href="../../plugins/alertify/css/themes/bootstrap.min.css">
+    <link rel="stylesheet" href="../../dist/css/estilos.css">
+    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
 
 
 </head>
+
 <body>
 
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
+    <body class="hold-transition skin-blue sidebar-mini">
+        <div class="wrapper">
 
-  <!-- Main Header -->
-  <header class="main-header">
-   	<?php include ("../include/header.php"); ?>
-  </header>
+            <!-- Main Header -->
+            <header class="main-header">
+                <?php include ("../include/header.php"); ?>
+            </header>
 
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
-       	<?php include ("../include/sidebar.php"); ?>
-  </aside>
-
-
-
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-
-    </section>
-
-    <!-- Main content -->
-    <section class="content container-fluid">
-  <?php include ("../include/periodo.php"); ?>
-
- <form action="../../../controlador/c_anios.php" method="get">
-    <div class="box box-warning">
-       <div class="box-header with-border">
-           <h3 class="" align="center"><i class="fa fa-edit"></i> <strong>Modificar año.</strong></h3>
-           <p class="info" align="center"><i class="fa fa-eye"></i> En esta sección del sistema se puede realizar la modificación de un registro.</p>
-       </div>
-       <br>
+            <!-- Left side column. contains the logo and sidebar -->
+            <aside class="main-sidebar">
+                <?php include ("../include/sidebar.php"); ?>
+            </aside>
 
 
-    <input type="hidden" value="<?php  echo $resultado[0]['id_anio'] ?>" name="id">
+
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                <h1>
+                    <i class="fa  fa-location-arrow "></i> Años/Grados.
+                    <small>Modificar <i class="fa fa-pencil"></i></small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+                    <li><a href="#">Mantenimiento</a></li>
+                    <li><a href="#">Años/Grados</a></li>
+                    <li><a href="#" class="active">Modificar</a></li>
+                </ol>
+                </section>
+
+                <!-- Main content -->
+                <section class="content container-fluid">
+
+                    <form action="../../../controlador/c_anios.php" method="get">
+                        <div class="box box-warning">
+                        <div class="box-header with-border">
+                        <h3 class="box-title">Dato del Año/Grado: </h3>
+                        <div class="pull-right hidden-xs">
+                            <?php include ("../include/periodo.php"); ?>
+                        </div>
+                    </div>
+                            <br>
 
 
-     <div class="row">
-        <div class="form-group ">
-          <div class="col-md-10 col-md-offset-1">
-              <label for="anio">Año:</label>
-               <input type="text" name="anio" id="anio" value="<?php  echo $resultado[0]['anio'] ?>" class="form-control" autocomplete="off">
-               <span class="help-block"></span>
+                            <input type="hidden" value="<?php  echo $resultado[0]['id_anio'] ?>" name="id">
+
+
+                            <div class="row">
+                                <div class="form-group ">
+                                    <div class="col-md-10 col-md-offset-1">
+                                        <label for="anio">Año:</label>
+                                        <input type="text" name="anio" id="anio"
+                                            value="<?php  echo $resultado[0]['anio'] ?>" class="form-control"
+                                            autocomplete="off">
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-offset-3">
+
+
+
+
+
+
+                                    <button type="submit" name="opcion" value="modificar"
+                                        class="btn btn-primary btn-flat margin"><i class="fa fa-edit"></i>
+                                        <strong>Modificar</strong></button>
+
+                                    <button type="button" class="btn btn-primary btn-flat margin"><strong><i
+                                                class="fa  fa-spinner"></i> Limpiar</strong></button>
+
+                                    <a href="mostrar.php" type="button" class="btn btn-md btn-primary"><strong><i
+                                                class="fa fa-server"></i> Listar</strong></a>
+
+                                </div>
+                            </div>
+
+                            <div id="tabla"></div>
+
+                        </div>
+
+                    </form>
+
+                </section>
+                <!-- /.content -->
             </div>
-          </div>
-    </div>
+            <!-- /.content-wrapper -->
 
-<hr>
-    <div class="row">
-      <div class="col-md-12 col-sm-offset-3">
-
-
+            <!-- Main Footer -->
+            <footer class="main-footer">
+                <?php include ("../include/footer.php"); ?>
+            </footer>
 
 
+        </div>
+        <!-- ./wrapper -->
 
 
-        <button type="submit" name="opcion" value="modificar" class="btn btn-primary btn-flat margin"><i class="fa fa-edit"></i> <strong>Modificar</strong></button>
-
-        <button type="button" class="btn btn-primary btn-flat margin"><strong><i class="fa  fa-spinner"></i> Limpiar</strong></button>
-
-          <a href="mostrar.php" type="button" class="btn btn-md btn-primary"><strong><i class="fa fa-server"></i> Listar</strong></a>
-
-      </div>
-    </div>
-
-    <div id="tabla"></div>
-
-    </div>
-
-  </form>
-
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
-  <!-- Main Footer -->
-  <footer class="main-footer">
-      	<?php include ("../include/footer.php"); ?>
-  </footer>
-
-
-</div>
-<!-- ./wrapper -->
-
-
-   	<?php include ("../include/plugins.php"); ?>
-  <script src="../../dist/js/anios/grillaActualizar.js"></script>
-  <script src="../../dist/js/anios/expresionregular.js"></script>
-  <script src="../../dist/js/anios/validacion.js"></script>
+        <?php include ("../include/plugins.php"); ?>
+        <script src="../../dist/js/anios/grillaActualizar.js"></script>
+        <script src="../../dist/js/anios/expresionregular.js"></script>
+        <script src="../../dist/js/anios/validacion.js"></script>
 
 
 
@@ -129,5 +146,6 @@
 
 
 
-</body>
+    </body>
+
 </html>

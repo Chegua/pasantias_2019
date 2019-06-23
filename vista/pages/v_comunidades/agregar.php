@@ -41,7 +41,7 @@ if (isset($_SESSION['user_id'])) {
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <i class="fa fa-thumb-tack"></i> Comunidad.
+        <i class="fa fa-map"></i> Comunidad.
         <small>Registrar <i class="fa fa-plus"></i></small>
       </h1>
       <ol class="breadcrumb">
