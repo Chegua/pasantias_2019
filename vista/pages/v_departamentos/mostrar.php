@@ -51,7 +51,7 @@ if (isset($_SESSION['user_id'])) {
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        <i class="fa fa-pencil"></i> Departamentos.
+                        <i class="fa fa-building"></i> Departamentos.
                         <small>Listar <i class="fa fa-list"></i></small>
                     </h1>
                     <ol class="breadcrumb">
@@ -136,7 +136,7 @@ if (isset($_SESSION['user_id'])) {
                                         <?php for ($i=0; $i <count($resultado) ; $i++): ?>
                                         <tr>
                                             <td> <?php echo $i+1; ?></td>
-                                            <td><?php echo $resultado[$i]['nombre_departamento']; ?></td>
+                                            <td><?php echo $resultado[$i]['departamento']; ?></td>
 
                                             <td class="text-center"><button title="Modificar Registro" type="button"
                                                     onClick="window.location.href='modificar.php<?php echo '?id='?><?php echo $resultado[$i]['id_departamento']?>'"

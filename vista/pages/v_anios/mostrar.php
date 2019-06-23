@@ -51,7 +51,7 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        <i class="fa fa-pencil"></i> Años/Grados.
+                        <i class="fa  fa-location-arrow"></i> Años/Grados.
                         <small>Listar <i class="fa fa-list"></i></small>
                     </h1>
                     <ol class="breadcrumb">

@@ -50,7 +50,7 @@ if (isset($_SESSION['user_id'])) {
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <i class="fa fa-pencil"></i> Items.
+        <i class="fa  fa-navicon"></i> Items.
         <small>Listar <i class="fa fa-list"></i></small>
       </h1>
       <ol class="breadcrumb">

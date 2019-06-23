@@ -41,12 +41,13 @@ if (isset($_SESSION['user_id'])) {
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <i class="fa fa-pencil "></i> Items.
+        <i class="fa  fa-navicon "></i> Items.
         <small>Registrar <i class="fa fa-plus"></i></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
         <li><a href="#">Mantenimiento</a></li>
+        <li><a href="#">Items</a></li>
         <li class="active">Agregar Nuevo.</li>
       </ol>
     </section>

@@ -52,7 +52,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
     <h1>
-        <i class="fa fa-pencil"></i> Cargos.
+        <i class="fa fa-briefcase"></i> Cargos.
         <small>Listar <i class="fa fa-list"></i></small>
       </h1>
       <ol class="breadcrumb">
@@ -60,7 +60,7 @@
         <li><a href="#">Mantenimiento.</a></li>
         <li><a href="#">Cargos.</a></li>
 
-        <li><a href="#" class="active">Agregar Nuevo.</a></li>
+        <li><a href="#" class="active">Listar.</a></li>
 
       </ol>
     </section>

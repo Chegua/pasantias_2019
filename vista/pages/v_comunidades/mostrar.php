@@ -51,18 +51,26 @@ if (isset($_SESSION['user_id'])) {
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-
+      <h1>
+        <i class="fa fa-map"></i> Comunidad.
+        <small>Listar <i class="fa fa-list"></i></small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li><a href="#">Sistema</a></li>
+        <li class="active">Agregar Nuevo.</li>
+      </ol>
     </section>
 
     <section class="content container-fluid">
 
-  <?php include ("../include/periodo.php"); ?>
-
     <div class="box box-warning">
-       <div class="box-header with-border">
-           <h3 class="" align="center"><strong><i class="fa fa-server"></i>  Comunidades.</strong></h3>
-           <p class="info" align="center"><i class="fa fa-eye"></i> En esta sección del sistema se visualiza una lista de registros.</p>
-       </div>
+    <div class="box-header with-border">
+          <h3 class="box-title">Listado de comunidades: </h3>           <div class="pull-right hidden-xs">
+      <?php include ("../include/periodo.php"); ?>
+             </div>
+
+        </div>
 
        <?php
       require_once('../../../modelo/m_cargos.php');
@@ -98,7 +106,7 @@ if (isset($_SESSION['user_id'])) {
           </script>';
       }
       ?>
-<div class="panel panel-primary">
+<div class="panel panel-default">
           <div class="panel-heading">
             <h5> <strong>Agregar nuevo</strong><button type="button" onclick="window.location.href='agregar.php'" class="btn btn-success btn-sm"><span class="  glyphicon glyphicon-plus"></span></button></h5>
 
@@ -110,6 +118,9 @@ if (isset($_SESSION['user_id'])) {
           <thead>
             <th class="">N°</th>
             <th class="">Comunidades</th>
+            <th class="">Parroquia</th>
+            <th class="">Municipio</th>
+            <th class="">Estado</th>
             <th class="text-center">Acciones</th>
 
           </thead>
@@ -120,11 +131,14 @@ if (isset($_SESSION['user_id'])) {
                   <td> <?php echo $i+1; ?></td>
                   <td><?php echo $resultado[$i]['nombre_comunidad']; ?></td>
 
-                  <td class="text-center"><button title="Modificar Registro" type="button" onClick="window.location.href='modificar.php<?php echo '?id='?><?php echo $resultado[$i]['id_cargo']?>'" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
+                  <td class="text-center"><button title="Modificar Registro" type="button" onClick="window.location.href='modificar.php<?php echo '?id='?><?php echo $resultado[$i]['id_comunidad']?>'" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
 
                     <a href="javascript:preguntar(<?php echo $resultado[$i]['id_cargo']?>,'eliminar')" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></a>
 
                   </td>
+                  <td>a</td>
+                  <td>a</td>
+                  <td>a</td>
                 </tr>
               <?php endfor; ?>
           </tbody>
