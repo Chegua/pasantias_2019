@@ -98,8 +98,27 @@ class comunidades{
            return 'fracaso';
           }
       }
-    }
+		}
 
-  }
+		public function acutualizar()
+		{
+			$db= DataBase::getInstance();
+			$sql= "UPDATE comunidades SET nombre_comunidad= :nombre_comunidad, id_parroquia= :id_parroquia WHERE id_comunidad= :id_comunidad";
+			$consulta->prepare($sql);
+			$consulta->bindParam(':nombre_comunidad', $this->_nombre);
+			$consulta->bindParam(':id_parroquia', $this->_parroquia);
+			$consulta->bindParam(':id_comunidad', $this->_codigo);
+			$resultado= $consulta->execute();
+			
+			if ($resultado) {
+				return 'exito';
+			}
+			else{
+			 return 'fracaso';
+			}
+
+		}		
+
+}
 
 ?>
