@@ -51,14 +51,15 @@ $resultado2= $cuadratura->consultar();
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <i class="fa fa-graduation-cap "></i> Estudiantes.
+        <i class="fa fa-graduation-cap"></i> Estudiantes.
         <small>Registrar <i class="fa fa-plus"></i></small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li><a href="#">Personas</a></li>
-        <li class="">Estudiantes.</li>
-        <li class="active">Agregar Nuevo.</li>
+        <li class="">Personas</li>
+        <li class="">Estudiantes</li>
+        <li class="">Agregar nuevo</li>
+
       </ol>
     </section>
 
@@ -90,13 +91,13 @@ $resultado2= $cuadratura->consultar();
               </select>
             </div>
 
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
               <label for="cedula">Cedula: </label>
                 <div class="input-group">
 
                   <input type="text" required class="form-control" name="cedula" id="cedula" autocomplete="off"  placeholder="Ingrese la cedula" maxlength="8"  data-inputmask='"mask": "99999999"' data-mask>
                   <span class="input-group-btn">
-                    <a href="javascript:void(0);" name="buscar" id="buscar" class="btn btn-info" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-search"></i> </a></span>
+                    <a href="javascript:void(0);" name="buscar" id="buscar" class="btn btn-info" data-toggle="modal" data-target="#modal_repre"><i class="fa fa-search"></i> </a></span>
                 </div>
                 <span class="help-block"></span>
             </div>
@@ -125,7 +126,7 @@ $resultado2= $cuadratura->consultar();
            <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="form-control form-control-sm" required>
         </div>
 
-        <div class="form-group col-md-2">
+        <div class="form-group col-md-6">
           <label for="edad">Edad</label>
           <input type="int" name="edad" id="edadCalculada" class="form-control form-control-sm" readonly>
         </div>
@@ -171,71 +172,7 @@ $resultado2= $cuadratura->consultar();
               <option value="tio">Tio</option>
             </select>
           </div>
-
-          <div class="col-md-12">
-            <label for="">Asignar Seccion:</label>
-            <button type="button" name="cuadratura" class="btn btn-primary" data-toggle="modal" data-target="#modal_cuadratura"><i class="fa fa-user-plus"></i> </button>
-          </div>
-          <input type="hidden" name="cuadratura" id="cuadratura">
-
-
-          <div class="form-group col-md-4">
-            <label for="anio">Año:</label>
-            <input type="text" name="anio" id="anio" class="form-control" disabled>
-          </div>
-          <div class="form-group col-md-4">
-            <label for="mencion">Mencion:</label>
-            <input type="text" name="mencion" id="mencion" class="form-control" disabled>
-          </div>
-          <div class="form-group col-md-4">
-            <label for="periodo">Periodo escolar:</label>
-            <input type="text" name="periodo" id="periodo" class="form-control" disabled>
-          </div>
-
-          <h4 class="col-md-12"><label for="">Docente guia:</label> </h4>
-
-          <div class="form-group col-md-4">
-            <label for="cedulaD">Cedula:</label>
-            <input type="text" name="cedulaD" id="cedulaD" class="form-control" disabled>
-          </div>
-          <div class="form-group col-md-4">
-            <label for="nombreD">Nombre:</label>
-            <input type="text" name="nombreD" id="nombreD" class="form-control" disabled>
-          </div>
-          <div class="form-group col-md-4">
-            <label for="apellidoD">Apellido:</label>
-            <input type="text" name="apellidoD" id="apellidoD" class="form-control" disabled>
-          </div>
-
-
-          <div class="form-group col-md-3">
-            <label for="estado">Estados:</label>
-            <select name="estado" class="form-control form-control-sm select2" id="estado" required>
-              <option value="">Seleccione...</option>
-            </select>
-          </div>
-
-          <div class="form-group col-md-3">
-            <label for="municipio">Municipios:</label>
-            <select name="municipio" class="form-control form-control-sm select2" id="municipio" required>
-              <option value="">Seleccione...</option>
-            </select>
-          </div>
-
-          <div class="form-group col-md-3">
-            <label for="parroquia">Parroquias:</label>
-            <select name="parroquia" class="form-control form-control-sm select2" id="parroquia" required>
-              <option value="">Seleccione...</option>
-            </select>
-          </div>
-
-          <div class="form-group col-md-3">
-            <label for="comunidad">Comunidad:</label>
-            <select name="comunidad" class="form-control form-control-sm select2" id="comunidad" required>
-              <option value="">Seleccione...</option>
-            </select>
-          </div>
-
+      
 
       </article>
   </div>
@@ -398,9 +335,9 @@ $resultado2= $cuadratura->consultar();
 <!-- ./wrapper -->
     <?php include ("../include/plugins.php"); ?>
   <!---<script src="../../dist/js/cargos/filtrado.js"></script>-->
-  <script src="../../dist/js/tutor_academico/expresionregular.js"></script>
+  <!-- <script src="../../dist/js/tutor_academico/expresionregular.js"></script>
   <script src="../../dist/js/estudiantes/validacion.js"></script>
-  <script src="../../dist/js/tutor_academico/grillaAgregar.js"></script>
+  <script src="../../dist/js/tutor_academico/grillaAgregar.js"></script> -->
 
   <script src="../../dist/js/estudiantes/seleccion_modales.js"></script>
   <script src="../../dist/js/dire.js"></script>

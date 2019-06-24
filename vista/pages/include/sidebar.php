@@ -35,7 +35,19 @@
       </li>
 
       <li><a href="../v_empresas/mostrar.php"><i class="fa fa-industry"></i> <span>Empresas</span></a></li>
-      <li><a href="../v_estudiante/asignar_matricula.php"><i class="fa fa-check"></i> <span>Asignaciones</span></a></li>
+
+      <li class="treeview">
+          <a href="#"><i class="fa fa-check"></i> <span>Asignaciones</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="../v_asignar_seccion/mostrar.php">Estudiante/Seccion</a></li>
+            <li><a href="../v_municipios/mostrar.php">Estudiante/Empresa </a></li>
+            <li><a href="../v_parroquias/mostrar.php">Estudiante/Departamento </a></li>
+          </ul>
+        </li>
 
         <li class="treeview">
           <a href="#"><i class="fa fa-wrench"></i> <span>Mantenimiento</span>
