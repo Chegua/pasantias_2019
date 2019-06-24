@@ -10,7 +10,7 @@
   require_once('../../../modelo/m_cargos.php');
   $cargo= new cargos();
 
-  $resultado= $cargo->consultar();
+  $resultado= $cargo->listar();
 
 ?>
 <!DOCTYPE html>

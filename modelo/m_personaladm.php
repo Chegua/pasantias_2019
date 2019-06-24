@@ -12,7 +12,7 @@ class personal_administrativo extends personas
   public $estatus;
 
   //METODOS
-  function __construct($nacionalidad,$cedula,$nombre,$apellido,$sexo,$telefono,$correo,$cargo,$departamento,$fecha_inicio,$fecha_fin,$estatus)
+  function __construct($nacionalidad,$cedula,$nombre,$apellido,$sexo,$telefono,$correo,$departamento,$cargo,$fecha_inicio,$fecha_fin,$estatus)
   {
     parent::__construct($nacionalidad,$cedula,$nombre,$apellido,$sexo,$telefono,$correo);
     $this->cargo= $cargo;
@@ -22,12 +22,9 @@ class personal_administrativo extends personas
     $this->estatus= $estatus;
   }
   /*-------------------------------------------------------*/
-  public function registrar(){
+  public function crearHistorial($id_per){
     $db= DataBase::getInstance();
-    $per=parent::registrarP();
-
-    $p=parent::buscar();
-    $this->id_per_adm= $p[0]['id_persona'];
+    $this->id_per_adm= $id_per;
     $validar= $db->prepare("SELECT * FROM historial_departamentos WHERE estatus='Activo' AND id_personal_administrativo='$this->id_per_adm'");
     $validar->execute();
     $respuesta= $validar->rowCount();

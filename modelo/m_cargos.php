@@ -125,10 +125,21 @@ class cargos
       return null;
   }
 
+  public function listar()
+  {
+    $db = Database::getInstance();
+    $sql="SELECT *FROM vista_cargos";
+    $resultado=$db->query($sql);
+    if($resultado->rowCount() >0)
+      return $resultado->fetchAll();
+    else
+      return null;
+  }
+
   public function consultar3()
   {
     $db = Database::getInstance();
-    $sql="SELECT *FROM vista_cargos WHERE tipo_cargo='Academico'";
+    $sql="SELECT *FROM vista_cargos WHERE tipo_cargo='Academico/Administrativo'";
     $resultado=$db->query($sql);
     if($resultado->rowCount() >0)
       return $resultado->fetchAll();

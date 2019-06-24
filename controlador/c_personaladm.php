@@ -57,7 +57,13 @@ switch($_REQUEST['opcion'])
     $apellido=trim($apellido);//elimina los espacios del inicio y el final de cada cadnea
 
 		$per_adm = new personal_administrativo($nacionalidad,$cedula,$nombre,$apellido,$sexo,$telefono,$correo,$departamento,$cargo,$fecha_inicio,$fecha_fin,$estatus);
-		$resultado = $per_adm->registrar();
+		$per_adm->setTipo('Administrativo');
+		$idP = $per_adm->registrarP();
+		if ($idP=='existente') {
+			$encontrado= $per_adm->buscar();
+			$idP= $encontrado['id_persona'];
+		}
+		$resultado= $per_adm->crearHistorial($idP);
     switch ($resultado){
 			case 'existente':
 				Header("Location: ../vista/pages/v_personaladm/mostrar.php?respuesta1= existente");

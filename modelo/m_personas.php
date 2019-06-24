@@ -130,7 +130,8 @@ class personas{
     if ($resultado>0) {
       return 'existente';
     }else {
-    $consulta2= $db->prepare("INSERT INTO personas (nacionalidad,cedula,nombre,apellido,sexo,telefono,correo) VALUES (:nacionalidad,:cedula,:nombre,:apellido,:sexo,:telefono,:correo)");
+      $token= $this->generarToken();
+      $consulta2= $db->prepare("INSERT INTO personas (nacionalidad,cedula,nombre,apellido,sexo,telefono,correo,tipo,token) VALUES (:nacionalidad,:cedula,:nombre,:apellido,:sexo,:telefono,:correo,:tipo,:token)");
 
        $consulta2->bindParam(':nacionalidad', $this->nacionalidad);
        $consulta2->bindParam(':cedula', $this->cedula);
@@ -139,9 +140,11 @@ class personas{
        $consulta2->bindParam(':sexo', $this->sexo);
        $consulta2->bindParam(':telefono', $this->telefono);
        $consulta2->bindParam(':correo', $this->correo);
+       $consulta2->bindParam(':tipo', $this->tipo);
+       $consulta2->bindParam(':token', $token);
        $resultado2= $consulta2->execute();
       if ($resultado2)
-        return 'exito';
+        return $db->lastInsertId();
       else
        return 'fracaso';
     }
@@ -153,7 +156,7 @@ class personas{
 		$sql="SELECT * FROM personas WHERE cedula='$this->cedula'";
 		$resultado=$db->query($sql);
 		 if($resultado->rowCount() >0)
-		 	return $resultado->fetchAll();
+		 	return $resultado->fetch(PDO::FETCH_ASSOC);
 		 else
 		 	return null;
 	}
@@ -233,7 +236,7 @@ class personas{
 
   public function generarToken()
   {
-    $token= bin2hex(random_bytes(20));
+    $token= bin2hex(random_bytes(5));
     return $token;        
   }
 

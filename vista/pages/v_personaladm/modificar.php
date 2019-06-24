@@ -14,7 +14,7 @@ $id=$_REQUEST['id'];
 $departamento= new departamentos();
 $resultadodep= $departamento->consultar();
 $cargo= new cargos();
-$resultadocarg= $cargo->consultar();
+$resultadocarg= $cargo->listar();
 $resultado= personal_administrativo::encontrar($id);
 ?>
 
