@@ -47,10 +47,6 @@ class cargos
     }
   }
 
-
-
-
-
   public function actualizar($id)
  	{
     $db = Database::getInstance();
@@ -84,14 +80,6 @@ class cargos
  public function eliminar($id){
 
   $db= DataBase::getInstance();
-
-  /*$consulta2= $db->prepare("SELECT * FROM validar_cargos WHERE id_cargo='$id'");
-  $consulta2->execute();
-
-  $resultado3= $consulta2->rowCount();
-  if ($resultado3>0) {
-       return 'ojo';
-  }*/
 
   $consulta= $db->prepare("SELECT id_cargo FROM cargos WHERE id_cargo='".$id."'");
   $consulta->execute();
@@ -153,6 +141,17 @@ class cargos
   {
     $db = Database::getInstance();
     $sql="SELECT * FROM cargos WHERE id_tipo_cargo='1'";
+    $resultado=$db->query($sql);
+    if($resultado->rowCount() >0)
+      return $resultado->fetchAll();
+    else
+      return null;
+  }
+
+  public function consultar_empresariales()
+  {
+    $db = Database::getInstance();
+    $sql="SELECT * FROM cargos WHERE id_tipo_cargo='2'";
     $resultado=$db->query($sql);
     if($resultado->rowCount() >0)
       return $resultado->fetchAll();

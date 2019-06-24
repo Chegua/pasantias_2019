@@ -71,7 +71,7 @@ class municipios{
 		$resultado=false;
 		try{
        		$bd=DataBase::getInstance();
-       		$consulta = $bd->prepare('SELECT * FROM municipios');
+       		$consulta = $bd->prepare('SELECT * FROM vista_estado_municipio');
         	$consulta->execute();
         	$resultado = $consulta->fetchAll();
         	$consulta->closeCursor();

@@ -31,7 +31,6 @@ class personas{
   {
     $db = Database::getInstance();
     $sql= "INSERT INTO personas (nacionalidad,cedula,nombre,apellido,sexo,telefono,correo,tipo,clave) VALUES (:nacionalidad,:cedula,:nombre,:apellido,:sexo,:telefono,:correo,:tipo,:clave)";
-
     try {
       $consulta= $db->prepare($sql);
       $consulta->bindParam(':nacionalidad', $this->nacionalidad);
@@ -52,6 +51,30 @@ class personas{
     return $resultado;
   }
 
+  public function asignarClave($token)
+  {
+    $resultado= false;
+    $db= Database::getInstance();
+    $sql= "UPDATE personas SET clave=:clave WHERE cedula=:cedula AND token=:token";
+
+    try {
+      
+      $consulta2= $db->prepare($sql);
+      $consulta2->bindParam(':cedula', $this->cedula);     
+      $consulta2->bindParam(':clave', $this->clave);
+      $consulta2->bindParam(':token', $token);
+      $resultado= $consulta2->execute();
+      if ($consulta2->rowCount()==0) {
+        throw new Exception("Error: Algunos de los datos ingresados son incorrectos");        
+      }
+
+    } catch (Exception $e){  
+      $resultado= false;
+      throw new Exception($e->getMessage());
+    }
+    return $resultado;
+  }
+
   public function login()
   {
       $resultado= false;
@@ -63,6 +86,9 @@ class personas{
           $resultado= $consulta->fetchAll(PDO::FETCH_ASSOC);
           //$consulta->closeCursor();
           if (count($resultado)>0){
+              if ($resultado[0]['clave']==NULL) {
+                throw new Exception("Debe asignar una contraseña");                
+              }
               if (password_verify($this->clave,$resultado[0]['clave'])){
                   $this->id= $resultado[0]['id_persona'];
                   session_start();
@@ -143,6 +169,21 @@ class personas{
       return null;
   }
 
+  public static function buscarAdm()
+  {
+    $tipo= 'Administrador';
+    $db = Database::getInstance();
+    $sql="SELECT * FROM personas WHERE tipo= :tipo";
+    $consulta= $db->prepare($sql);
+    $consulta->bindParam(':tipo',$tipo);
+    $consulta->execute();
+    $resultado= $consulta->fetchAll(PDO::FETCH_ASSOC);
+    if(count($resultado) >0)
+      return $resultado;
+    else
+      return null;
+  }
+
 	public function modificarP($db, $id)
  	{
     $consulta= $db->prepare("UPDATE personas SET nacionalidad= :nacionalidad, cedula= :cedula, nombre= :nombre, apellido= :apellido, sexo= :sexo, telefono= :telefono, correo= :correo WHERE id_persona= '$id'");
@@ -188,6 +229,12 @@ class personas{
       return $resultado->fetchAll(PDO::FETCH_OBJ);
     else
       return null;
+  }
+
+  public function generarToken()
+  {
+    $token= bin2hex(random_bytes(20));
+    return $token;        
   }
 
   public function getCodigo(){

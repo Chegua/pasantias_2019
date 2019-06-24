@@ -23,7 +23,7 @@
               <!-- The user image in the navbar-->
               <img src="vista/pages/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">User</span>
+              <span class="hidden-xs"><?php echo $user['nombre'].' '.$user['apellido']; ?></span>
             </a>
 
             <ul class="dropdown-menu">
@@ -33,7 +33,7 @@
 
                 <p>
                   ...
-                  <small>...</small>
+                  <small></small>
                 </p>
               </li>
               <!-- Menu Footer-->

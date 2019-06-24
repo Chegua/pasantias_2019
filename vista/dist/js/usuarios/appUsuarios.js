@@ -7,8 +7,9 @@ $(document).ready(function(){
     function go_to_index(){
         window.location="http://localhost/PASANTIAS_2019/";
     }
+
     // --------------------------------------------CREATE-------------------------------------------------------------       
-    $('#userForm').submit(function(e){
+    $('#admForm').submit(function(e){
         e.preventDefault();
         const postData={
             opcion: 'registrar',
@@ -20,7 +21,7 @@ $(document).ready(function(){
             telefono: $('#telefono').val(),
             correo: $('#correo').val(),
             clave: $('#clave').val(),
-            tipo: $('#tipo').val()            
+            tipo: 'Administrador'            
         };        
         $.ajax({
             url: '../../../controlador/c_persona.php',
@@ -30,7 +31,7 @@ $(document).ready(function(){
             success: function(r){                
                 alertify.success('Operación exitosa');
                 console.log(r);
-                $('#userForm').trigger('reset');
+                $('#admForm').trigger('reset');
                 // setTimeout (redireccionar(), 5000);      
                 console.log(postData);
                 
@@ -43,6 +44,45 @@ $(document).ready(function(){
                 //alert("error: "+r.responseText+" "+r.status);             
             }
         });
+    });
+
+
+    // --------------------------------------------Asignar clave usuario-------------------------------------------------------------       
+    $('#userForm').submit(function(e){
+        e.preventDefault();
+        if ($('#clave').val()!=$('#claveR').val()) {
+            alertify.error("Error: Las contraseña no coinciden");
+            
+        }else{
+            const postData={
+                opcion: 'asignarClave',
+                cedula: $('#cedula').val(),
+                clave: $('#clave').val(),
+                token: $('#token').val()
+            };        
+            $.ajax({
+                url: '../../../controlador/c_persona.php',
+                method: 'post',
+                data: postData,
+                dataType: 'json',
+                success: function(r){                
+                    alertify.success('Operación exitosa');
+                    console.log(r);
+                    $('#userForm').trigger('reset');
+                    // setTimeout (redireccionar(), 5000);      
+                    console.log(postData);
+                    
+                },
+                error:function(r) {
+                    alertify.error(r.responseText);
+                    console.log(r);
+                    //$('#userForm').trigger('reset');
+                    // console.log(postData);  
+                    //alert("error: "+r.responseText+" "+r.status);             
+                }
+            });
+        }
+        
     });
 
     // ---------------------------------------------LOGIN-------------------------------------------------------

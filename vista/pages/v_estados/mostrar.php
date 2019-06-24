@@ -6,11 +6,10 @@ if (isset($_SESSION['user_id'])) {
 }else{
   header('Location: /PASANTIAS_2019/vista/pages/v_users/login.php');
 }
+require_once('../../../modelo/Estado.php');
+$estado= new estados();
 
-  require_once('../../../modelo/m_departamentos.php');
-  $departamento= new departamentos();
-
-  $resultado= $departamento->consultar();
+$resultado= $estado->listar();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -133,9 +132,16 @@ if (isset($_SESSION['user_id'])) {
                                     </thead>
 
                                     <tbody>
-                                        <td>a</td>
-                                        <td>a</td>
-                                        <td>a</td>  
+                                    <?php for ($i=0; $i <count($resultado) ; $i++): ?>
+                                        <tr>
+                                            <td> <?php echo $i+1; ?></td>                  
+                                            <td><?php echo $resultado[$i]['nombre_estado']; ?></td>
+                                            <td class="text-center">
+                                                <button title="Modificar Registro" type="button" onClick="window.location.href='modificar.php<?php echo '?id='?><?php echo $resultado[$i]['id_estado']?>'" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
+                                                <button title="Eliminar" class="btn btn-danger btn-sm eliminar" value="<?php echo $resultado[$i]['id_estado']?>"><span class="glyphicon glyphicon-trash"></button>
+                                            </td>
+                                        </tr>
+                                        <?php endfor; ?>
                                     </tbody>
 
                                 </table>
@@ -169,7 +175,7 @@ if (isset($_SESSION['user_id'])) {
         <script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
         <script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
         <script src="../../plugins/alertify/alertify.min.js"></script>
-        <script src="../../dist/js/departamentos/eliminar2.js"></script>
+        <script src="../../dist/js/estados/eliminar.js"></script>
         <script src="../../bower_components/datable/dataTables.bootstrap.min.js"></script>
         <script src="../../bower_components/datable/dataTables.buttons.min.js"></script>
         <script src="../../bower_components/datable/buttons.bootstrap.min.js"></script>

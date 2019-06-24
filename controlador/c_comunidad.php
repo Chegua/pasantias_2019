@@ -31,36 +31,26 @@ switch($_REQUEST['opcion'])
 		$comunidad = new comunidades($nombre);
 		$update = $comunidad->actualizar($id);
 
-	switch ($update) {
-		case 'existente':
-		header("location: ../vista/pages/v_comunidades/mostrar.php?respuesta1=existente");
-		break;
-		case 'exito':
-		header("location: ../vista/pages/v_comunidades/mostrar.php?respuesta2=extio");
-		break;
-		case 'fracaso':
-		header("location: ../vista/pages/v_comunidades/mostrar.php?respuesta3=fracaso");
-		break;
-	}
-   break;
+		switch ($update) {			
+			case 'exito':
+			header("location: ../vista/pages/v_comunidades/mostrar.php?respuesta2=extio");
+			break;
+			case 'fracaso':
+			header("location: ../vista/pages/v_comunidades/mostrar.php?respuesta3=fracaso");
+			break;
+		}
+   		break;
 
 	case 'eliminar':
 		$id = $_REQUEST['id'];
-
 		$comunidad = new comunidades();
-		$resultado= $comunidad->eliminar($id);
-
-switch ($resultado) {
-		case 'exito':
-		header("location: ../vista/pages/v_comunidades/mostrar.php?respuesta2= extio");
+		try {
+			$resultado= $comunidad->eliminar($id);
+			$resultado= json_encode($resultado);
+			echo $resultado;
+		} catch (Exception $e) {
+			die ($e->getMessage());
+		}		
 		break;
-		case 'fracaso':
-		header("location: ../vista/pages/v_comunidades/mostrar.php?respuesta3= fracaso");
-		break;
-		case 'ojo':
-		header("location: ../vista/pages/v_comunidades/mostrar.php?respuesta4= ojo");
-		break;
-	}
-	break;
 }
 ?>
