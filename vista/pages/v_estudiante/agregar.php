@@ -99,48 +99,47 @@ $resultado2= $cuadratura->consultar();
                   <span class="input-group-btn">
                     <a href="javascript:void(0);" name="buscar" id="buscar" class="btn btn-info" data-toggle="modal" data-target="#modal_repre"><i class="fa fa-search"></i> </a></span>
                 </div>
-                <span class="help-block"></span>
             </div>
 
             <div class="form-group col-md-6">
                   <label for="nombre">Nombres: </label>
                   <input type="text" name="nombre" id="nombre" class="form-control form-control-sm" placeholder="Ingrese el nombre" autocomplete="off" required>
-                  <span class="help-block"></span>
             </div>
 
-             <div class="form-group col-md-6">
+            <div class="form-group col-md-6">
                   <label for="apellido">Apellidos: </label>
                   <input type="text" name="apellido" id="apellido" class="form-control form-control-sm" placeholder="Ingrese el apellido" autocomplete="off" required>
                  <span class="help-block"></span>
             </div>
 
-            <div class="form-group col-md-4">
-              <label for="sexo">Sexo: *</label><br>
-                <input type="radio" name="sexo" id="" value="Masculino" class="minimal" checked> Masculino
-                <input type="radio" name="sexo" id="" value="Femenino" class="minimal-red"> Femenino
-                <span class="help-block">(Selecciononado.)</span>
+            <div class="form-group col-md-6">
+              <label for="sexo">Sexo:</label><br>
+              <select name="sexo" id="sexo" class="form-control">
+              <option value="Masculino">Masculino</option>
+              <option value="Femenino">Femenino</option>
+              </select>
             </div>
+   </article>
 
-         <div class="form-group col-md-6">
+   <article class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-xs-12 col-md-offset-">
+            <div class="form-group col-md-6">
            <label for="fecha_nacimiento">Fecha de Naciemiento</label>
-           <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="form-control form-control-sm" required>
+           <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="form-control " required>
         </div>
 
         <div class="form-group col-md-6">
           <label for="edad">Edad</label>
-          <input type="int" name="edad" id="edadCalculada" class="form-control form-control-sm" readonly>
+          <input type="int" name="edad" id="edadCalculada" class="form-control " readonly>
         </div>
 
-          <div class="form-group col-md-6">
+        <div class="form-group col-md-6">
               <label for="telefono">Telefono:</label>
               <input type="text" name="telefono" id="telefono" class="form-control form-control-sm" placeholder="Ingrese el numero" data-inputmask='"mask": "(9999) 999-9999"' data-mask autocomplete="off" maxlength="15">
-              <span class="help-block">(Opcional.)</span>
           </div>
 
           <div class="form-group col-md-6">
                 <label for="correo">Correo:</label>
                 <input type="text" name="correo" id="correo" class="form-control form-control-sm" placeholder="Ingrese el correo"  autocomplete="off">
-                <span class="help-block">(Opcional.)</span>
           </div>
 
           <div class="col-md-12">
@@ -154,10 +153,12 @@ $resultado2= $cuadratura->consultar();
             <label for="cedulaR">Cedula:</label>
             <input type="text" name="cedulaR" id="cedulaR" class="form-control" disabled>
           </div>
+
           <div class="form-group col-md-3">
             <label for="nombreR">Nombre:</label>
             <input type="text" name="nombreR" id="nombreR" class="form-control" disabled>
           </div>
+
           <div class="form-group col-md-3">
             <label for="apellidoR">Apellido:</label>
             <input type="text" name="apellidoR" id="apellidoR" class="form-control" disabled>
@@ -172,9 +173,37 @@ $resultado2= $cuadratura->consultar();
               <option value="tio">Tio</option>
             </select>
           </div>
-      
+          <h4>Direccion:</h4>
+          <div class="form-group col-md-3">
+                <label for="estado">Estados:</label>
+                <select name="estado" class="form-control form-control-sm select2" id="estado" required>
+                  <option value="">Seleccione...</option>
+                </select>
+              </div>
 
-      </article>
+              <div class="form-group col-md-3">
+                <label for="municipio">Municipios:</label>
+                <select name="municipio" class="form-control form-control-sm select2" id="municipio" required>
+                  <option value="">Seleccione...</option>
+                </select>
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="parroquia">Parroquias:</label>
+                <select name="parroquia" class="form-control form-control-sm select2" id="parroquia" required>
+                  <option value="">Seleccione...</option>
+                </select>
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="comunidad">Comunidad:</label>
+                <select name="comunidad" class="form-control form-control-sm select2" id="comunidad" required>
+                  <option value="">Seleccione...</option>
+                </select>
+              </div>
+
+   </article>        
+
   </div>
         <!-- /.box-body -->
   <div class="box-footer" >
