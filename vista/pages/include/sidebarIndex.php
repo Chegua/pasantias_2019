@@ -27,34 +27,15 @@
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="../estudiantes/mostrar.php">Estudiantes </a></li>
-
-            <li><a href="../TE/mostrar.php">Tutor Empresarial </a></li>
-
-            <li><a href="../TA/mostrar.php">Tutor Academico </a></li>
-
-            <li><a href="../estado/mostrar.php">Personal Adminsitrativo </a></li>
-
-            <li><a href="../representante/mostrar.php">Representante </a></li>
-
+            <li><a href="vista/pages/v_estudiante/mostrar.php">Estudiantes </a></li>
+            <li><a href="vista/pages/v_personaladm/mostrar.php">Personal Adminisrativo </a></li>
+            <li><a href="vista/pages/v_tutoracademico/mostrar.php">Tutores Academicos </a></li>
+            <li><a href="vista/pages/v_tutores_empresariales/mostrar.php">Tutores Empresariales </a></li>
         </ul>
       </li>
 
-
-        <li><a href="../empresa/mostrar.php"><i class="fa fa-industry"></i> <span>Empresas</span></a></li>
-
-        <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Asignaciones</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../departamentos/mostrar.php">Tutor Academico</a></li>
-
-        </ul>
-      </li>
-
+      <li><a href="vista/pages/v_empresas/mostrar.php"><i class="fa fa-industry"></i> <span>Empresas</span></a></li>
+      <li><a href="vista/pages/v_estudiante/asignar_matricula.php"><i class="fa fa-check"></i> <span>Asignaciones</span></a></li>
 
         <li class="treeview">
           <a href="#"><i class="fa fa-wrench"></i> <span>Mantenimiento</span>
@@ -63,24 +44,28 @@
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="../departamentos/mostrar.php">Departamentos </a></li>
+            <li><a href="vista/pages/v_departamentos/mostrar.php">Departamentos </a></li>
+            <li><a href="vista/pages/v_cargos/mostrar.php">Cargos </a></li>
+            <li><a href="vista/pages/v_menciones/mostrar.php">Menciones </a></li>
+            <li><a href="vista/pages/v_anios/mostrar.php">Año/Grado </a></li>
+            <li><a href="vista/pages/v_periodos/mostrar.php">Periodos </a></li>
+            <li><a href="vista/pages/v_cuadratura/agregar.php">Cuadratura </a></li>
+            <li><a href="vista/pages/v_items/mostrar.php">Items </a></li>
+            <li><a href="vista/pages/v_evaluaciones/mostrar.php">Evaluaciones </a></li>
+          </ul>
+        </li>
 
-            <li><a href="../cargos/mostrar.php">Cargos </a></li>
-
-            <li><a href="../mencion/mostrar.php">Menciones </a></li>
-
-            <li><a href="../periodo/mostrar.php">Periodos </a></li>
-
-            <li><a href="../periodo/mostrar.php">Items </a></li>
-            <li><a href="../grados/mostrar.php">Grados/Años </a></li>
-
-
-
-            <li><a href="../estado/mostrar.php">Estados </a></li>
-            <li><a href="../estado/mostrar.php">Municipio </a></li>
-            <li><a href="../estado/mostrar.php">Parroquia </a></li>
-
-
+        <li class="treeview">
+          <a href="#"><i class="fa fa-map-marker"></i> <span>Localidades</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="vista/pages/v_estados/mostrar.php">Estados </a></li>
+            <li><a href="vista/pages/v_municipios/mostrar.php">Municipios </a></li>
+            <li><a href="vista/pages/v_parroquias/mostrar.php">Parroquias </a></li>
+            <li><a href="vista/pages/v_comunidades/mostrar.php">Comunidades </a></li>
           </ul>
         </li>
 

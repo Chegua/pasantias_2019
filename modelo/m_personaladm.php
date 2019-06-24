@@ -58,6 +58,16 @@ class personal_administrativo extends personas
     else
       return null;
   }
+
+  public static function consultar_personas(){
+    $db= DataBase::getInstance();
+    $sql= "SELECT * FROM personas";
+    $resultado=$db->query($sql);
+    if($resultado->rowCount()>0)
+      return $resultado->fetchAll();
+    else
+      return null;
+  }
   /*-------------------------------------------------------*/
 
   public static function eliminar($id)

@@ -54,7 +54,7 @@ $resultado3= personas::consultar();
     <!-- Content Header (Page header) -->
     <section class="content-header">
      <h1>
-        <i class="fa fa-graduation-cap "></i> Tutor empresarial.
+        <i class="fa fa-male "></i> Tutor empresarial.
         <small>Registrar <i class="fa fa-plus"></i></small>
       </h1>
       <ol class="breadcrumb">
@@ -138,14 +138,19 @@ $resultado3= personas::consultar();
           </div>
 
 
-          <div class="col-md-12">
-            <button type="button" name="buscar_emp" class="btn btn-info" data-toggle="modal" data-target="#emp_modal"> <strong>Empresa</strong> <i class="fa fa-search-plus"></i> </button>
+          
 
           </div>
 
            <div class="form-group col-md-4">
              <label>Empresas: </label>
-            <input type="text" name="emp" id="emp" class="form-control" disabled>
+
+             <div class="input-group">
+                <input type="text" name="emp" id="emp" class="form-control" disabled>
+                <span class="input-group-btn">
+                <button type="button" name="buscar_emp" class="btn btn-info" data-toggle="modal" data-target="#emp_modal"> <i class="fa fa-search-plus"></i> </button>
+                </span>
+             </div>
            </div>
 
            <div class="form-group col-md-4">
@@ -237,13 +242,13 @@ $resultado3= personas::consultar();
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-      <h4 class="modal-title" id="myModalLabel">Buscar datos</h4>
+      <h4 class="modal-title" id="myModalLabel">Seleccione una persona.</h4>
       </div>
       <div class="modal-body">
 
-<div class="panel panel-info">
+<div class="panel panel-default">
     <div class="panel-heading">
-         </div>
+    </div>
 
            <div class="panel-body">
               <table class="table table-hover table-bordered" id="example">
@@ -298,12 +303,12 @@ $resultado3= personas::consultar();
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-      <h4 class="modal-title" id="myModalLabel">Buscar datos</h4>
+      <h4 class="modal-title" id="myModalLabel">Seleccione una empresa.</h4>
       </div>
       <div class="modal-body">
-        <div class="panel panel-primary">
+        <div class="panel panel-default">
             <div class="panel-heading">
-              <h4>Elija la empresa en que labora</h4>
+              <h4>Empresas disponibles.</h4>
             </div>
             <div class="panel-body">
                  <table class="table table-hover table-bordered" id="example2">

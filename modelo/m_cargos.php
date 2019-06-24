@@ -129,13 +129,25 @@ class cargos
   public function consultar()
   {
     $db = Database::getInstance();
-    $sql="SELECT *FROM vista_cargos";
+    $sql="SELECT *FROM vista_cargos WHERE tipo_cargo='Empresarial'";
     $resultado=$db->query($sql);
     if($resultado->rowCount() >0)
       return $resultado->fetchAll();
     else
       return null;
   }
+
+  public function consultar3()
+  {
+    $db = Database::getInstance();
+    $sql="SELECT *FROM vista_cargos WHERE tipo_cargo='Academico'";
+    $resultado=$db->query($sql);
+    if($resultado->rowCount() >0)
+      return $resultado->fetchAll();
+    else
+      return null;
+  }
+
 
   public function consultar_academicos()
   {

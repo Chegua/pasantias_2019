@@ -50,7 +50,7 @@ if (isset($_SESSION['user_id'])) {
     <!-- Content Header (Page header) -->
     <section class="content-header">
      <h1>
-        <i class="fa fa-graduation-cap"></i> Tutor Empresarial.
+        <i class="fa fa-male"></i> Tutor Empresarial.
         <small>Listar <i class="fa fa-list"></i></small>
       </h1>
       <ol class="breadcrumb">
