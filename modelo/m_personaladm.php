@@ -53,10 +53,10 @@ class personal_administrativo extends personas
     $db= DataBase::getInstance();
     $sql= "SELECT * FROM vista_historial_departamentos";
     $resultado=$db->query($sql);
-    if($resultado->rowCount()>0)
-      return $resultado->fetchAll();
-    else
-      return null;
+    // if($resultado->rowCount()>0)
+      return $resultado->fetchAll(PDO::FETCH_ASSOC);
+    // else
+      // return null;
   }
 
   public static function consultar_personas(){

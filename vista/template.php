@@ -43,7 +43,7 @@
         </header>
 
         <aside class="main-sidebar">
-            <?php include ("pages/include/sidebarindex.php"); ?>
+            <?php include ("pages/include/sidebarIndex.php"); ?>
         </aside>
 
         <!-- Content Wrapper. Contains page content -->
