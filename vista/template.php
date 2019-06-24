@@ -39,7 +39,7 @@
     <div class="wrapper">
 
         <header class="main-header">
-            <?php include ("pages/include/header.php"); ?>
+            <?php include ("pages/include/headerindex.php"); ?>
         </header>
 
         <aside class="main-sidebar">
