@@ -14,7 +14,7 @@ $departamento= new departamentos();
 $resultadodep= $departamento->consultar();
 
 $cargo= new cargos();
-$resultadocarg= $cargo->consultar();
+$resultadocarg= $cargo->consultar_academicos();
 
  ?>
 

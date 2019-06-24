@@ -27,6 +27,9 @@ if (isset($_REQUEST['correo']))
     
 if (isset($_REQUEST['clave']))
     $clave = $_REQUEST['clave'];
+
+if (isset($_REQUEST['token']))
+    $token = $_REQUEST['token'];
     
 switch ($_REQUEST['opcion']) {
     case 'iniciarSesion':
@@ -41,6 +44,19 @@ switch ($_REQUEST['opcion']) {
         }
         break;
     
+    case 'asignarClave':
+        $persona= new personas('',$cedula,'','','','','');
+        $clave= password_hash($clave,PASSWORD_BCRYPT);
+        $persona->setClave($clave);
+        try{            
+            $resultado= $persona->asignarClave($token);
+            $resultado= json_encode($resultado);
+            echo $resultado;
+        } catch (Exception $e) {
+            die ($e->getMessage());
+        }
+        break;
+
     case 'registrar':
         $persona= new personas($nacionalidad,$cedula,$nombre,$apellido,$sexo,$telefono,$correo);
         $clave= password_hash($clave,PASSWORD_BCRYPT);

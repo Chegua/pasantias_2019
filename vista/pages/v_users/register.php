@@ -17,76 +17,43 @@
   </div>
 
   <div class="register-box-body">
-    <p class="login-box-msg">Registro de usuario</p>
+    <p class="login-box-msg">Validacion de Usuario</p>
 
     <form id="userForm">
     <div class="row box-body">
       <article class="col-xl-9 col-lg-10 col-md-12 col-sm-9 col-xs-12 col-md-offset-">
         <!-- <div class="form-row"> -->
-
-          <div class="form-group col-md-12">
-            <label for="tipo">Tipo de usuario: </label><br>
-            <select name="tipo" id="tipo" class="form-control">
-              <option value="Administrador">Administrador</option>
-              <option value="Tutor">Tutor</option>
-              <option value="Estudiante">Estudiante</option>
-            </select>
-          </div>
-
-          <div class="form-group col-md-4">
+          
+          <!-- <div class="form-group col-md-4">
             <label for="nacionalidad">Nac.</label>
             <select name="nacionalidad" class="form-control form-control-sm" id="nacionalidad" required>
               <option value="V">V</option>
               <option value="E">E</option>
             </select>
-          </div>
+          </div> -->
 
-          <div class="form-group col-md-8">
+          <div class="form-group col-md-12"
             <label for="cedula">Cedula: </label>
-              <div class="input-group">
-                <input type="text" required class="form-control" name="cedula" id="cedula" autocomplete="off"  placeholder="Ingrese la cedula" maxlength="8"  data-inputmask='"mask": "99999999"' data-mask>
-                <span class="input-group-btn">
-                  <!---<a href="javascript:void(0);" name="buscar" id="buscar" class="btn btn-info" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-search"></i> </a>-->
-                </span>
-              </div>
-              <span class="help-block"></span>
-          </div>
-
-          <div class="form-group col-md-12">
-                <label for="nombre">Nombres: </label>
-                <input type="text" name="nombre" id="nombre" class="form-control form-control-sm" placeholder="Ingrese el nombre" autocomplete="off" required>
-                <span class="help-block"></span>
-          </div>
-
-          <div class="form-group col-md-12">
-              <label for="apellido">Apellidos: </label>
-              <input type="text" name="apellido" id="apellido" class="form-control form-control-sm" placeholder="Ingrese el apellido" autocomplete="off" required>
-              <span class="help-block"></span>
-          </div>
-
-          <div class="form-group col-md-12">
-            <label for="sexo">Sexo: </label><br>
-              <select name="sexo" id="sexo" class="form-control">
-                <option value="Masculino">Masculino</option>
-                <option value="Femenino">Femenino</option>
-              </select>
-          </div>
-
-          <div class="form-group col-md-12">
-                <label for="telefono">Telefono:</label>
-                <input type="text" name="telefono" id="telefono" class="form-control form-control-sm" placeholder="Ingrese el numero" data-inputmask='"mask": "(9999) 999-9999"' data-mask autocomplete="off" maxlength="15">
-          </div>
-
-          <div class="form-group col-md-12">
-                <label for="correo">Correo:</label>
-                <input type="text" name="correo" id="correo" class="form-control form-control-sm" placeholder="Ingrese el correo"  autocomplete="off">
-               <span class="help-block"></span>
+            <input type="text" required class="form-control" name="cedula" id="cedula" autocomplete="off"  placeholder="Ingrese la cedula" maxlength="8"  data-inputmask='"mask": "99999999"' data-mask>
+            <span class="help-block"></span>
           </div>
 
           <div class="form-group col-md-12">
             <label for="clave">Contraseña: </label>
             <input type="password" name="clave" id="clave" class="form-control form-control-sm" placeholder="Ingrese la contraseña" autocomplete="off" required>
             <span class="help-block"></span>
+          </div>
+
+          <div class="form-group col-md-12">
+            <label for="claveR">Confirme su contraseña: </label>
+            <input type="password" name="claveR" id="claveR" class="form-control form-control-sm" placeholder="Ingrese la contraseña" autocomplete="off" required>
+            <span class="help-block"></span>
+          </div>
+
+          <div class="form-group col-md-12">
+            <label for="token">Codigo de validacion: </label> 
+            <input type="text" name="token" id="token" class="form-control form-control-sm" placeholder="Ingrese el codigo" autocomplete="off" required>
+            <span class="help-block">Si no posee codigo contacte con el administrador</span>
           </div>
 
         <!-- /.col -->

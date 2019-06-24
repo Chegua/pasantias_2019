@@ -104,7 +104,7 @@ class comunidades{
 		{
 			$db= DataBase::getInstance();
 			$sql= "UPDATE comunidades SET nombre_comunidad= :nombre_comunidad, id_parroquia= :id_parroquia WHERE id_comunidad= :id_comunidad";
-			$consulta->prepare($sql);
+			$consulta= $db->prepare($sql);
 			$consulta->bindParam(':nombre_comunidad', $this->_nombre);
 			$consulta->bindParam(':id_parroquia', $this->_parroquia);
 			$consulta->bindParam(':id_comunidad', $this->_codigo);
@@ -118,6 +118,24 @@ class comunidades{
 			}
 
 		}		
+
+		public function eliminar($id)
+		{
+			$resultado= false;
+			$db= DataBase::getInstance();
+			$sql="DELETE FROM comunidades WHERE id_comunidad= :id_comunidad";
+			try {
+				$consulta= $db->prepare($sql);
+				$consulta->bindParam(':id_comunidad', $id);
+				$resultado= $consulta->execute();
+			} catch (Exception $e) {
+				$resultado=false;
+				throw new Exception("Error al eliminar. Puede que el registro este siendo usado");
+				
+			}
+			return $resultado;
+		
+		}
 
 }
 

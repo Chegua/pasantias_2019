@@ -7,10 +7,10 @@ if (isset($_SESSION['user_id'])) {
   header('Location: /PASANTIAS_2019/vista/pages/v_users/login.php');
 }
 
-  require_once('../../../modelo/m_departamentos.php');
-  $departamento= new departamentos();
+    require_once('../../../modelo/Municipio.php');
+    $municipio= new municipios();
 
-  $resultado= $departamento->consultar();
+    $resultado= $municipio->listar();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -134,10 +134,17 @@ if (isset($_SESSION['user_id'])) {
                                     </thead>
 
                                     <tbody>
-                                        <td>a</td>
-                                        <td>a</td>
-                                        <td>a</td>  
-                                        <td>a</td>  
+                                         <?php for ($i=0; $i <count($resultado) ; $i++): ?>
+                                        <tr>
+                                            <td> <?php echo $i+1; ?></td> 
+                                            <td><?php echo $resultado[$i]['nombre_municipio']; ?></td>               
+                                            <td><?php echo $resultado[$i]['nombre_estado']; ?></td>
+                                            <td class="text-center">
+                                                <button title="Modificar Registro" type="button" onClick="window.location.href='modificar.php<?php echo '?id='?><?php echo $resultado[$i]['id_municipio']?>'" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
+                                                <button title="Eliminar" class="btn btn-danger btn-sm eliminar" value="<?php echo $resultado[$i]['id_municipio']?>"><span class="glyphicon glyphicon-trash"></button>
+                                            </td>
+                                        </tr>
+                                        <?php endfor; ?> 
                                     </tbody>
 
                                 </table>

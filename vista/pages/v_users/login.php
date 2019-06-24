@@ -3,6 +3,9 @@ session_start();
   if (isset($_SESSION['user_id'])) {
     header('Location: /PASANTIAS_2019');
   }
+  require_once('../../../modelo/m_personas.php');
+  $adm= personas::buscarAdm();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -51,7 +54,11 @@ session_start();
       </div>
     </form>
     <br>
+    <?php if (!$adm):?>
+    <a href="registerAdm.php" class="text-center btn btn-link">Registrarse como Adm</a>
+    <?php else:?>
     <a href="register.php" class="text-center btn btn-link">Registrarse</a>
+    <?php endif;?>
 
   </div>
   <!-- /.login-box-body -->
