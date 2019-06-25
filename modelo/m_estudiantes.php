@@ -38,32 +38,40 @@ class estudiantes extends personas
       return 'exito';
     }else{
       return 'fracaso';
-    }
-    // if ($r){
-    //   $consulta2= $db->prepare("INSERT INTO matricula (id_cuadratura,id_estudiante) VALUES (:id_cuadratura,:id_estudiante)");
-    //   $consulta2->bindParam(':id_cuadratura', $this->cuadratura);
-    //   $consulta2->bindParam(':id_estudiante', $this->id);
-    //   $r_matricula=$consulta2->execute();
-    //   if ($r_matricula) {
-    //     return 'exito';
-    //   }else {
-    //     return 'fracaso';
-    //   }
+    }    
+  }
 
-    // }else{
-    //   return 'fracaso';
-    // }
+  public static function asignarMatricula($idEst,$cuadratura)
+  {
+    $db= DataBase::getInstance();   
+    $consultar= $db->prepare("SELECT id_matricula FROM matricula WHERE id_estudiante='$idEst' AND id_cuadratura='$cuadratura'");
+    // $consultar->bindParam(':id_estudiante',$idEst);
+    // $consultar->bindParam(':id_cuadratura',$cuadratura);
+    $consultar->execute();
+    $validar= $consultar->rowCount();
+    if ($validar > 0) {
+      return 'existente';
+    }else{
+      $consulta= $db->prepare("INSERT INTO matricula (id_estudiante,id_cuadratura) VALUES (:id_estudiante, :id_cuadratura");
+      $consulta->bindParam(':id_estudiante',$idEst);
+      $consulta->bindParam(':id_cuadratura',$cuadratura);
+      $resultado= $consulta->execute();
+      if ($resultado){
+        return 'exito';
+      }else {
+        return 'fracaso';
+      }
+    }
 
   }
 
   public static function consultar(){
     $db= DataBase::getInstance();
-
     $sql= "SELECT *FROM vista_estudiantes";
     $consulta= $db->prepare($sql);
     $resultado= $consulta->execute();
     if ($resultado)
-        return $resultado= $consulta->fetchAll(PDO::FETCH_ASSOC);
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
     else
       return null;
   }
@@ -83,29 +91,35 @@ class estudiantes extends personas
   public static function encontrar($id)
   {
      $db = DataBase::getInstance();
-
-     $consulta=$db->prepare("SELECT * FROM vista_matricula WHERE id_matricula= '$id'");
-
+     $consulta=$db->prepare("SELECT * FROM vista_estudiantes WHERE id_estudiante= '$id'");
      $resultado= $consulta->execute();
 
-      if($resultado>0)
-         return $consulta->fetch(PDO::FETCH_ASSOC);
-      else
-         return null;
+     return $consulta->fetch(PDO::FETCH_ASSOC); 
   }
 
-public function consultar2(){
-    $db= DataBase::getInstance();
-    //$consulta= $db->prepare("SELECT * FROM ver_estudiante");
-    //$resultado= $consulta->execute();
-    $sql= "SELECT *FROM vista_matricula";
-    $resultado=$db->query($sql);
-    if($resultado->rowCount()>0)
-      return $resultado->fetchAll();
-    else
-      return null;
+  public function consultar2(){
+      $db= DataBase::getInstance();
+      //$consulta= $db->prepare("SELECT * FROM ver_estudiante");
+      //$resultado= $consulta->execute();
+      $sql= "SELECT *FROM vista_matricula";
+      $resultado=$db->query($sql);
+      if($resultado->rowCount()>0)
+        return $resultado->fetchAll();
+      else
+        return null;
 
+  }
+
+  public function setId($id)
+  {
+    $this->id=$id;
+  }
+  public function setCuadratura($c)
+  {
+    $this->cuadratura=$c;
   }
 }
+
+
 
 ?>

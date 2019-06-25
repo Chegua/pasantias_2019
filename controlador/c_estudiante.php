@@ -2,6 +2,9 @@
 require_once('../modelo/m_estudiantes.php');
 require_once('../modelo/m_representantes.php');
 
+if (isset($_REQUEST['id_estudiante'])) 
+	$id_estudiante= $_REQUEST['id_estudiante'];
+
 if(isset($_REQUEST['nacionalidad'])){
 	$nacionalidad=$_REQUEST['nacionalidad'];
 }
@@ -77,13 +80,21 @@ switch($opcion)
 		}
 		break;
 
+	case 'asignarMatricula':
+		$resultado= estudiantes::asignarMatricula($id_estudiante,$cuadratura);
+		switch ($resultado){
+			case 'existente':
+				Header("Location: ../vista/pages/v_asignar_seccion/mostrar.php?respuesta1= existente");
+				break;
+			case 'exito':
+				Header("Location: ../vista/pages/v_asignar_seccion/mostrar.php?respuesta2= exito");
+				break;
+		}
+		break;
+
 	case 'encontrar':
-    if (isset($_REQUEST['id_matricula'])) {
-    	$id_matricula= $_REQUEST['id_matricula'];
-    }
-
-
-    $resultado = estudiantes::encontrar($id_matricula);
+    
+    $resultado = estudiantes::encontrar($id_estudiante);
 		$resultado= json_encode($resultado);
 		echo $resultado;
 		break;
@@ -118,17 +129,7 @@ switch($opcion)
 			break;
 
 	case 'modificar':
-		$cedula = $_REQUEST['cedula'];
-		$nombre = $_REQUEST['nombre'];
-		$apellido= $_REQUEST['apellido'];
-		$fecha_nacimiento= $_REQUEST['fecha_nacimiento'];
-		$edad= $_REQUEST['edad'];
-		$sexo= $_REQUEST['sexo'];
-		$direccion= $_REQUEST['direccion'];
-		$telefono= $_REQUEST['telefono'];
-		$correo= $_REQUEST['correo'];
-    $parentesco= $_REQUEST['parentesco'];
-
+		
 		$estudiante = new estudiantes($cedula,$nombre, $apellido, $fecha_nacimiento, $edad, $sexo, $direccion, $telefono, $correo, $parentesco);
 		$resultado = $estudiante->modificar();
 		//require_once('../vista/salida.php');

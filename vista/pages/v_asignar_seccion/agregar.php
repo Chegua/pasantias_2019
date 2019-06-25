@@ -8,9 +8,10 @@ if (isset($_SESSION['user_id'])) {
 }
 // require_once('../../../modelo/m_personas.php');
 require_once('../../../modelo/m_cuadratura.php');
+require_once('../../../modelo/m_estudiantes.php');
 
 
-$resultado= personas::consultar_noEstudiante();
+$resultado= estudiantes::consultar();
 $cuadratura= new cuadratura();
 $resultado2= $cuadratura->consultar();
 ?>
@@ -62,7 +63,7 @@ $resultado2= $cuadratura->consultar();
     </section>
 
     <!-- Main content -->
-    <form name="form_cargo" id="form_cargo" action="../../../controlador/c_estudiante.php">
+    <form name="formAsignarMatricula" id="formAsignarMatricula" action="../../../controlador/c_estudiante.php" method="post">
 
     <section class="content">
 
@@ -81,11 +82,13 @@ $resultado2= $cuadratura->consultar();
 
         <div class="form-row">
 <h4><strong>Estudiante:</strong></h4>
+<input type="hidden" name="id_estudiante" id="estudiante">
+
         <div class="form-group col-md-2">
               <label for="nacionalidad">Nac.</label>
               <select name="nacionalidad" class="form-control form-control-sm" id="nacionalidad" required disabled>
-                <option value="V">V- </option>
-                <option value="E">E- </option>
+                <option value="V">V</option>
+                <option value="E">E</option>
               </select>
             </div>
 
@@ -170,7 +173,7 @@ $resultado2= $cuadratura->consultar();
           <div class="row">
       <div class="col-md-12 col-sm-offset-3">
 
-        <button type="submit" name="opcion" id="btnvalidar" value="registrar" class="btn btn-primary btn-flat margin"><i class="fa fa-save"></i> <strong>Registrar</strong></button>
+        <button type="submit" name="opcion" id="btnvalidar" value="asignarMatricula" class="btn btn-primary btn-flat margin"><i class="fa fa-save"></i> <strong>Registrar</strong></button>
 
         <button type="button" class="btn btn-primary btn-flat margin"><strong><i class="fa  fa-spinner"></i> Limpiar</strong></button>
 
@@ -199,7 +202,7 @@ $resultado2= $cuadratura->consultar();
 </div>
 <!-- ./wrapper -->
 
-<!-----------------------------------------------MODAL PARA EL BOTON BUSCAR REPRESENTANTE -------------------------------------------------->
+<!-----------------------------------------------MODAL PARA EL BOTON BUSCAR ESTUDIANTE -------------------------------------------------->
 
 <div class="modal fade bs-example-modal-lg" id="modal_repre" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog  modal-lg" role="document">
@@ -231,17 +234,17 @@ $resultado2= $cuadratura->consultar();
                 </thead>
 
                 <tbody>
-                  <?php foreach ($resultado as $value): ?>
+                  <?php for ($i=0; $i < count($resultado); $i++): ?>
                     <tr>
-                      <td><?php echo $value->nacionalidad."-".$value->cedula; ?></td>
-                      <td><?php echo $value->nombre; ?></td>
-                      <td><?php echo $value->apellido; ?></td>
-                      <td><?php echo $value->sexo; ?></td>
-                      <td><?php echo $value->telefono; ?></td>
-                      <td><?php echo $value->correo; ?></td>
-                      <td><button type="button" name="selecionar_representante" class="btn btn-sm btn-success" data-dismiss="modal" onclick="elegir_representante(<?php echo $value->id_persona?>);" ><i class="fa fa-check-square-o"></i> </button> </td>
+                      <td><?php echo $resultado[$i]['nacionalidad_estudiante']."-".$resultado[$i]['cedula_estudiante']; ?></td>
+                      <td><?php echo $resultado[$i]['nombre_estudiante']; ?></td>
+                      <td><?php echo $resultado[$i]['apellido_estudiante']; ?></td>
+                      <td><?php echo $resultado[$i]['sexo_estudiante']; ?></td>
+                      <td><?php echo $resultado[$i]['telefono_estudiante']; ?></td>
+                      <td><?php echo $resultado[$i]['correo_estudiante']; ?></td>
+                      <td><button type="button" name="selecionar_estudiante" class="btn btn-sm btn-success" data-dismiss="modal" onclick="elegir_estudiante(<?php echo $resultado[$i]['id_estudiante']?>);" ><i class="fa fa-check-square-o"></i> </button> </td>
                     </tr>
-                  <?php endforeach; ?>
+                  <?php endfor; ?>
                 </tbody>
          </table>
      </div>
@@ -325,7 +328,6 @@ $resultado2= $cuadratura->consultar();
   <!---<script src="../../dist/js/cargos/filtrado.js"></script>-->
   <script src="../../dist/js/tutor_academico/expresionregular.js"></script>
   <script src="../../dist/js/estudiantes/validacion.js"></script>
-  <script src="../../dist/js/tutor_academico/grillaAgregar.js"></script>
 
   <script src="../../dist/js/estudiantes/seleccion_modales.js"></script>
   <script src="../../dist/js/dire.js"></script>

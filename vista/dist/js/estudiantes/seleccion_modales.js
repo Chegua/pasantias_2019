@@ -26,6 +26,41 @@ function elegir_representante(id){
     });
 }
 
+function elegir_estudiante(id){
+  $.ajax({
+      url:'../../../controlador/c_estudiante.php',
+      method:'GET',
+      data:{'opcion':'encontrar', 'id_estudiante':id},
+      dataType:'json',
+      success:function(result){ //data,textStatus,jqXHR
+        // $('#filtrar').empty(texto);
+
+        id= result['id_estudiante'];
+        cedula= result['nacionalidad_estudiante']+'-'+result['cedula_estudiante'];
+        nombre= result['nombre_estudiante'];
+        apellido= result['apellido_estudiante'];
+        sexo= result['sexo_estudiante'];
+        telefono= result['telefono_estudiante'];
+        correo= result['correo_estudiante'];
+
+        $('#estudiante').val(id);
+        $('#cedula').val(cedula);
+        $('#nombre').val(nombre);
+        $('#apellido').val(apellido);
+        $('#sexo').val(sexo);
+        $('#telefono').val(telefono);
+        $('#correo').val(correo);
+
+      },
+      error:function(result) {
+        // alert("error: "+result.responseText+" "+result.status);
+        console.log("error: "+result.responseText+" "+result.status);
+        // $('#filtrar').empty('');
+      }
+    });nacionalidad
+    nacionalidad
+}
+
 function elegir_docente(id){
   $.ajax({
       url:'../../../controlador/c_historial_academico.php',
