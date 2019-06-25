@@ -96,11 +96,11 @@ if (isset($_SESSION['user_id'])) {
                   <td><?php echo $resultado[$i]['correo_estudiante']; ?></td>
 
                   <td>
-                   <button type="button" title="Perfil" onClick="window.location.href='perfil2.php<?php echo '?id='?><?php echo $resultado[$i]['id_matricula']?>'" class="btn btn-sm btn-success btn-sm"><span class="fa fa-eye"></span></button>
+                   <button type="button" title="Perfil" onClick="window.location.href='perfil2.php<?php echo '?id='?><?php echo $resultado[$i]['id_estudiante']?>'" class="btn btn-sm btn-success btn-sm"><span class="fa fa-eye"></span></button>
 
-                    <button title="Modificar Registro" type="button" onClick="window.location.href='modificar.php<?php echo '?id='?><?php echo $resultado[$i]['id_matricula']?>'" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
+                    <button title="Modificar Registro" type="button" onClick="window.location.href='modificar.php<?php echo '?id='?><?php echo $resultado[$i]['id_estudiante']?>'" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-pencil"></span></button>
 
-                    <a href="javascript:preguntar(<?php echo $resultado[$i]['id_matricula']?>,'eliminar')" class="btn btn-sm btn-danger" title="Eliminar registro"><span class="glyphicon glyphicon-trash"></span></a>
+                    <a href="javascript:preguntar(<?php echo $resultado[$i]['id_estudiante']?>,'eliminar')" class="btn btn-sm btn-danger" title="Eliminar registro"><span class="glyphicon glyphicon-trash"></span></a>
                   </td>
                 </tr>
 

@@ -49,24 +49,29 @@ switch($opcion)
 	case 'registrar':
 
 		$nombre= ucwords(strtolower($nombre)); //convierte la primera letra a mayuscula
-    $nombre=trim($nombre);//elimina los espacios del inicio y el final de cada cadnea
+		$nombre=trim($nombre);//elimina los espacios del inicio y el final de cada cadnea
 
 		$apellido= ucwords(strtolower($apellido)); //convierte la primera letra a mayuscula
-    $apellido=trim($apellido);//elimina los espacios del inicio y el final de cada cadnea
+		$apellido=trim($apellido);//elimina los espacios del inicio y el final de cada cadnea
 
 		$r= representantes::registrar2($representante);
 
 		if ($r=='fracaso') {
 			header("location: ../vista/pages/v_estudiante/mostrar.php?respuesta3=fracaso");
 		}else {
-			$estudinate = new estudiantes($nacionalidad,$cedula,$nombre,$apellido,$sexo,$telefono,$correo,$fecha_nacimiento,$edad,$representante,$parentesco,$cuadratura,$comunidad);
-			$resultado = $estudinate->registrar();
+			$estudiante = new estudiantes($nacionalidad,$cedula,$nombre,$apellido,$sexo,$telefono,$correo,$fecha_nacimiento,$edad,$representante,$parentesco,$comunidad);
+			$estudiante->setTipo('Estudiante');
+			$idEst = $estudiante->registrarP();
+			if ($id=='existente') {
+				header("location: ../vista/pages/v_estudiante/mostrar.php?respuesta1=existente");
+			}
+			$resultado= $estudiante->registrarEst($idEst);
 			switch ($resultado) {
 				case 'existente':
 					header("location: ../vista/pages/v_estudiante/mostrar.php?respuesta1=existente");
 				break;
 				case 'exito':
-					header("location: ../vista/pages/v_estudiante/agregar.php?respuesta2=exito");
+					header("location: ../vista/pages/v_estudiante/mostrar.php?respuesta2=exito");
 				break;
 			}
 		}

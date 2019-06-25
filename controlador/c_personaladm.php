@@ -65,8 +65,8 @@ switch($_REQUEST['opcion'])
 		}
 		$resultado= $per_adm->crearHistorial($idP);
     switch ($resultado){
-			case 'existente':
-				Header("Location: ../vista/pages/v_personaladm/mostrar.php?respuesta1= existente");
+			case 'fracaso':
+				Header("Location: ../vista/pages/v_personaladm/mostrar.php?respuesta1= fracaso");
 				break;
 			case 'exito':
 				Header("Location: ../vista/pages/v_personaladm/mostrar.php?respuesta2= exito");

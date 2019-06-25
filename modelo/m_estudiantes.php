@@ -12,25 +12,21 @@ class estudiantes extends personas
   public $comunidad;
 
   //METODOS
-  function __construct($nacionalidad,$cedula,$nombre,$apellido,$sexo,$telefono,$correo,$fecha_nacimiento,$edad,$representante,$parentesco,$cuadratura,$comunidad)
+  function __construct($nacionalidad,$cedula,$nombre,$apellido,$sexo,$telefono,$correo,$fecha_nacimiento,$edad,$representante,$parentesco,$comunidad)
   {
     parent::__construct($nacionalidad,$cedula,$nombre,$apellido,$sexo,$telefono,$correo);
     $this->fecha_nacimiento= $fecha_nacimiento;
     $this->edad= $edad;
     $this->representante= $representante;
     $this->parentesco= $parentesco;
-    $this->cuadratura= $cuadratura;
     $this->comunidad= $comunidad;
 
   }
 
-  public function registrar(){
-    $db= DataBase::getInstance();
-
-    parent::registrarP();
-    $p=parent::buscar();
-    $this->id= $p[0]['id_persona'];
-    $consulta=$db->prepare("INSERT INTO estudiantes (id_estudiante, id_representante, parentesco, fecha_nacimiento, edad, id_comunidad) VALUES (:id_estudiante, :id_representante, :parentesco, :fecha_nacimiento, :edad, :id_comunidad)");
+  public function registrarEst($idEst){
+    $db= DataBase::getInstance();    
+    $this->id= $idEst;
+    $consulta=$db->prepare("INSERT INTO estudiantes (id_estudiante,id_representante,parentesco,fecha_nacimiento,edad,id_comunidad) VALUES (:id_estudiante, :id_representante, :parentesco, :fecha_nacimiento, :edad, :id_comunidad)");
     $consulta->bindParam(':id_estudiante', $this->id);
     $consulta->bindParam(':id_representante', $this->representante);
     $consulta->bindParam(':parentesco', $this->parentesco);
@@ -38,28 +34,32 @@ class estudiantes extends personas
     $consulta->bindParam(':edad', $this->edad);
     $consulta->bindParam(':id_comunidad', $this->comunidad);
     $r=$consulta->execute();
-
-    if ($r){
-      $consulta2= $db->prepare("INSERT INTO matricula (id_cuadratura,id_estudiante) VALUES (:id_cuadratura,:id_estudiante)");
-      $consulta2->bindParam(':id_cuadratura', $this->cuadratura);
-      $consulta2->bindParam(':id_estudiante', $this->id);
-      $r_matricula=$consulta2->execute();
-      if ($r_matricula) {
-        return 'exito';
-      }else {
-        return 'fracaso';
-      }
-
+    if ($r) {
+      return 'exito';
     }else{
       return 'fracaso';
     }
+    // if ($r){
+    //   $consulta2= $db->prepare("INSERT INTO matricula (id_cuadratura,id_estudiante) VALUES (:id_cuadratura,:id_estudiante)");
+    //   $consulta2->bindParam(':id_cuadratura', $this->cuadratura);
+    //   $consulta2->bindParam(':id_estudiante', $this->id);
+    //   $r_matricula=$consulta2->execute();
+    //   if ($r_matricula) {
+    //     return 'exito';
+    //   }else {
+    //     return 'fracaso';
+    //   }
+
+    // }else{
+    //   return 'fracaso';
+    // }
 
   }
 
   public static function consultar(){
     $db= DataBase::getInstance();
 
-    $sql= "SELECT *FROM vista_matricula";
+    $sql= "SELECT *FROM vista_estudiantes";
     $consulta= $db->prepare($sql);
     $resultado= $consulta->execute();
     if ($resultado)

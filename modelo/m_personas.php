@@ -126,7 +126,6 @@ class personas{
     $consulta=  $db->prepare("SELECT id_persona FROM personas WHERE cedula= '$this->cedula'");
     $consulta->execute();
     $resultado= $consulta->rowCount();
-
     if ($resultado>0) {
       return 'existente';
     }else {

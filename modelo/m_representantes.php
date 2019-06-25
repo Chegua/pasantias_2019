@@ -36,7 +36,6 @@ class representantes extends personas
 
   public static function registrar2($representante){
     $db= DataBase::getInstance();
-
     $consulta=  $db->prepare("SELECT id_representante FROM representantes WHERE id_representante= '$representante'");
     $consulta->execute();
     $resultado= $consulta->rowCount();
@@ -47,12 +46,10 @@ class representantes extends personas
       $consulta2=$db->prepare("INSERT INTO representantes (id_representante) VALUES (:id)");
       $consulta2->bindParam(':id', $representante);
       $r=$consulta2->execute();
-      if ($r) {
-        return 'exito';
-      }
-      else{
-       return 'fracaso';
-      }
+      if ($r) 
+        return 'exito';      
+      else
+       return 'fracaso';      
     }
   }
 
