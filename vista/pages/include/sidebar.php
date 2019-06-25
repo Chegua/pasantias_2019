@@ -45,7 +45,7 @@
           <ul class="treeview-menu">
             <li><a href="../v_asignar_seccion/mostrar.php">Estudiante/Seccion</a></li>
             <li><a href="../v_municipios/mostrar.php">Estudiante/Empresa </a></li>
-            <li><a href="../v_parroquias/mostrar.php">Estudiante/Departamento </a></li>
+            <li><a href="../v_asignar_departamento/mostrar.php">Estudiante/Departamento </a></li>
           </ul>
         </li>
 

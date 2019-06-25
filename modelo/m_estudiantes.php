@@ -52,10 +52,8 @@ class estudiantes extends personas
     if ($validar > 0) {
       return 'existente';
     }else{
-      $consulta= $db->prepare("INSERT INTO matricula (id_estudiante,id_cuadratura) VALUES (:id_estudiante, :id_cuadratura");
-      $consulta->bindParam(':id_estudiante',$idEst);
-      $consulta->bindParam(':id_cuadratura',$cuadratura);
-      $resultado= $consulta->execute();
+      $sql="INSERT INTO matricula (id_estudiante,id_cuadratura) VALUES ($idEst, $cuadratura)";
+     $resultado= $consulta= $db->query($sql);
       if ($resultado){
         return 'exito';
       }else {
