@@ -86,8 +86,8 @@ $resultado2= $cuadratura->consultar();
             <div class="form-group col-md-2">
               <label for="nacionalidad">Nac.</label>
               <select name="nacionalidad" class="form-control form-control-sm" id="nacionalidad" required>
-                <option value="V">V- </option>
-                <option value="E">E- </option>
+                <option value="V">V</option>
+                <option value="E">E</option>
               </select>
             </div>
 
@@ -168,9 +168,9 @@ $resultado2= $cuadratura->consultar();
             <label for="parentesco">Parentesco:</label>
             <select class="form-control" name="parentesco" id="parentesco">
               <option value="">Seleccione...</option>
-              <option value="padre">Padre</option>
-              <option value="abuelo">Abuelo</option>
-              <option value="tio">Tio</option>
+              <option value="padre">Padre/Madre</option>
+              <option value="abuelo">Abuelo/Abuela</option>
+              <option value="tio">Tio/Tia</option>
             </select>
           </div>
           <h4>Direccion:</h4>
