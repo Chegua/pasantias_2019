@@ -91,9 +91,6 @@ $resultado= $mencion->consultar();
                 <input type="text" name="rif" id="rif" class="form-control form-control-sm" placeholder="Ingrese el rif" autocomplete="off"
                 data-inputmask='"mask":"99999999-9"'  data-mask maxlength="11" required
                 onkeypress="return solonumeros(event)" onpaste="return false">
-
-
-              <span class="help-block">(No se permiten numeros ni simbolos.)</span>
               </div>
 
                 <div class="form-group col-md-6">
@@ -107,7 +104,6 @@ $resultado= $mencion->consultar();
 
                     <span class="input-group-btn"><button type="button" name="buscar" id="buscar" class="btn btn-info"><i class="fa fa-search"></i> </button></span>
                   </div>
-                 <span class="help-block">(No se permiten letras ni simbolos.)</span>
 
                 </div>
                 <div id="grilla">
@@ -129,13 +125,11 @@ $resultado= $mencion->consultar();
              <div class="form-group col-md-6">
                 <label for="telefono">Telefono:</label>
                 <input type="text" name="telefono" id="telefono" class="form-control form-control-sm" placeholder="Ingrese el numero" data-inputmask='"mask": "(9999) 999-9999"' data-mask autocomplete="off" maxlength="15">
-              <span class="help-block">(Opcional.)</span>
              </div>
 
               <div class="form-group col-md-6">
                 <label for="correo">Correo:</label>
                 <input type="text" name="correo" id="correo" class="form-control form-control-sm" placeholder="Ingrese el correo"  autocomplete="off">
-              <span class="help-block">(Opcional.)</span>
               </div>
 
 

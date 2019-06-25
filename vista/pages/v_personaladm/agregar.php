@@ -56,7 +56,7 @@ $resultadocarg= $cargo->consultar3();
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <i class="fa fa-graduation-cap "></i> Personal adm.
+        <i class="fa fa-graduation-cap "></i> Personal administrativo
         <small>Registrar <i class="fa fa-plus"></i></small>
       </h1>
       <ol class="breadcrumb">
@@ -91,11 +91,9 @@ $resultadocarg= $cargo->consultar3();
 <form name="registrar_adm" id="registrar_adm" method="post" action="../../../controlador/c_personaladm.php">
 
 
-    <div class="row">
-      <article class="col-xl-9 col-lg-9 col-md-10 col-sm-9 col-xs-12 col-md-offset-1">
-        <div class="form-row">
-
-            <div class="form-group col-md-2">
+<div class="row">
+<article class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-xs-12 col-md-offset-">
+<div class="form-group col-md-2">
               <label for="nacionalidad">Nac.</label>
               <select name="nacionalidad" class="form-control form-control-sm" id="nacionalidad" required>
                 <option value="V">V</option>
@@ -103,48 +101,45 @@ $resultadocarg= $cargo->consultar3();
               </select>
             </div>
 
-            <div class="form-group col-md-6">
-              <label for="cedula">Cedula: *</label>
-              <input type="text" class="form-control form-control-sm" name="cedula" id="cedula" autocomplete="off"  placeholder="Ingrese la cedula" maxlength="8">
-            <span class="help-block">(No se permiten letras ni simbolos.)</span>
+            <div class="form-group col-md-4">
+              <label for="cedula">Cedula: </label>
+                <div class="input-group">
+
+                  <input type="text" required class="form-control" name="cedula" id="cedula" autocomplete="off"  placeholder="Ingrese la cedula" maxlength="8"  data-inputmask='"mask": "99999999"' data-mask>
+                  <span class="input-group-btn">
+                    <a href="javascript:void(0);" name="buscar" id="buscar" class="btn btn-info" data-toggle="modal" data-target="#personal_adm"><i class="fa fa-search"></i> </a></span>
+                </div>
             </div>
-
-
 
             <div class="form-group col-md-6">
               <label for="nombre">Nombres: *</label>
-              <input type="text" name="nombre" id="nombre" class="form-control form-control-sm" placeholder="Ingrese el nombre" autocomplete="off" required>
-            <span class="help-block">(No se permiten numeros ni simbolos.)</span>
+              <input type="text" name="nombre" id="nombre" class="form-control form-control-sm" placeholder="Ingrese el nombre" autocomplete="off" onkeypress="return soloLetras(event)" onpaste="return false" required>
             </div>
 
-             <div class="form-group col-md-6">
+            <div class="form-group col-md-6">
               <label for="apellido">Apellidos: *</label>
-              <input type="text" name="apellido" id="apellido" class="form-control form-control-sm" placeholder="Ingrese el nombre" autocomplete="off" required>
-            <span class="help-block">(No se permiten numeros ni simbolos.)</span>
+              <input type="text" name="apellido" id="apellido" class="form-control form-control-sm" placeholder="Ingrese el nombre" autocomplete="off" onkeypress="return soloLetras(event)" onpaste="return false" required>
             </div>
 
-
-            <div class="form-group col-md-12">
+            <div class="form-group col-md-6">
               <label for="sexo">Sexo: *</label><br>
-                <input type="radio" name="sexo" id="sexo" value="Masculino" class="minimal" checked> Masculino
-                <input type="radio" name="sexo" id="sexo" value="Femenino" class="minimal-red"> Femenino
-                <span class="help-block">(Selecciononado.)</span>
+                <select name="sexo" id="sexo" class="form-control">
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+                </select>
             </div>
-
 
             <div class="form-group col-md-6">
                 <label for="telefono">Telefono:</label>
                 <input type="text" name="telefono" id="telefono" class="form-control form-control-sm" placeholder="Ingrese el numero" data-inputmask='"mask": "(9999) 999-9999"' data-mask autocomplete="off" maxlength="15">
-                <span class="help-block">(Opcional.)</span>
             </div>
 
             <div class="form-group col-md-6">
                   <label for="correo">Correo:</label>
                   <input type="text" name="correo" id="correo" class="form-control form-control-sm" placeholder="Ingrese el correo"  autocomplete="off">
-                  <span class="help-block">(Opcional.)</span>
             </div>
 
-
+            
             <div class="form-group col-md-6">
               <label for="departamento">Departamento: *</label>
               <select name="departamento" class="form-control form-control-sm" id="departamento" required>
@@ -153,9 +148,7 @@ $resultadocarg= $cargo->consultar3();
                   <option value="<?php echo $resultadodep[$i]['id_departamento']; ?>"><?php echo $resultadodep[$i]['departamento'];?></option>
                 <?php endfor; ?>
               </select>
-            <span class="help-block">(Seleccione por favor.)</span>
             </div>
-
 
             <div class="form-group col-md-6">
               <label for="cargo">Cargo: *</label>
@@ -165,7 +158,6 @@ $resultadocarg= $cargo->consultar3();
                   <option value="<?php echo $resultadocarg[$i]['id_cargo']; ?>"><?php echo $resultadocarg[$i]['cargo']; ?></option>
                 <?php endfor; ?>
               </select>
-            <span class="help-block">(Seleccione por favor.)</span>
             </div>
 
             <div class="form-group col-md-4">
@@ -184,7 +176,6 @@ $resultadocarg= $cargo->consultar3();
                   </div>
                     <input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio" >
                 </div>
-                    <span class="help-block"></span>
           </div>
 
           <div class="form-group col-md-4">
@@ -195,11 +186,8 @@ $resultadocarg= $cargo->consultar3();
                   </div>
                     <input type="date" class="form-control" name="fecha_fin" id="fecha_fin" >
                 </div>
-                    <span class="help-block"></span>
           </div>
-
-          </div>
-      </article>
+</article>
 </div>
 <hr>
     <div class="row">
@@ -224,7 +212,61 @@ $resultadocarg= $cargo->consultar3();
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+  <div class="modal fade bs-example-modal-lg" id="personal_adm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog  modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
+      <h4 class="modal-title" id="myModalLabel">Buscar datos</h4>
+      </div>
+      <div class="modal-body">
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+         </div>
+
+           <div class="panel-body">
+              <table class="table table-hover table-bordered" id="example2">
+                <thead>
+                  <tr>
+                    <th>Año</th>
+                    <th>Mencion</th>
+                    <th>Periodo</th>
+                    <th class="">Cedula</th>
+                    <th class="">Nombres</th>
+                    <th class="">Apellidos</th>
+                    <th>Seleccione</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php for ($i=0; $i < count($resultado2) ; $i++):?>
+                    <tr>
+                      <td><?php echo $resultado2[$i]['anio']; ?></td>
+                      <td><?php echo $resultado2[$i]['mencion']; ?></td>
+                      <td><?php echo $resultado2[$i]['periodo']; ?></td>
+                      <td><?php echo $resultado2[$i]['cedula']; ?></td>
+                      <td><?php echo $resultado2[$i]['nombre']; ?></td>
+                      <td><?php echo $resultado2[$i]['apellido']; ?></td>
+
+                      <td><button type="button" name="selecionar_docente" class="btn btn-sm btn-success" data-dismiss="modal" onclick="elegir_cuadratura(<?php echo $resultado2[$i]['id_cuadratura']?>);" ><i class="fa fa-check-square-o"></i> </button> </td>
+
+                    </tr>
+                  <?php endfor; ?>
+                </tbody>
+         </table>
+     </div>
+ </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <!----<button type="button" class="btn btn-primary" onclick="validarContacto();">Registrar</button>--->
+      </div>
+    </div>
+  </div>
+</div>
   <!-- Main Footer -->
   <footer class="main-footer">
         <?php include ("../include/footer.php"); ?>
@@ -234,11 +276,9 @@ $resultadocarg= $cargo->consultar3();
 </div>
 <!-- ./wrapper -->
     <?php include ("../include/plugins.php"); ?>
-  <!---<script src="../../dist/js/cargos/filtrado.js"></script>-->
-<!-- <script src="../../dist/js/personaladm/expresionregular.js"></script>
-<script src="../../dist/js/personaladm/validacion.js"></script> -->
-<!-- <script src="../../dist/js/personaladm/grillaAgregar.js"></script> -->
-<!-- <script src="../../dist/js/personaladm/app.js"></script> -->
+<script src="../../dist/js/tutor_academico/expresionregular.js"></script>
+<script src="../../dist/js/tutor_academico/validacion.js"></script>
+<script src="../../dist/js/tutor_academico/validar2.js"></script>
 
 </body>
 </html>

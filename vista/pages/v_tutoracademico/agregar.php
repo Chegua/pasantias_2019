@@ -77,20 +77,18 @@ $resultado2= personas::consultar();
         </div>
   <div class="box-body">
 
+  <article class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-xs-12 col-md-offset-">
 
-    <article class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-xs-12 col-md-offset-">
 
-        <div class="form-row">
+      <div class="form-group col-md-2">
+      <label for="nacionalidad">Nac.</label>
+      <select name="nacionalidad" class="form-control form-control-sm" id="nacionalidad" required>
+        <option value="V">V</option>
+        <option value="E">E</option>
+      </select>
+    </div>
 
-              <div class="form-group col-md-2">
-              <label for="nacionalidad">Nac.</label>
-              <select name="nacionalidad" class="form-control form-control-sm" id="nacionalidad" required>
-                <option value="V">V</option>
-                <option value="E">E</option>
-              </select>
-            </div>
-
-            <div class="form-group col-md-3">
+<div class="form-group col-md-4">
               <label for="cedula">Cedula: </label>
                 <div class="input-group">
                   <input type="text" required class="form-control" name="cedula" id="cedula" autocomplete="off"  placeholder="Ingrese la cedula" maxlength="8"  data-inputmask='"mask": "99999999"' data-mask>
@@ -98,37 +96,36 @@ $resultado2= personas::consultar();
                     <a href="javascript:void(0);" name="buscar" id="buscar" class="btn btn-info" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-search"></i> </a>
                   </span>
                 </div>
-                <span class="help-block"></span>
             </div>
 
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-6">
                   <label for="nombre">Nombres: </label>
-                  <input type="text" name="nombre" id="nombre" class="form-control form-control-sm" placeholder="Ingrese el nombre" autocomplete="off" required>
+                  <input type="text" name="nombre" id="nombre" class="form-control form-control-sm" placeholder="Ingrese el nombre" autocomplete="off"  onkeypress="return soloLetras(event)" onpaste="return false" required>
                   <span class="help-block"></span>
             </div>
 
-             <div class="form-group col-md-4">
+            <div class="form-group col-md-6">
                   <label for="apellido">Apellidos: </label>
-                  <input type="text" name="apellido" id="apellido" class="form-control form-control-sm" placeholder="Ingrese el apellido" autocomplete="off" required>
+                  <input type="text" name="apellido" id="apellido" class="form-control form-control-sm" placeholder="Ingrese el apellido" autocomplete="off" onkeypress="return soloLetras(event)" onpaste="return false" required>
                  <span class="help-block"></span>
             </div>
 
-
-          <div class="form-group col-md-4">
-                <label for="telefono">Telefono:</label>
-                <input type="text" name="telefono" id="telefono" class="form-control form-control-sm" placeholder="Ingrese el numero" data-inputmask='"mask": "(9999) 999-9999"' data-mask autocomplete="off" maxlength="15">
-            </div>
-
-            <div class="form-group col-md-4">
+            
+            <div class="form-group col-md-6">
               <label for="sexo">Sexo: </label><br>
                 <select name="sexo" id="sexo" class="form-control">
                   <option value="Masculino">Masculino</option>
                   <option value="Femenino">Femenino</option>
                 </select>
             </div>
+</article>
+<article class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-xs-12 col-md-offset-">
 
-
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-6">
+                <label for="telefono">Telefono:</label>
+                <input type="text" name="telefono" id="telefono" class="form-control form-control-sm" placeholder="Ingrese el numero" data-inputmask='"mask": "(9999) 999-9999"' data-mask autocomplete="off" maxlength="15">
+            </div>
+            <div class="form-group col-md-6">
                 <label for="correo">Correo:</label>
                 <input type="text" name="correo" id="correo" class="form-control form-control-sm" placeholder="Ingrese el correo"  autocomplete="off">
                <span class="help-block"></span>
@@ -168,7 +165,7 @@ $resultado2= personas::consultar();
 <div class="with-border">
           <h4 class="box-title">Datos de Tutor: </h4>
 </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-6">
               <label for="">Estatus de tutor: </label>
               <select class="form-control" name="estatus_tutor" id="estatus_tutor" required>
                 <option value="">Selecione...</option>
@@ -178,7 +175,7 @@ $resultado2= personas::consultar();
         </div>
 
 
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-6">
           <label for="estatus">Estatus:</label>
             <select name="estatus" id="estatus" class="form-control" disabled="">
               <option value="Seleccione">...</option>
@@ -187,7 +184,7 @@ $resultado2= personas::consultar();
             </select>
         </div>
 
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-6">
             <label>Fecha Inicio:</label>
               <div class="input-group">
                 <div class="input-group-addon">
@@ -198,7 +195,7 @@ $resultado2= personas::consultar();
                   <span class="help-block"></span>
         </div>
 
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-6">
             <label>Fecha Final:</label>
               <div class="input-group">
                 <div class="input-group-addon">
@@ -208,9 +205,8 @@ $resultado2= personas::consultar();
               </div>
                   <span class="help-block"></span>
         </div>
-
-
-      </article>
+</article>
+   
   </div>
         <!-- /.box-body -->
   <div class="box-footer" >
@@ -248,11 +244,13 @@ $resultado2= personas::consultar();
 <!-- ./wrapper -->
 <!-- ./wrapper -->
     <?php include ("../include/plugins.php"); ?>
-  <!---<script src="../../dist/js/cargos/filtrado.js"></script>-->
+  <!-- <script src="../../dist/js/cargos/filtrado.js"></script> -->
   <script src="../../dist/js/tutor_academico/expresionregular.js"></script>
   <script src="../../dist/js/tutor_academico/validacion.js"></script>
+  <script src="../../dist/js/tutor_academico/validar2.js"></script>
 
-  <script src="../../dist/js/tutor_academico/grillaAgregar.js"></script>
+  <script src="../../dist/js/tutor_academico/grillaAgregar.js"></script> 
+  
   <script src="../../dist/js/dire.js"></script>
   <script src="../../bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
   <script src="../../bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>

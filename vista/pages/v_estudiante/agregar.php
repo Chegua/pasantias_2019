@@ -103,12 +103,12 @@ $resultado2= $cuadratura->consultar();
 
             <div class="form-group col-md-6">
                   <label for="nombre">Nombres: </label>
-                  <input type="text" name="nombre" id="nombre" class="form-control form-control-sm" placeholder="Ingrese el nombre" autocomplete="off" required>
+                  <input type="text" name="nombre" id="nombre" class="form-control form-control-sm" placeholder="Ingrese el nombre" autocomplete="off" onkeypress="return soloLetras(event)" onpaste="return false" required>
             </div>
 
             <div class="form-group col-md-6">
                   <label for="apellido">Apellidos: </label>
-                  <input type="text" name="apellido" id="apellido" class="form-control form-control-sm" placeholder="Ingrese el apellido" autocomplete="off" required>
+                  <input type="text" name="apellido" id="apellido" class="form-control form-control-sm" placeholder="Ingrese el apellido" autocomplete="off" onkeypress="return soloLetras(event)" onpaste="return false" required>
                  <span class="help-block"></span>
             </div>
 
@@ -363,10 +363,9 @@ $resultado2= $cuadratura->consultar();
 
 <!-- ./wrapper -->
     <?php include ("../include/plugins.php"); ?>
-  <!---<script src="../../dist/js/cargos/filtrado.js"></script>-->
-  <!-- <script src="../../dist/js/tutor_academico/expresionregular.js"></script>
-  <script src="../../dist/js/estudiantes/validacion.js"></script>
-  <script src="../../dist/js/tutor_academico/grillaAgregar.js"></script> -->
+<script src="../../dist/js/estudiantes/expresionregular.js"></script>
+<script src="../../dist/js/estudiantes/validacion.js"></script>
+<script src="../../dist/js/estudiantes/validar2.js"></script>
 
   <script src="../../dist/js/estudiantes/seleccion_modales.js"></script>
   <script src="../../dist/js/dire.js"></script>

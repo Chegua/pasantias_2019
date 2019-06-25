@@ -141,7 +141,7 @@ if (isset($_SESSION['user_id'])) {
        </div>
 
 	<div class="panel-body">
-      <table class="table table-hover table-bordered" id="example">
+      <table class="table table-hover table-bordered" id="example2">
 
           <thead>
             <th class="col-md-1">N°</th>
@@ -269,6 +269,31 @@ if (isset($_SESSION['user_id'])) {
 <script type="text/javascript">
  $(document).ready(function(){
    $('#example').DataTable({
+     dom: 'frtip',
+     buttons:[
+       'copyHtml5',
+       'excelHtml5',
+       'csvHtml5',
+       'pdfHtml5'
+       //'colvis'
+     ],
+     'paging': true,
+     'lengthChange': false,
+     'searching': true,
+     'ordering': true,
+     'info': false,
+     'autoWidth': false,
+     'scrollX': false,
+     "language":{
+       "url":"../../bower_components/datatables.net/js/Spanish.json"
+     }
+
+   });
+ });
+ </script>
+ <script type="text/javascript">
+ $(document).ready(function(){
+   $('#example2').DataTable({
      dom: 'frtip',
      buttons:[
        'copyHtml5',

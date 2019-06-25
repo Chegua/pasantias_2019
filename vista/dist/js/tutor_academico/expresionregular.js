@@ -9,6 +9,17 @@ function filtronombre(string){
 	}
 }
 
+function filtrotipo(string){
+	var filtro = /^^[a-zA-ZáéíóúñÑ\s]{1,100}$/;
+
+	if (string.search(filtro)) {
+		return false;
+	}
+	else{
+		true;
+	}
+}
+
 function filtroselect(string){
 	var filtro = /^^[0-9]{1,100}$/;
 
@@ -33,7 +44,18 @@ function filtrocedula(string){
 }
 
 function filtrotelefono(string){
-	var filtro =/^^[a-zA-Z()-1234567890\s]{2,200}$/;
+	var filtro =/^^[a-zA-Z()-1234567890\s]{15}$/;
+
+	if (string.search(filtro)) {
+		return false;
+	}
+	else{
+		true;
+	}
+}
+
+function filtrorif(string){
+	var filtro =/^^[a-zA-Z()-1234567890\s]{10}$/;
 
 	if (string.search(filtro)) {
 		return false;
@@ -65,6 +87,16 @@ function filtrodireccion(string){
 	}
 }
 
+function filtrodireccion2(string){
+	var filtro = /^^[a-zA-ZáéíóúñÑ!"#$%&/()=,.1234567890\s]{1,200}$/;
+
+	if (string.search(filtro)) {
+		return false;
+	}
+	else{
+		true;
+	}
+}
 
 
  

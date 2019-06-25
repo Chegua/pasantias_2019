@@ -51,7 +51,7 @@ if (isset($_SESSION['user_id'])) {
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <i class="fa fa-server"></i> Empresas.
+        <i class="fa fa-institution"></i> Empresas.
         <small>Listar <i class="fa fa-list"></i></small>
       </h1>
       <ol class="breadcrumb">
