@@ -33,16 +33,12 @@ class historial_academico extends personas//Inicio la clase, señalando que es h
   }
 
 //Metodo registrar datos de la clase hija
-  public function registrar(){
+  public function crearHistorial($id_per){
 
     $db= DataBase::getInstance();//Conexion
-
-    parent::registrarP();           //Ejecuto el metodo registrar de la clase padre
-    $p=parent::buscar();               //Ejecuto el metodo buscar de la clase padre.
-    $this->id= $p[0]['id_persona'];    //Busco el ID de una persona en la clase padre.
-
+    $this->id= $id_per;
     //Preparo la consulta
-     $consulta=$db->prepare("INSERT INTO docentes (id_persona , estatus_docente, fecha_inicio_d, fecha_fin_d) VALUES (:id_persona, :estatus_docente, :fecha_inicio_d, :fecha_fin_d)");
+    $consulta=$db->prepare("INSERT INTO docentes (id_persona , estatus_docente, fecha_inicio_d, fecha_fin_d) VALUES (:id_persona, :estatus_docente, :fecha_inicio_d, :fecha_fin_d)");
 
     //Le asigno valores mediante el constructor, a los values.
     $consulta->bindParam(':id_persona', $this->id);
@@ -59,7 +55,6 @@ class historial_academico extends personas//Inicio la clase, señalando que es h
         return 'exito';
       }else{
         $consulta2=$db->prepare("INSERT INTO tutor_academico (id_tutor , estatus_tutor, fecha_inicio_t, fecha_fin_t) VALUES (:id_persona, :estatus_tutor, :fecha_inicio_t, :fecha_fin_t)");
-
         $consulta2->bindParam(':id_persona', $this->id);
         $consulta2->bindParam(':estatus_tutor', $this->estatus);
         $consulta2->bindParam(':fecha_inicio_t', $this->fecha_ini);
@@ -81,22 +76,16 @@ class historial_academico extends personas//Inicio la clase, señalando que es h
     $resultado=$db->query($sql);  //Ejecuto la consulta
 
     //Si encuentra mas de 0 resultados, devuelve todas las filas en un arreglo.
-    if($resultado->rowCount()>0)
       return $resultado->fetchAll();
-    else
-      return null;
+   
   }
 
      public static function consultar2(){
     $db= DataBase::getInstance(); //Conexion a la base de datos mediante pdo
     $sql= "SELECT * FROM vista_tutor_academico"; //Preparo la consulta
     $resultado=$db->query($sql);  //Ejecuto la consulta
-
-    //Si encuentra mas de 0 resultados, devuelve todas las filas en un arreglo.
-    if($resultado->rowCount()>0)
-      return $resultado->fetchAll();
-    else
-      return null;
+    return $resultado->fetchAll();
+    ;
   }
 
 //Metodo actualizar datos de la clase hija.
@@ -142,7 +131,6 @@ class historial_academico extends personas//Inicio la clase, señalando que es h
       }
         return 'malo';
     }
-
   }
 
 //Metodo encontrar datos en la bse de datos.

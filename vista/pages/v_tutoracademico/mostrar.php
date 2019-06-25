@@ -161,7 +161,7 @@ if (isset($_SESSION['user_id'])) {
               <td><?php echo $resultado2[$i]['nacionalidad'].$resultado2[$i]['cedula']; ?></td>
               <td><?php echo $resultado2[$i]['nombre']; ?></td>
               <td><?php echo $resultado2[$i]['apellido']; ?></td>
-              <td><?php echo $resultado2[$i]['estatus_docente']; ?></td>
+              <td><?php echo $resultado2[$i]['estatus_tutor']; ?></td>
 
               <td>
                <button type="button" title="Perfil" onClick="window.location.href='perfil2.php<?php echo '?id='?><?php echo $resultado2[$i]['id_tutor_aca']?>'" class="btn btn-sm btn-success btn-sm"><span class="fa fa-eye"></span></button>

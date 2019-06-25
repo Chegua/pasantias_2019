@@ -49,8 +49,13 @@ switch($_REQUEST['opcion'])
 
 	case 'registrar':
 		$tutor_empresarial = new tutores_empresariales($nacionalidad,$cedula,$nombre,$apellido,$sexo,$telefono,$correo,$cargo,$empresa_mencion,$fecha_inicio,$fecha_fin,$estatus);
-
-		$resultado = $tutor_empresarial->registrar();
+		$tutor_empresarial->setTipo('Tutor Empresarial');
+		$idP = $tutor_empresarial->registrarP();
+		if ($idP=='existente') {
+			$encontrado= $tutor_empresarial->buscar();
+			$idP= $encontrado['id_persona'];
+		}
+		$resultado= $tutor_empresarial->crearHistorial($idP);
 
 		switch ($resultado){
 			case 'existente':

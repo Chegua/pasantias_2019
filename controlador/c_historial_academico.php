@@ -1,36 +1,74 @@
 <?php
- require_once('../modelo/m_personas.php');
+require_once('../modelo/m_personas.php');
 
 require_once('../modelo/m_historial_academico.php');
 
-
-$opcion = $_REQUEST['opcion'];
-switch($opcion)
-{
-
-	case 'registrar':
 //DATOS PARA EL DOCENTE
-	    $nacionalidad=$_REQUEST['nacionalidad'];
-		$cedula = $_REQUEST['cedula'];
-		$nombre = $_REQUEST['nombre'];
-		$apellido= $_REQUEST['apellido'];
-		$sexo= $_REQUEST['sexo'];
-		$telefono= $_REQUEST['telefono'];
-		$correo= $_REQUEST['correo'];
+if (isset($_REQUEST['id']))
+	$id=$_REQUEST['id'];
 
-		$estatus_docente= $_REQUEST['estatus_docente'];
-		$fecha_ini_d= $_REQUEST['fecha_ini_d'];
-		$fecha_fin_d= $_REQUEST['fecha_fin_d'];
+if (isset($_REQUEST['nacionalidad']))
+	$nacionalidad=$_REQUEST['nacionalidad'];
+
+if (isset($_REQUEST['cedula']))
+	$cedula = $_REQUEST['cedula'];
+	
+if (isset($_REQUEST['nombre']))
+	$nombre = $_REQUEST['nombre'];
+
+if (isset($_REQUEST['apellido']))
+	$apellido= $_REQUEST['apellido'];
+
+if (isset($_REQUEST['sexo']))
+	$sexo= $_REQUEST['sexo'];
+
+if (isset($_REQUEST['telefono']))
+	$telefono= $_REQUEST['telefono'];
+
+if (isset($_REQUEST['correo']))
+	$correo= $_REQUEST['correo'];
+
+if (isset($_REQUEST['estatus_docente']))
+	$estatus_docente= $_REQUEST['estatus_docente'];
+
+if (isset($_REQUEST['fecha_ini_d']))
+	$fecha_ini_d= $_REQUEST['fecha_ini_d'];
+
+if (isset($_REQUEST['fecha_fin_d']))
+	$fecha_fin_d= $_REQUEST['fecha_fin_d'];
 
 //DATOS PARA EL TUTOR
-		$estatus_tutor= $_REQUEST['estatus_tutor'];//indicador si es o no es tutor.
-		$estatus= $_REQUEST['estatus']; // ACTIVO O INACTIVO
-		$fecha_ini= $_REQUEST['fecha_ini'];
-		$fecha_fin= $_REQUEST['fecha_fin'];
+if (isset($_REQUEST['estatus_tutor']))
+	$estatus_tutor= $_REQUEST['estatus_tutor'];//indicador si es o no es tutor.
 
-		$tutor_academico = new historial_academico($nacionalidad,$cedula,$nombre,$apellido,$sexo,$telefono,$correo,$estatus_docente,$fecha_ini_d,$fecha_fin_d,$estatus_tutor,$estatus,$fecha_ini,$fecha_fin);
+if (isset($_REQUEST['estatus']))
+	$estatus= $_REQUEST['estatus']; // ACTIVO O INACTIVO
 
-		$resultado = $tutor_academico->registrar();
+if (isset($_REQUEST['fecha_ini']))
+	$fecha_ini= $_REQUEST['fecha_ini'];
+
+if (isset($_REQUEST['fecha_fin']))
+	$fecha_fin= $_REQUEST['fecha_fin'];
+
+switch($_REQUEST['opcion'])
+{
+	case 'registrar':
+
+		if($estatus_tutor=='No'){ 
+			$tutor_academico = new historial_academico($nacionalidad,$cedula,$nombre,$apellido,$sexo,$telefono,$correo,$estatus_docente,$fecha_ini_d,$fecha_fin_d,$estatus_tutor,'','','');
+			$tutor_academico->setTipo('');
+		}else{
+			$tutor_academico = new historial_academico($nacionalidad,$cedula,$nombre,$apellido,$sexo,$telefono,$correo,$estatus_docente,$fecha_ini_d,$fecha_fin_d,$estatus_tutor,$estatus,$fecha_ini,$fecha_fin);
+			$tutor_academico->setTipo('Tutor Academico');
+		}
+		
+		$idP = $tutor_academico->registrarP();
+		if ($idP=='existente') {
+			$encontrado= $tutor_academico->buscar();
+			$idP= $encontrado['id_persona'];
+		}
+
+		$resultado= $tutor_academico->crearHistorial($idP);
 
 		switch ($resultado) {
 		case 'existente':
@@ -49,20 +87,7 @@ switch($opcion)
 		break;
 
 	case 'modificar':
-		$id=$_REQUEST['id'];
-		$nacionalidad=$_REQUEST['nacionalidad'];
-		$cedula = $_REQUEST['cedula'];
-		$nombre = $_REQUEST['nombre'];
-		$apellido= $_REQUEST['apellido'];
-		$sexo= $_REQUEST['sexo'];
-		$telefono= $_REQUEST['telefono'];
-		$correo= $_REQUEST['correo'];
-		$cargo= $_REQUEST['cargo'];
-		$estatus_tutor= $_REQUEST['estatus_tutor'];
-		$estatus= $_REQUEST['estatus'];
-	    $fecha_ini= $_REQUEST['fecha_ini'];
-		$fecha_fin= $_REQUEST['fecha_fin'];
-
+		
 		$tutor_academico = new historial_academico($nacionalidad,$cedula,$nombre,$apellido,$sexo,$telefono,$correo,$cargo,$estatus_tutor,$estatus,$fecha_ini,$fecha_fin);
 
 		$resultado = $tutor_academico->actualizar($id);
