@@ -5,6 +5,9 @@ require_once('../modelo/m_representantes.php');
 if (isset($_REQUEST['id_estudiante'])) 
 	$id_estudiante= $_REQUEST['id_estudiante'];
 
+if (isset($_REQUEST['id_matricula'])) 
+	$id_matricula= $_REQUEST['id_matricula'];
+
 if(isset($_REQUEST['nacionalidad'])){
 	$nacionalidad=$_REQUEST['nacionalidad'];
 }
@@ -92,9 +95,13 @@ switch($opcion)
 		}
 		break;
 
-	case 'encontrar':
-    
-    $resultado = estudiantes::encontrar($id_estudiante);
+	case 'encontrarMatricula':    
+		$resultado = estudiantes::encontrarMatricula($id_matricula);
+		$resultado= json_encode($resultado);
+		echo $resultado;
+		break;
+	case 'encontrar':    
+		$resultado = estudiantes::encontrar($id_estudiante);
 		$resultado= json_encode($resultado);
 		echo $resultado;
 		break;
@@ -105,28 +112,26 @@ switch($opcion)
 		echo $resultado;
 		break;
 
-		case 'actualizar_lista':
-			if(isset($_REQUEST['anio'])){
-				$anio=$_REQUEST['anio'];
-			}
-			if(isset($_REQUEST['mencion'])){
-				$mencion=$_REQUEST['mencion'];
-			}
+	case 'actualizar_lista':
+		if(isset($_REQUEST['anio'])){
+			$anio=$_REQUEST['anio'];
+		}
+		if(isset($_REQUEST['mencion'])){
+			$mencion=$_REQUEST['mencion'];
+		}
+		if ((!empty($anio)) && (!empty($mencion)) ) {
+			$resultado = estudiantes::listar($anio,$mencion);
+			$resultado= json_encode($resultado);
+			echo $resultado;
+		}
+		// if (((!empty($anio)) && (empty($mencion))) || ((empty($anio)) && (!empty($mencion)))) {
+		// 	$centinela= 'busqueda2';
+		// 	$resultado = estudiantes::listar($anio,$mencion,$centinela);
+		// 	$resultado= json_encode($resultado);
+		// 	echo $resultado;
+		// }
 
-			if ((!empty($anio)) && (!empty($mencion)) ) {
-				// $centinela= 'busqueda1';
-				$resultado = estudiantes::listar($anio,$mencion);
-				$resultado= json_encode($resultado);
-				echo $resultado;
-			}
-			// if (((!empty($anio)) && (empty($mencion))) || ((empty($anio)) && (!empty($mencion)))) {
-			// 	$centinela= 'busqueda2';
-			// 	$resultado = estudiantes::listar($anio,$mencion,$centinela);
-			// 	$resultado= json_encode($resultado);
-			// 	echo $resultado;
-			// }
-
-			break;
+		break;
 
 	case 'modificar':
 		

@@ -58,7 +58,7 @@ $resultado2= $cuadratura->consultar();
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
         <li class="">Asignar seccion.</li>
-        <li class="active">Agregar Nuevo.</li>
+        href="javascript:void(0);"  <li class="active">Agregar Nuevo.</li>
       </ol>
     </section>
 

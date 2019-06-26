@@ -91,11 +91,8 @@ class personal_administrativo extends personas
   public static function encontrar($id)
   {
      $db = Database::getInstance();
-
      $sql="SELECT * FROM vista_historial_departamentos WHERE id_hist_dpto= '$id'";
-
      $resultado= $db->query($sql);
-
       if($resultado->rowCount() >0)
          return $resultado->fetch();
       else
@@ -103,27 +100,33 @@ class personal_administrativo extends personas
   }
 /*-------------------------------------------------------*/
 
-public function modificar($id_hist_dpto,$id_personal_administrativo){
-  $db= DataBase::getInstance();
-  $this->id_per_adm= $id_personal_administrativo;
-  $per=parent::modificarP($db,$id_personal_administrativo);
+  public function modificar($id_hist_dpto,$id_personal_administrativo){
+    $db= DataBase::getInstance();
+    $this->id_per_adm= $id_personal_administrativo;
+    $per=parent::modificarP($db,$id_personal_administrativo);
 
-  $consulta=$db->prepare("UPDATE historial_departamentos SET id_departamento= :departamento, id_cargo= :cargo,fecha_inicio= :fecha_inicio, fecha_fin= :fecha_fin,estatus= :estatus WHERE id_hist_dpto= '$id_hist_dpto'");
-  // $consulta->bindParam(':id_per_adm', $this->id_per_adm);
-  $consulta->bindParam(':departamento', $this->departamento);
-  $consulta->bindParam(':cargo', $this->cargo);
-  $consulta->bindParam(':fecha_inicio', $this->fecha_inicio);
-  $consulta->bindParam(':fecha_fin', $this->fecha_fin);
-  $consulta->bindParam(':estatus', $this->estatus);
-  $r= $consulta->execute();
-  if ($r)
-    return 'exito';
-  else
-   return 'fracaso';
-}
+    $consulta=$db->prepare("UPDATE historial_departamentos SET id_departamento= :departamento, id_cargo= :cargo,fecha_inicio= :fecha_inicio, fecha_fin= :fecha_fin,estatus= :estatus WHERE id_hist_dpto= '$id_hist_dpto'");
+    // $consulta->bindParam(':id_per_adm', $this->id_per_adm);
+    $consulta->bindParam(':departamento', $this->departamento);
+    $consulta->bindParam(':cargo', $this->cargo);
+    $consulta->bindParam(':fecha_inicio', $this->fecha_inicio);
+    $consulta->bindParam(':fecha_fin', $this->fecha_fin);
+    $consulta->bindParam(':estatus', $this->estatus);
+    $r= $consulta->execute();
+    if ($r)
+      return 'exito';
+    else
+    return 'fracaso';
+  }
 /*-------------------------------------------------------*/
-
-
+  public static function actualizar_lista($dpto)
+  {
+    $db = Database::getInstance();
+     $sql="SELECT * FROM vista_historial_departamentos WHERE departamento= '$dpto'";
+     $resultado= $db->query($sql);
+        return $resultado->fetchAll();
+      
+  }
 }
 
 ?>

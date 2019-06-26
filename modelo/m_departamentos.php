@@ -47,18 +47,14 @@ class departamentos
   public function consultar()
  	{
     $db = DataBase::getInstance();
-
 		$sql= "SELECT *FROM departamentos";
 		$resultado=$db->query($sql);
-
 		if($resultado->rowCount() >0)
-			return $resultado->fetchAll();
+			return $resultado->fetchAll(PDO::FETCH_ASSOC);
 		else
 			return null;
-	}
-
-
-
+  }
+  
   public function consultar2($valores)
   {
 

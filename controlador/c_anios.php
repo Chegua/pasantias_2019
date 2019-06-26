@@ -32,6 +32,13 @@ switch($_REQUEST['opcion'])
 			echo $resultado;
 		break;
 
+	// case 'encontrar':
+	// 	$anio = new anios();
+	// 	$resultado = $anio->consultar();
+	// 	$resultado= json_encode($resultado);
+	// 	echo $resultado;
+	// 	break;
+
 	case 'modificar':
 		$nombre= $_REQUEST['anio'];
 		$id= $_REQUEST['id'];

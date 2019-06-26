@@ -49,10 +49,8 @@ class menciones
     $db = DataBase::getInstance();
 		$sql= "SELECT *FROM menciones";
 		$resultado=$db->query($sql);
-		if($resultado->rowCount() >0)
 			return $resultado->fetchAll();
-		else
-			return null;
+	
 	}
 
 

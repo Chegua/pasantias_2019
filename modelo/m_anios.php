@@ -131,11 +131,9 @@ class anios
      $sql="SELECT * FROM anios WHERE id_anio= '$id'";
 
      $resultado= $db->query($sql);
-
-      if($resultado->rowCount() >0)
-         return $resultado->fetchAll();
-      else
-         return null;
+    
+     return $resultado->fetchAll();
+      
   }
 /*-------------------------------------------------------*/
 

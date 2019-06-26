@@ -74,12 +74,18 @@ switch($_REQUEST['opcion'])
 		}
 		break;
 
-	case 'buscar':
-		$cedula = $_REQUEST['cedula'];
-		$estudiante = new personal_administrativo($cedula);
-    	$resultado = $estudiante->buscar();
-		//require_once('../vista/salida.php');
-		break;
+		case 'buscar':
+			$cedula = $_REQUEST['cedula'];
+			$estudiante = new personal_administrativo($cedula);
+				$resultado = $estudiante->buscar();
+			//require_once('../vista/salida.php');
+			break;
+
+		case 'encontrarHistorial':
+			$resultado= personal_administrativo::encontrar($id_hist_dpto);
+			$resultado= json_encode($resultado);
+			echo $resultado;
+			break;
 
     case 'modificar':
       $nombre= ucwords(strtolower($nombre)); //convierte la primera letra a mayuscula
@@ -98,7 +104,13 @@ switch($_REQUEST['opcion'])
   				Header("Location: ../vista/pages/v_personaladm/mostrar.php?respuesta2= exito");
   				break;
   		}
-  		break;
+			break;
+			
+		case 'actualizar_lista':
+			$resultado= personal_administrativo::actualizar_lista($departamento);
+			$resultado= json_encode($resultado);
+			echo $resultado;
+			break;
 
     case 'eliminar':
       $id = $_REQUEST['id'];

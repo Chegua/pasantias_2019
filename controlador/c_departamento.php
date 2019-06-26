@@ -2,12 +2,14 @@
 require_once('../modelo/m_departamentos.php');
 
 //$nombre= strtoupper($string);
+if (isset($_REQUEST['departamento']))
+	$nombre= $_REQUEST['departamento'];
 
 switch($_REQUEST['opcion'])
 {
 
 	case 'registrar':
-		$nombre= $_REQUEST['departamento'];
+		
 		$departamento = new departamentos($nombre);
 		$resultado = $departamento->registrar();
 
@@ -23,7 +25,6 @@ switch($_REQUEST['opcion'])
 		break;
 
 	case 'modificar':
-		$nombre= $_REQUEST['departamento'];
 		$id=$_REQUEST['id'];
 		$departamento = new departamentos($nombre);
 		$update = $departamento->actualizar($id);
@@ -40,6 +41,13 @@ switch($_REQUEST['opcion'])
 		break;
 	}
    break;
+
+   case 'listar':
+		$departamento= new departamentos();
+		$resultado= $departamento->consultar();
+		$resultado= json_encode($resultado);
+		echo $resultado;
+	   break;
 
 	case 'eliminar':
 		$id = $_REQUEST['id'];

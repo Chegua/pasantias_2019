@@ -95,6 +95,19 @@ class estudiantes extends personas
      return $consulta->fetch(PDO::FETCH_ASSOC); 
   }
 
+  public static function encontrarMatricula($id)
+  {
+     $db = DataBase::getInstance();
+     $sql= "SELECT * FROM vista_matricula WHERE id_matricula= '$id'";
+     $consulta=$db->prepare($sql);
+     $consulta->execute();
+     $resultado= $consulta->fetch(PDO::FETCH_ASSOC);
+     if (count($resultado)>0)
+      return $resultado;
+    else
+      return null; 
+  }
+
   public function consultar2(){
       $db= DataBase::getInstance();
       //$consulta= $db->prepare("SELECT * FROM ver_estudiante");
