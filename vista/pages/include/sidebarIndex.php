@@ -19,7 +19,8 @@
 
         <li class="header" align="center">MENU</li>
         <!-- Optionally, you can add icons to the links -->
-
+       
+        <?php if ($_SESSION['user_rol']=='Administrador'):?>
         <li class="treeview">
           <a href="#"><i class="fa fa-group"></i> <span>Personas</span>
             <span class="pull-right-container">
@@ -33,6 +34,7 @@
             <li><a href="vista/pages/v_tutores_empresariales/mostrar.php">Tutores Empresariales </a></li>
         </ul>
       </li>
+      <?php endif;?>
 
       <li><a href="vista/pages/v_empresas/mostrar.php"><i class="fa fa-industry"></i> <span>Empresas</span></a></li>
       <li><a href="vista/pages/v_estudiante/asignar_matricula.php"><i class="fa fa-check"></i> <span>Asignaciones</span></a></li>

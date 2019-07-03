@@ -6,6 +6,9 @@ if (isset($_SESSION['user_id'])) {
 }else{
   header('Location: /PASANTIAS_2019/vista/pages/v_users/login.php');
 }
+if ($_SESSION['user_rol']!='Administrador') {
+  header('Location: /PASANTIAS_2019/');
+}
 
   require_once('../../../modelo/m_empresas.php');
   $empresa= new empresas();

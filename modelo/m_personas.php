@@ -93,7 +93,7 @@ class personas{
                   $this->id= $resultado[0]['id_persona'];
                   session_start();
                   $_SESSION['user_id'] = $resultado[0]['id_persona'];
-                  $_SESSION['user_tipo'] = $resultado[0]['tipo'];                    
+                  $_SESSION['user_rol'] = $resultado[0]['tipo'];                    
               }                    
               else
                   throw new Exception("Contraseña incorrecta");
