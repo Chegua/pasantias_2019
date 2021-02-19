@@ -146,7 +146,6 @@ $(document).ready(function(){
                 $('#sexo').val(result['sexo_estudiante']);
                 $('#anio').val(result['anio']);
                 $('#mencion').val(result['mencion']);
-
                 alertify.success('Estudiante seleccionado');                
             },
             error:function(result) {
